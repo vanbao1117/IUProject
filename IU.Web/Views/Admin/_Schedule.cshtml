@@ -15,7 +15,7 @@
                             <div class="box-header" style="float: left; width: 100px;">
                                 <h3 class="box-title">
                                     Subject 
-                                    <select id="subjects" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                                    <select id="subjects" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in allsubjects"></select>
                                 </h3>
                             </div>
                             <div class="box-header" style="float: left; width: 100px;">
@@ -171,6 +171,7 @@
                             <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                 <thead>
                                     <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="aaaa">Index</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Days</th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Subject</th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Class</th>
@@ -184,6 +185,7 @@
 
 
                                     <tr role="row" class="odd" ng-repeat="item in schedules.classSchedules">
+                                        <td class="sorting_1">{{$index}}</td>
                                         <td class="sorting_1">{{item.dateStudy}}</td>
                                         <td>{{item.subjectName}}</td>
                                         <td>{{item.className}}</td>

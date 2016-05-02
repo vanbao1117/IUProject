@@ -341,7 +341,7 @@ namespace IU.Services
                 else
                 {
                     var currentDate = DateTime.Now;
-                    _class = context.OpenClassTBLs.Where(o => o.OpenClassID == openClassID && o.Deadline.Value < currentDate).FirstOrDefault();
+                    _class = context.OpenClassTBLs.Where(o => o.OpenClassID == openClassID && o.Deadline.Value <= currentDate).FirstOrDefault();
                     if (_class != null)
                     {
                         return true;

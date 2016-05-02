@@ -141,12 +141,12 @@
                                 </ul>
                             </li>
                     
-                            <li class="treeview feedback">
+                            @*<li class="treeview feedback">
                                 <a href="/#/lecture/feedback">
                                     <i class="fa fa-comment-o"></i>
                                     <span>Feed Back</span>
                                 </a>
-                            </li>
+                            </li>*@
                         </ul>
                     </section>
                 }
@@ -164,13 +164,13 @@
                             </li>
                             <li class="treeview active" onclick="activeAdminMenu($(this))">
                                 <a href="/#/admin/openclass">
-                                    <i class="fa fa-book"></i>
+                                    <i class="fa fa-folder-open"></i>
                                     <span>Open Class</span>
                                 </a>
                             </li>
                             <li class="treeview feedback" onclick="activeAdminMenu($(this))">
                                 <a href="/#/admin/schedule">
-                                    <i class="fa fa-comment-o"></i>
+                                    <i class="fa fa-calendar-plus-o"></i>
                                     <span>Schedule</span>
                                 </a>
                             </li>
@@ -183,14 +183,14 @@
                     
                             <li class="treeview feedback" onclick="activeAdminMenu($(this))">
                                 <a href="/#/admin/account">
-                                    <i class="fa fa-comment-o"></i>
+                                    <i class="fa fa-paint-brush"></i>
                                     <span>Create Account</span>
                                 </a>
                             </li>
 
                             <li class="treeview feedback" onclick="activeAdminMenu($(this))">
                                 <a href="/#/admin/feedback">
-                                    <i class="fa fa-comment-o"></i>
+                                    <i class="fa fa-feed"></i>
                                     <span>Feedback</span>
                                 </a>
                             </li>
@@ -252,7 +252,7 @@
                             </li>
                             <li ng-class="{'active':feedbackActiveMenu}" class="treeview feedback" ng-click="activeMenu(undefined, 'feedback')">
                                 <a href="/#/feedback">
-                                    <i class="fa fa-comment-o"></i>
+                                    <i class="fa fa-feed"></i>
                                     <span>Feed Back</span>
                                 </a>
                             </li>
@@ -275,13 +275,6 @@
 
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.3
-            </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-            reserved.
-        </footer>
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->

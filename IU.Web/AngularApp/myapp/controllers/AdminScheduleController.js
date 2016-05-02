@@ -6,6 +6,7 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         $scope.mode = 'edit';
         $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
         $scope.subjects = [];
+        $scope.allsubjects = [];
         $scope.$watch('subjects', function (newVal, oldVal) {
             console.log('subjects', newVal);
         });
@@ -138,6 +139,8 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     lecturerID: $scope.editBisLecturerSelected.lecturerID
                 };
 
+                console.log("openClass: ", openClass);
+
             SubjectService.createBis(openClass).then(
               function (status) {
                   $timeout(function () {
@@ -209,6 +212,10 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
+               if (lecturerID == "") {
+                   $scope.allsubjects = $scope.copyObjToObj(subjects, $scope.allsubjects);
+               }
+               
            },
            function (error) {
                console.log('getAllSubjects error: ' + error);

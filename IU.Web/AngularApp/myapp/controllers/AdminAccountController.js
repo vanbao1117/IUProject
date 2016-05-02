@@ -6,6 +6,7 @@ IUApp.controller('AdminAccountController', ['$scope', '$http', '$location', '$ro
        
         $scope.student = {};
         $scope.lecturer = {};
+        $scope.subjects = [];
 
         $scope.$watch('student', function (newVal, oldVal) {
             console.log('student changed');
@@ -42,7 +43,7 @@ IUApp.controller('AdminAccountController', ['$scope', '$http', '$location', '$ro
     };
 
     $scope.getAllSubjects = function () {
-        SubjectService.getAllSubjects().then(
+        SubjectService.getAllSubjects("").then(
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
