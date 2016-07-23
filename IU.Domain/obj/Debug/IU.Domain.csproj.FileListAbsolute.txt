@@ -18,3 +18,13 @@ D:\Source\Source\IU.Domain\bin\Debug\EntityFramework.SqlServer.xml
 D:\Source\Source\IU.Domain\obj\Debug\IU.Domain.dll
 D:\Source\Source\IU.Domain\obj\Debug\IU.Domain.pdb
 D:\Source\Source\IU.Domain\obj\Debug\IU.Domain.csprojResolveAssemblyReference.cache
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\IU.Domain.dll.config
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\IU.Domain.dll
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\IU.Domain.pdb
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.dll
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.xml
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.csprojResolveAssemblyReference.cache
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.dll
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.pdb

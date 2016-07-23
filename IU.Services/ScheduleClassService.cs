@@ -21,6 +21,39 @@ namespace IU.Services
             
         }
 
+        public async Task<ClassSchedulePageViewModel> GetClassScheduleSync(int pageNumber, int pageSize, string userName, string abbreSubjectName)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetClassSchedule(pageNumber, pageSize, userName, abbreSubjectName));
+            }
+        }
+
+        private ClassSchedulePageViewModel GetClassSchedule(int pageNumber, int pageSize, string userName, string abbreSubjectName)
+        {
+            using (var context = new IUContext())
+            {
+                int NumberOfItems = 0;
+                var sem = GetCurrentSemester();
+                var currentStudent = GetCurrentStudent(userName);
+
+                var currentStudentList = GetCurrentStudentList(currentStudent, sem.SemesterID);
+
+                var subject = GetSubjectByName(abbreSubjectName);
+
+                var classSheduleTbl = context.ClassScheduleTBLs.Where(c => c.StudentListID == currentStudentList.StudentListID && c.SubjectID == subject.SubjectID);
+
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
+
+                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy, RoomID = f.RoomID, SlotID = f.SlotID, StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
+
+                int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize); ;
+
+                ClassSchedulePageViewModel classSchedule = new ClassSchedulePageViewModel() { TotalPages = totalPage, ClassSchedules = firstPage.ToList() };
+
+                return classSchedule;
+            }
+        }
 
         public async Task<ClassSchedulePageViewModel> GetAllClassScheduleSync(int pageNumber, int pageSize)
         {
@@ -35,7 +68,12 @@ namespace IU.Services
             using (var context = new IUContext())
             {
                 int NumberOfItems = 0;
-                var firstPageData = Helper.PagedResult(context.ClassScheduleTBLs, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
+                var sem = GetCurrentSemester();
+                var studentList = GetStudentList(sem);
+
+                var classSheduleTbl = context.ClassScheduleTBLs.Where(c => studentList.Contains(c.StudentListID));
+
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
 
                 var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy, RoomID = f.RoomID, SlotID = f.SlotID, StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 
@@ -44,6 +82,64 @@ namespace IU.Services
                 ClassSchedulePageViewModel classSchedule = new ClassSchedulePageViewModel() { TotalPages = totalPage, ClassSchedules = firstPage.ToList() };
 
                 return classSchedule;
+            }
+        }
+
+
+        private StudentTBL GetCurrentStudent(string username)
+        {
+            using (var context = new IUContext())
+            {
+                var user = context.AspNetUsers.Where(u => u.UserName == username).FirstOrDefault();
+                var student = context.StudentTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
+                return student;
+            }
+        }
+
+        private StudentListTBL GetCurrentStudentList(StudentTBL studentTBL, string semesterID)
+        {
+            using (var context = new IUContext())
+            {
+                var studentListTBL = context.StudentListTBLs.Where(u => u.StudentID == studentTBL.StudentID && u.SemesterID == semesterID).FirstOrDefault();
+                return studentListTBL;
+            }
+        }
+
+        private ClassTBL GetClass(string className)
+        {
+            using (var context = new IUContext())
+            {
+                var _class = context.ClassTBLs.Where(c => c.ClassName == className).FirstOrDefault();
+                if (_class != null) return _class;
+            }
+            return null;
+        }
+
+        private SemesterTBL GetCurrentSemester()
+        {
+            using (var context = new IUContext())
+            {
+                var currentDate = DateTime.Now;
+                var sem = context.SemesterTBLs.Where(obj => obj.StartDate <= currentDate && currentDate <= obj.EndDate);
+                return sem.FirstOrDefault();
+            }
+        }
+
+        private SubjectTBL GetSubjectByName(string abbreSubjectName)
+        {
+            using (var context = new IUContext())
+            {
+                var sub = context.SubjectTBLs.Where(obj => obj.AbbreSubjectName == abbreSubjectName);
+                return sub.FirstOrDefault();
+            }
+        }
+
+        private string[] GetStudentList(SemesterTBL sem)
+        {
+            using (var context = new IUContext())
+            {
+                var studentListTBL = context.StudentListTBLs.Where(obj => obj.SemesterID == sem.SemesterID);
+                return studentListTBL.Select(l=> l.StudentListID).ToArray();
             }
         }
 

@@ -24,38 +24,38 @@
 
 
 
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Monday 21/1/2000</td>
-                                        <td>Java</td>
-                                        <td>JA1</td>
-                                        <td>208</td>
-                                        <td>4</td>
-                                        <td>Bao</td>
+                                    <tr role="row" class="odd" ng-repeat="item in schedules.classSchedules">
+                                        <td class="sorting_1">{{item.dateStudy}}</td>
+                                        <td>{{item.subjectName}}</td>
+                                        <td>{{item.className}}</td>
+                                        <td>{{item.roomID}}</td>
+                                        <td>{{item.slotID}}</td>
+                                        <td>{{item.studentName}}</td>
                                     </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Monday 21/1/2000</td>
-                                        <td>Java</td>
-                                        <td>JA1</td>
-                                        <td>208</td>
-                                        <td>5</td>
-                                        <td>Bao</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">Tuedays 22/1/2000</td>
-                                        <td>JPS</td>
-                                        <td>JPS222</td>
-                                        <td>208</td>
-                                        <td>4</td>
-                                        <td>Luyen</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">Tuedays 22/1/2000</td>
-                                        <td>JPS</td>
-                                        <td>JPS222</td>
-                                        <td>208</td>
-                                        <td>5</td>
-                                        <td>Luyen</td>
-                                    </tr>
+                                    @*<tr role="row" class="even">
+                                            <td class="sorting_1">Monday 21/1/2000</td>
+                                            <td>Java</td>
+                                            <td>JA1</td>
+                                            <td>208</td>
+                                            <td>5</td>
+                                            <td>Bao</td>
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">Tuedays 22/1/2000</td>
+                                            <td>JPS</td>
+                                            <td>JPS222</td>
+                                            <td>208</td>
+                                            <td>4</td>
+                                            <td>Luyen</td>
+                                        </tr>
+                                        <tr role="row" class="even">
+                                            <td class="sorting_1">Tuedays 22/1/2000</td>
+                                            <td>JPS</td>
+                                            <td>JPS222</td>
+                                            <td>208</td>
+                                            <td>5</td>
+                                            <td>Luyen</td>
+                                        </tr>*@
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -69,7 +69,26 @@
                                 </tfoot>
                             </table>
                         </div>
-                    </div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button previous disabled" id="example2_previous">
+                                        <a href="#" ng-click="previous()" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
+                                    </li>
+                                    <li class="paginate_button active" ng-repeat="a in range(schedules.totalPages) track by $index">
+                                        <a href="#" ng-click="getAllClassSchedule($index + 1)" aria-controls="example2" data-dt-idx="{{$index + 1}}" tabindex="{{$index}}">{{$index + 1}}</a>
+                                    </li>
+                                    <li class="paginate_button next" id="example2_next">
+                                        <a href="#" ng-click="next()" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->
