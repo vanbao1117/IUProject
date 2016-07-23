@@ -110,7 +110,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li ng-class="{'active':item.clicked}" ng-repeat="item in Subjects" ng-click="activeMenu(item, 'schedule')"><a href="/#/schedule/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}} </a></li>
+                            <li ng-class='{"active":item.clicked}' ng-repeat="item in Subjects" ng-click="activeMenu(item)"><a href="/#/schedule/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}} </a></li>
                         </ul>
                     </li>
                     <li class="treeview">

@@ -4,8 +4,6 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices) {
     $scope.Subjects = [];
 
-    $scope.activeScheduleItems = [];
-    
     $scope.gotoMenu = function (url, header) {
         if (header) {
             $scope.setPageHeader(header);
@@ -15,23 +13,6 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
         $location.path(url);
     };
 
-    $scope.activeMenu = function (item, group) {
-        
-        if (item !== undefined && group == 'schedule') {
-
-            angular.forEach($scope.activeScheduleItems, function (_item, key) {
-                _item.clicked = false;
-            });
-
-            
-            if ($scope.activeScheduleItems.indexOf(item) === -1) {
-                // a is NOT in array
-                $scope.activeScheduleItems.push(item);
-            }
-
-            item.clicked = true;
-        }
-    };
 
     $scope.getSubjects = function () {
         SubjectService.get().then(
@@ -52,7 +33,6 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
 
      (function init() {
          $timeout(function () {
-             $scope.activeMenu();
              $scope.getSubjects();
              
              console.log('Home controller initial with timeout fired');

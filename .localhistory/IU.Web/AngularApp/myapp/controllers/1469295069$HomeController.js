@@ -15,9 +15,9 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
         $location.path(url);
     };
 
-    $scope.activeMenu = function (item, group) {
+    $scope.activeMenu = function (item) {
         
-        if (item !== undefined && group == 'schedule') {
+        if (item !== undefined) {
 
             angular.forEach($scope.activeScheduleItems, function (_item, key) {
                 _item.clicked = false;

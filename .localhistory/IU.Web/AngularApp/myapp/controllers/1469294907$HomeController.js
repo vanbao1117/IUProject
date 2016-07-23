@@ -4,7 +4,7 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices) {
     $scope.Subjects = [];
 
-    $scope.activeScheduleItems = [];
+    $scope.activeItems = [];
     
     $scope.gotoMenu = function (url, header) {
         if (header) {
@@ -15,20 +15,21 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
         $location.path(url);
     };
 
-    $scope.activeMenu = function (item, group) {
+    $scope.activeMenu = function (item) {
         
-        if (item !== undefined && group == 'schedule') {
+        if (item !== undefined) {
 
-            angular.forEach($scope.activeScheduleItems, function (_item, key) {
+            angular.forEach($scope.activeItems, function (_item, key) {
                 _item.clicked = false;
             });
 
-            
-            if ($scope.activeScheduleItems.indexOf(item) === -1) {
+            if ($scope.activeItems.indexOf(item) === -1) {
                 // a is NOT in array
-                $scope.activeScheduleItems.push(item);
+                $scope.activeItems.push(item);
             }
 
+            
+            console.log('item: ', item);
             item.clicked = true;
         }
     };

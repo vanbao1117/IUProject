@@ -4,8 +4,6 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices) {
     $scope.Subjects = [];
 
-    $scope.activeScheduleItems = [];
-    
     $scope.gotoMenu = function (url, header) {
         if (header) {
             $scope.setPageHeader(header);
@@ -15,23 +13,6 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
         $location.path(url);
     };
 
-    $scope.activeMenu = function (item, group) {
-        
-        if (item !== undefined && group == 'schedule') {
-
-            angular.forEach($scope.activeScheduleItems, function (_item, key) {
-                _item.clicked = false;
-            });
-
-            
-            if ($scope.activeScheduleItems.indexOf(item) === -1) {
-                // a is NOT in array
-                $scope.activeScheduleItems.push(item);
-            }
-
-            item.clicked = true;
-        }
-    };
 
     $scope.getSubjects = function () {
         SubjectService.get().then(
@@ -44,7 +25,12 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
           });
     }
 
-    
+    $scope.activeMenu = function () {
+        $('.sidebar-menu').find('li').each(function (j, li) {
+            li.removeClass("active");
+            //.addClass("yourClass")
+        })
+    };
 
     $scope.setPageHeader = function (header) {
         $('.content-header').html('<h1>' + header + '</h1><ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">' + header + '</li></ol>');
