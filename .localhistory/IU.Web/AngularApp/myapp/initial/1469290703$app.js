@@ -23,11 +23,11 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
             templateUrl: '/Home/Dashboard',
             controller: 'DashboardController'
         })
-        .when('/schedule/:abbreSubjectName', {//Nhập liệu
+        .when('/class/:abbreSubjectName', {//Nhập liệu
             templateUrl: function (params) {
-                return 'Home/Schedule'
+                return 'Home/Class'
             },
-            controller: 'ScheduleController'
+            controller: 'ClassController'
         })
          .when('/attendance', {//Attendance
              templateUrl: '/Home/StuAttendance',

@@ -24,9 +24,9 @@ namespace IU.Web.Controllers
             return PartialView("~/Views/StuAttendance/_StuAttendance.cshtml");
         }
 
-        public PartialViewResult Schedule()
+        public PartialViewResult Class()
         {
-            return PartialView("~/Views/Schedule/_Schedule.cshtml");
+            return PartialView("~/Views/Class/_Class.cshtml");
         }
 
         public PartialViewResult Input()

@@ -196,7 +196,7 @@
     <Content Include="AngularApp\1.2.6\angular.min.js" />
     <Content Include="AngularApp\1.2.6\ng-infinite-scroll.js" />
     <Content Include="AngularApp\myapp\controllers\CategoryController.js" />
-    <Content Include="AngularApp\myapp\controllers\ScheduleController.js" />
+    <Content Include="AngularApp\myapp\controllers\ClassController.js" />
     <Content Include="AngularApp\myapp\controllers\NavAttendanceController.js" />
     <Content Include="AngularApp\myapp\controllers\StuAttendanceController.js" />
     <Content Include="AngularApp\myapp\controllers\DashboardController.js" />
@@ -1161,7 +1161,7 @@
     <Content Include="Views\Category\_Category.cshtml" />
     <Content Include="Views\Exploit\_Exploit.cshtml" />
     <Content Include="Views\Search\_Search.cshtml" />
-    <Content Include="Views\Schedule\_Schedule.cshtml" />
+    <Content Include="Views\Class\_Class.cshtml" />
     <Content Include="Views\StuAttendance\_StuAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
