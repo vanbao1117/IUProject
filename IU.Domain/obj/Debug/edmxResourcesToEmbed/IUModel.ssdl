@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminTBLs">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AdminName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminPhone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AspTransports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="TransCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="TransName" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AttendanceTBLs">
+    <Key>
+      <PropertyRef Name="AttendanceID" />
+    </Key>
+    <Property Name="AttendanceID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Attendancer" Type="varchar(max)" Nullable="false" />
+    <Property Name="DateAttendance" Type="datetime" Nullable="false" />
+    <Property Name="Attendance" Type="bit" Nullable="false" />
+    <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassScheduleTBLs">
+    <Key>
+      <PropertyRef Name="ClassScheduleID" />
+    </Key>
+    <Property Name="ClassScheduleID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateStudy" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassTBLs">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="Creater" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Secret" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ApplicationType" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="RefreshTokenLifeTime" Type="int" Nullable="false" />
+    <Property Name="AllowedOrigin" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LecturerOfSubjectTBLs">
+    <Key>
+      <PropertyRef Name="LecturerID" />
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LecturerScheduleTBLs">
+    <Key>
+      <PropertyRef Name="LecturerSchedule" />
+    </Key>
+    <Property Name="LecturerSchedule" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LecturerTBLs">
+    <Key>
+      <PropertyRef Name="LecturerID" />
+    </Key>
+    <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LecturerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LecturerGender" Type="bit" Nullable="false" />
+    <Property Name="LecturerBirth" Type="datetime" Nullable="false" />
+    <Property Name="LecturerPhone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LecturerEmail" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MessageText" Type="nvarchar(max)" />
+    <Property Name="ToUser" Type="nvarchar" MaxLength="50" />
+    <Property Name="Received" Type="nchar" MaxLength="1" />
+    <Property Name="Sent" Type="nchar" MaxLength="1" />
+    <Property Name="MessageDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RefreshTokens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IssuedUtc" Type="datetime" Nullable="false" />
+    <Property Name="ExpiresUtc" Type="datetime" Nullable="false" />
+    <Property Name="ProtectedTicket" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SemesterTBLs">
+    <Key>
+      <PropertyRef Name="SemesterID" />
+    </Key>
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SlotTBLs">
+    <Key>
+      <PropertyRef Name="SlotID" />
+    </Key>
+    <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SlotTime" Type="varchar(max)" Nullable="false" />
+    <Property Name="SlotName" Type="varchar" MaxLength="50" />
+    <Property Name="NumOfSlot" Type="int" />
+    <Property Name="TotalSlot" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentListTBLs">
+    <Key>
+      <PropertyRef Name="StudentListID" />
+    </Key>
+    <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentTBLs">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentGender" Type="bit" Nullable="false" />
+    <Property Name="StudentBirth" Type="datetime" Nullable="false" />
+    <Property Name="StudentPhone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentEmail" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="ParentPhone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubjectTBLs">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="AbbreSubjectName" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TestTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Test" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_AttendanceTBLs_ClassTBLs">
+    <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+    <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTBLs">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="AttendanceTBLs">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AttendanceTBLs_SemesterTBLs">
+    <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+    <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Principal>
+      <Dependent Role="AttendanceTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AttendanceTBLs_SlotTBLs">
+    <End Role="SlotTBLs" Type="Self.SlotTBLs" Multiplicity="1" />
+    <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlotTBLs">
+        <PropertyRef Name="SlotID" />
+      </Principal>
+      <Dependent Role="AttendanceTBLs">
+        <PropertyRef Name="SlotID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AttendanceTBLs_StudentTBLs">
+    <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+    <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBLs">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="AttendanceTBLs">
+        <PropertyRef Name="StudentListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AttendanceTBLs_SubjectTBLs">
+    <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+    <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="AttendanceTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerOfSubjectTBLs_LecturerTBLs">
+    <End Role="LecturerTBLs" Type="Self.LecturerTBLs" Multiplicity="1" />
+    <End Role="LecturerOfSubjectTBLs" Type="Self.LecturerOfSubjectTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LecturerTBLs">
+        <PropertyRef Name="LecturerID" />
+      </Principal>
+      <Dependent Role="LecturerOfSubjectTBLs">
+        <PropertyRef Name="LecturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerOfSubjectTBLs_SubjectTBLs">
+    <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+    <End Role="LecturerOfSubjectTBLs" Type="Self.LecturerOfSubjectTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="LecturerOfSubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerScheduleTBLs_ClassTBLs">
+    <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+    <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTBLs">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="LecturerScheduleTBLs">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerScheduleTBLs_LecturerTBLs">
+    <End Role="LecturerTBLs" Type="Self.LecturerTBLs" Multiplicity="1" />
+    <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LecturerTBLs">
+        <PropertyRef Name="LecturerID" />
+      </Principal>
+      <Dependent Role="LecturerScheduleTBLs">
+        <PropertyRef Name="LecturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerScheduleTBLs_SemesterTBLs">
+    <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+    <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Principal>
+      <Dependent Role="LecturerScheduleTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LecturerScheduleTBLs_SubjectTBLs">
+    <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+    <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="LecturerScheduleTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListStudentTBLs_ClassTBLs1">
+    <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+    <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTBLs">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="StudentListTBLs">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListStudentTBLs_SemesterTBLs1">
+    <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+    <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SemesterTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Principal>
+      <Dependent Role="StudentListTBLs">
+        <PropertyRef Name="SemesterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListStudentTBLs_StudentTBLs1">
+    <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+    <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBLs">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentListTBLs">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefreshTokens_Clients">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="RefreshTokens" Type="Self.RefreshTokens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RefreshTokens">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IUModelStoreContainer">
+    <EntitySet Name="AdminTBLs" EntityType="Self.AdminTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspTransports" EntityType="Self.AspTransports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AttendanceTBLs" EntityType="Self.AttendanceTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassScheduleTBLs" EntityType="Self.ClassScheduleTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassTBLs" EntityType="Self.ClassTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LecturerOfSubjectTBLs" EntityType="Self.LecturerOfSubjectTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LecturerScheduleTBLs" EntityType="Self.LecturerScheduleTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LecturerTBLs" EntityType="Self.LecturerTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentListTBLs" EntityType="Self.StudentListTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentTBLs" EntityType="Self.StudentTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubjectTBLs" EntityType="Self.SubjectTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AttendanceTBLs_ClassTBLs" Association="Self.FK_AttendanceTBLs_ClassTBLs">
+      <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+      <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AttendanceTBLs_SemesterTBLs" Association="Self.FK_AttendanceTBLs_SemesterTBLs">
+      <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+      <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AttendanceTBLs_SlotTBLs" Association="Self.FK_AttendanceTBLs_SlotTBLs">
+      <End Role="SlotTBLs" EntitySet="SlotTBLs" />
+      <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AttendanceTBLs_StudentTBLs" Association="Self.FK_AttendanceTBLs_StudentTBLs">
+      <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+      <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AttendanceTBLs_SubjectTBLs" Association="Self.FK_AttendanceTBLs_SubjectTBLs">
+      <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+      <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerOfSubjectTBLs_LecturerTBLs" Association="Self.FK_LecturerOfSubjectTBLs_LecturerTBLs">
+      <End Role="LecturerTBLs" EntitySet="LecturerTBLs" />
+      <End Role="LecturerOfSubjectTBLs" EntitySet="LecturerOfSubjectTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerOfSubjectTBLs_SubjectTBLs" Association="Self.FK_LecturerOfSubjectTBLs_SubjectTBLs">
+      <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+      <End Role="LecturerOfSubjectTBLs" EntitySet="LecturerOfSubjectTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerScheduleTBLs_ClassTBLs" Association="Self.FK_LecturerScheduleTBLs_ClassTBLs">
+      <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+      <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerScheduleTBLs_LecturerTBLs" Association="Self.FK_LecturerScheduleTBLs_LecturerTBLs">
+      <End Role="LecturerTBLs" EntitySet="LecturerTBLs" />
+      <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerScheduleTBLs_SemesterTBLs" Association="Self.FK_LecturerScheduleTBLs_SemesterTBLs">
+      <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+      <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LecturerScheduleTBLs_SubjectTBLs" Association="Self.FK_LecturerScheduleTBLs_SubjectTBLs">
+      <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+      <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListStudentTBLs_ClassTBLs1" Association="Self.FK_ListStudentTBLs_ClassTBLs1">
+      <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+      <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListStudentTBLs_SemesterTBLs1" Association="Self.FK_ListStudentTBLs_SemesterTBLs1">
+      <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+      <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListStudentTBLs_StudentTBLs1" Association="Self.FK_ListStudentTBLs_StudentTBLs1">
+      <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+      <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefreshTokens_Clients" Association="Self.FK_RefreshTokens_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="RefreshTokens" EntitySet="RefreshTokens" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
