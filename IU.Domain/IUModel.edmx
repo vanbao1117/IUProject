@@ -184,6 +184,7 @@
           </Key>
           <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SemesterName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SemesterCode" Type="varchar" MaxLength="50" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
         </EntityType>
@@ -277,18 +278,6 @@
             </Principal>
             <Dependent Role="AttendanceTBLs">
               <PropertyRef Name="SlotID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AttendanceTBLs_StudentTBLs">
-          <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
-          <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StudentTBLs">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="AttendanceTBLs">
-              <PropertyRef Name="StudentListID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -514,10 +503,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_AttendanceTBLs_SlotTBLs" Association="Self.FK_AttendanceTBLs_SlotTBLs">
             <End Role="SlotTBLs" EntitySet="SlotTBLs" />
-            <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AttendanceTBLs_StudentTBLs" Association="Self.FK_AttendanceTBLs_StudentTBLs">
-            <End Role="StudentTBLs" EntitySet="StudentTBLs" />
             <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
           </AssociationSet>
           <AssociationSet Name="FK_AttendanceTBLs_SubjectTBLs" Association="Self.FK_AttendanceTBLs_SubjectTBLs">
@@ -866,6 +851,7 @@
           <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="AttendanceTBL" />
           <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="LecturerScheduleTBL" />
           <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_SemesterTBLs1" FromRole="SemesterTBL" ToRole="StudentListTBL" />
+          <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SlotTBL">
           <Key>
@@ -1303,6 +1289,7 @@
           <EntitySetMapping Name="SemesterTBLs">
             <EntityTypeMapping TypeName="IUModel.SemesterTBL">
               <MappingFragment StoreEntitySet="SemesterTBLs">
+                <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />

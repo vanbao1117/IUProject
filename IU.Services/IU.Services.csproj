@@ -50,6 +50,7 @@
     <Compile Include="RefreshTokenService.cs" />
     <Compile Include="ClassService.cs" />
     <Compile Include="ScheduleClassService.cs" />
+    <Compile Include="AttendanceService.cs" />
     <Compile Include="SubjectService.cs" />
     <Compile Include="TransportationFormService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

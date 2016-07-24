@@ -77,7 +77,7 @@ namespace IU.Services
 
                 var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy, RoomID = f.RoomID, SlotID = f.SlotID, StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 
-                int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize); ;
+                int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
 
                 ClassSchedulePageViewModel classSchedule = new ClassSchedulePageViewModel() { TotalPages = totalPage, ClassSchedules = firstPage.ToList() };
 

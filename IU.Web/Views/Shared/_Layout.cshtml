@@ -122,10 +122,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/#/semester/Spring"><i class="fa fa-circle-o"></i> Spring</a></li>
-                            <li><a href="/#/semester/Summer"><i class="fa fa-circle-o"></i> Summer</a></li>
+                            <li ng-class="{'active':item.clicked}" ng-click="activeMenu(item, 'attendance')" ng-repeat="item in semesters"><a href="/#/semester/{{item.semesterCode}}"><i class="fa fa-circle-o"></i> {{item.semesterName}}</a></li>
+                            @*<li><a href="/#/semester/Summer"><i class="fa fa-circle-o"></i> Summer</a></li>
                             <li><a href="/#/semester/Autumn"><i class="fa fa-circle-o"></i> Autumn</a></li>
-                            <li><a href="/#/semester/Winter"><i class="fa fa-circle-o"></i> Winter</a></li>
+                            <li><a href="/#/semester/Winter"><i class="fa fa-circle-o"></i> Winter</a></li>*@
                         </ul>
                     </li>
                     <li>

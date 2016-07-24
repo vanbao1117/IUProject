@@ -22,16 +22,16 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">1</td>
-                                        <td>20/2/2014</td>
-                                        <td>1</td>
-                                        <td>LuyenML</td>
+                                    <tr role="row" class="odd" ng-repeat="item in attendances.page track by $index">
+                                        <td class="sorting_1">{{$index}}</td>
+                                        <td>{{item.dateAttendance}}</td>
+                                        <td>{{item.slotID}}</td>
+                                        <td>{{item.attendancerName}}</td>
                                         <td>Theory</td>
-                                        <td>present</td>
+                                        <td>{{item.attendance}}</td>
                                         <td> <input type="text" name="note"></td>
                                     </tr>
-                                    <tr role="row" class="even">
+                                    @*<tr role="row" class="even">
                                         <td class="sorting_1">JSP</td>
                                         <td>SE801</td>
                                         <td>208</td>
@@ -39,7 +39,7 @@
                                         <td>Take Attendance</td>
                                         <td>Edit</td>
                                         <td> <input type="text" name="note"></td>
-                                    </tr>
+                                    </tr>*@
                                 </tbody>
                             </table>
                         </div>

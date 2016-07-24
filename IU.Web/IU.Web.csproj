@@ -204,6 +204,7 @@
     <Content Include="AngularApp\myapp\controllers\ExploitController.js" />
     <Content Include="AngularApp\myapp\controllers\InputController.js" />
     <Content Include="AngularApp\myapp\services\ScheduleServices.js" />
+    <Content Include="AngularApp\myapp\services\AttendanceService.js" />
     <Content Include="AngularApp\myapp\services\SystemCodeService.js" />
     <Content Include="AngularApp\myapp\services\SubjectService.js" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />

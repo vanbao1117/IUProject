@@ -173,6 +173,7 @@
     <EntitySetMapping Name="SemesterTBLs">
       <EntityTypeMapping TypeName="IUModel.SemesterTBL">
         <MappingFragment StoreEntitySet="SemesterTBLs">
+          <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />

@@ -29,10 +29,10 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
             },
             controller: 'ScheduleController'
         })
-         .when('/attendance', {//Attendance
-             templateUrl: '/Home/StuAttendance',
-             controller: 'NavAttendanceController'
-         })
+         //.when('/attendance', {//Attendance
+         //    templateUrl: '/Home/StuAttendance',
+         //    controller: 'NavAttendanceController'
+         //})
          .when('/semester/:semesterName', {//Nhập liệu
              templateUrl: function (params) {
                  return 'Home/StuAttendance'

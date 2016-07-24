@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -15,6 +16,65 @@ namespace IU.Web.Controllers
     public class StuAttendanceController : ApiController
     {
 
+        // GET api/StuAttendance/GetAttendanceByStudent
+        /// <summary>
+        /// Get class Attendance
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(UserAttendancePagingViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAttendanceByStudent(int pageNumber, int pageSize = 20, string semesterCode = "")
+        {
+            try
+            {
+                using (AttendanceService _AttendanceService = new AttendanceService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var _Attendance = await _AttendanceService.GetAttendanceByStudentSync(pageNumber, pageSize, userName, semesterCode);
+                    return Ok(_Attendance);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/StuAttendance/GetSemesterByStudent
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserSemesterViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetSemesterByStudent()
+        {
+            try
+            {
+                UserSemesterViewModel[] modelArray = null;
+                string userName = HttpContext.Current.User.Identity.Name;
+                using (UserService _userService = new UserService())
+                {
+                    var currentUser = await _userService.FindUserSync(userName);
+                    
+                    using (AttendanceService myservice = new AttendanceService())
+                    {
+                        modelArray = await myservice.GetSemesterByStudentSync(currentUser.Id);
+                    }
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/TransCode/GetTransCode
         /// <summary>
