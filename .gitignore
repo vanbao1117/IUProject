@@ -1,2 +1,3 @@
 *.dll
 IU.Web.Models/bin/Debug/IU.Web.Models.dll
+*.config

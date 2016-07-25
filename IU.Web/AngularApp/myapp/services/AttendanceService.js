@@ -14,9 +14,9 @@ IUApp.factory('AttendanceService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
-        getAttendance: function (page, semesterCode) {
+        getAttendance: function (page, semesterCode, subjectCode) {
             var def = $q.defer();
-            $http.get("api/StuAttendance/GetAttendanceByStudent?pageNumber=" + page + "&pageSize=20" + "&semesterCode=" + semesterCode)
+            $http.get("api/StuAttendance/GetAttendanceByStudent?pageNumber=" + page + "&pageSize=20" + "&semesterCode=" + semesterCode + "&subjectCode=" + subjectCode)
                 .success(function (attendance) {
                     def.resolve(attendance);
                 })

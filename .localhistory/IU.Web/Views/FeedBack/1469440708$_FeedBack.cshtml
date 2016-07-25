@@ -1,0 +1,49 @@
+﻿<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Lecturer</h3>
+        
+        <select style="width: 100%;" class="form-control select2" ng-model="lecturer" ng-options="item as item.lecturerName for item in lecturers"></select>
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Quality</label>
+                    <select style="width: 100%;" class="form-control select2" ng-model="quality" ng-options="item as item.quality for item in qualities">
+
+                    </select>
+                    
+                </div>
+                <div class="form-group">
+                    <label>Attitude</label>
+                    <select style="width: 100%;" class="form-control select2" ng-model="attitude" ng-options="item as item.attitude for item in attitudes"></select>
+                </div>
+
+                <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>OnTime</label>
+                    <select style="width: 100%;" class="form-control select2" ng-model="onTime" ng-options="item as item.onTime for item in onTimes"></select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Satisfaction</label>
+                    <select style="width: 100%;" class="form-control select2" ng-model="satisfaction" ng-options="item as item.satisfaction for item in satisfactions"></select>
+                </div>
+            </div>
+            <div class="col-md-9"><h4><label>Your Comments</label></h4><h4></h4></div>
+            <div class="col-md-12">
+                <textarea name="comments" rows="10" cols="100" style="width:100%"></textarea>
+                <div class="col-md-15 center-block">
+                    <button ng-click="sendFeedback()" type="button" class="btn btn-primary center-block" style="width:100px">Success</button>
+                </div> 
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.box-body -->
+</div>

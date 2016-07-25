@@ -19,41 +19,89 @@ namespace IU.Services
             
         }
 
-        public async Task<UserAttendancePagingViewModel> GetAttendanceByStudentSync(int pageNumber, int pageSize, string userName, string semesterCode)
+        public async Task<UserAttendancePagingViewModel[]> GetAttendanceByStudentSync(int pageNumber, int pageSize, string userName, string semesterCode, string subjectCode)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetAttendanceByStudent(pageNumber, pageSize, userName, semesterCode));
+                return await Task.Run(() => GetAttendanceByStudent(pageNumber, pageSize, userName, semesterCode, subjectCode));
             }
         }
 
-        private UserAttendancePagingViewModel GetAttendanceByStudent(int pageNumber, int pageSize, string userName, string semesterCode)
+        private UserAttendancePagingViewModel[] GetAttendanceByStudent(int pageNumber, int pageSize, string userName, string semesterCode, string subjectCode)
         {
             using (var context = new IUContext())
             {
                 var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
-                var semester = GetSemesterByName(semesterCode);
 
+                var subjects = GetSubjectByStudent(user.Id);
+
+                var semester = GetSemesterByName(semesterCode);
                 int NumberOfItems = 0;
 
-                var attendances =
-                 from attendanceTBLs in context.AttendanceTBLs
+                List<UserAttendancePagingViewModel> lsPage = new List<UserAttendancePagingViewModel>();
+
+                foreach (SubjectTBL subject in subjects)
+                {
+                    
+                    NumberOfItems = 0;
+
+                    var attendances =
+                     from attendanceTBLs in context.AttendanceTBLs
+                     join studentListTBLs in context.StudentListTBLs
+                         on attendanceTBLs.StudentListID equals studentListTBLs.StudentListID
+                     join studentTBLs in context.StudentTBLs
+                        on studentListTBLs.StudentID equals studentTBLs.StudentID
+                     where studentTBLs.UserID == user.Id && studentListTBLs.SemesterID == semester.SemesterID
+                     && attendanceTBLs.SubjectID == subject.SubjectID
+                     select attendanceTBLs;
+
+                    if (!attendances.Any()) continue;
+
+                    var firstPageData = Helper.PagedResult(attendances, pageNumber, pageSize, attendance => attendance.DateAttendance, false, out NumberOfItems);
+
+                    var firstPage = firstPageData.ToArray().Select(f => new UserAttendanceViewModel() { Attendance = f.Attendance, AttendanceID = f.AttendanceID, Attendancer = f.Attendancer, AttendancerName = GetLecturer(f.Attendancer).LecturerName, ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), DateAttendance = f.DateAttendance, RoomID = f.RoomID, SemesterID = f.SemesterID, SlotID = f.SlotID, StudentListID = f.StudentListID, SubjectID = f.SubjectID, SubjectName = GetSubjectByName(f.SubjectID).SubjectName });
+
+                    int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
+
+                    UserAttendancePagingViewModel paging = new UserAttendancePagingViewModel() { TotalPages = totalPage, Page = firstPage.ToArray(), SubjectName = subject.SubjectName, SubjectCode = subject.AbbreSubjectName };
+                   
+
+                    if (subjectCode != null && subjectCode == subject.AbbreSubjectName)
+                    {
+                        lsPage.Add(paging);
+                        break;
+                    }
+                    else
+                    {
+                        if (subjectCode == null)
+                            lsPage.Add(paging);
+                    }
+
+                }
+
+
+                return lsPage.ToArray();
+            }
+        }
+
+
+        private List<SubjectTBL> GetSubjectByStudent(string userId)
+        {
+            using (var context = new IUContext())
+            {
+
+                var subjects =
+                 from subjectTBLs in context.SubjectTBLs
+                 join classScheduleTBLs in context.ClassScheduleTBLs
+                     on subjectTBLs.SubjectID equals classScheduleTBLs.SubjectID
                  join studentListTBLs in context.StudentListTBLs
-                     on attendanceTBLs.StudentListID equals studentListTBLs.StudentListID
+                     on classScheduleTBLs.StudentListID equals studentListTBLs.StudentListID
                  join studentTBLs in context.StudentTBLs
                     on studentListTBLs.StudentID equals studentTBLs.StudentID
-                 where studentTBLs.UserID == user.Id && studentListTBLs.SemesterID == semester.SemesterID
-                 select attendanceTBLs;
+                 where studentTBLs.UserID == userId
+                 select subjectTBLs;
 
-                var firstPageData = Helper.PagedResult(attendances, pageNumber, pageSize, attendance => attendance.DateAttendance, false, out NumberOfItems);
-
-                var firstPage = firstPageData.ToArray().Select(f => new UserAttendanceViewModel() { Attendance = f.Attendance, AttendanceID = f.AttendanceID, Attendancer = f.Attendancer, AttendancerName = GetLecturer(f.Attendancer).LecturerName, ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), DateAttendance = f.DateAttendance, RoomID = f.RoomID, SemesterID = f.SemesterID, SlotID = f.SlotID, StudentListID = f.StudentListID, SubjectID = f.SubjectID, SubjectName = GetSubjectByName(f.SubjectID).SubjectName});
-
-                int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
-
-                UserAttendancePagingViewModel paging = new UserAttendancePagingViewModel() { TotalPages = totalPage, Page = firstPage.ToArray() };
-
-                return paging;
+                return subjects.Distinct().ToList();
             }
         }
 

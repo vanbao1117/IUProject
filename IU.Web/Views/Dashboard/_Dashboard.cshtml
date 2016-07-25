@@ -30,7 +30,7 @@
                                         <td>{{item.className}}</td>
                                         <td>{{item.roomID}}</td>
                                         <td>{{item.slotID}}</td>
-                                        <td>{{item.studentName}}</td>
+                                        <td>{{item.lecturer}}</td>
                                     </tr>
                                     @*<tr role="row" class="even">
                                         <td class="sorting_1">Monday 21/1/2000</td>
@@ -76,14 +76,14 @@
                         <div class="col-sm-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button previous disabled" id="example2_previous">
-                                        <a href="#" ng-click="previous()" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
+                                    <li class="paginate_button previous" id="example2_previous">
+                                        <a href="#" ng-click="$event.preventDefault();previous()" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
                                     </li>
                                     <li class="paginate_button active" ng-repeat="a in range(schedules.totalPages) track by $index">
-                                        <a href="#" ng-click="getAllClassSchedule($index + 1)" aria-controls="example2" data-dt-idx="{{$index + 1}}" tabindex="{{$index}}">{{$index + 1}}</a>
+                                        <a style="cursor: pointer;" href="#" ng-click="$event.preventDefault();getAllClassSchedule($index + 1)" aria-controls="example2" data-dt-idx="{{$index + 1}}" tabindex="{{$index}}">{{$index + 1}}</a>
                                     </li>
                                     <li class="paginate_button next" id="example2_next">
-                                        <a href="#" ng-click="next()" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
+                                        <a href="#" ng-click="$event.preventDefault();next()" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
                                     </li>
                               </ul>
                             </div>

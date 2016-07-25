@@ -10,28 +10,27 @@
         <EntityTypeShape EntityType="IUModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="1" />
         <EntityTypeShape EntityType="IUModel.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="3.75" />
         <EntityTypeShape EntityType="IUModel.AspNetUser" Width="1.5" PointX="11" PointY="1.25" />
-        <EntityTypeShape EntityType="IUModel.AspTransport" Width="1.5" PointX="5.75" PointY="9.75" />
-        <EntityTypeShape EntityType="IUModel.AttendanceTBL" Width="1.5" PointX="6" PointY="4.75" />
-        <EntityTypeShape EntityType="IUModel.ClassScheduleTBL" Width="1.5" PointX="7.75" PointY="10.75" />
+        <EntityTypeShape EntityType="IUModel.AspTransport" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="IUModel.AttendanceTBL" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="IUModel.ClassScheduleTBL" Width="1.5" PointX="4.75" PointY="9.75" />
         <EntityTypeShape EntityType="IUModel.ClassTBL" Width="1.5" PointX="0.75" PointY="5.375" />
         <EntityTypeShape EntityType="IUModel.Client" Width="1.5" PointX="8.75" PointY="7" />
-        <EntityTypeShape EntityType="IUModel.LecturerScheduleTBL" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="IUModel.LecturerTBL" Width="1.5" PointX="0.75" PointY="12.625" />
-        <EntityTypeShape EntityType="IUModel.Notification" Width="1.5" PointX="9.75" PointY="10.75" />
+        <EntityTypeShape EntityType="IUModel.LecturerScheduleTBL" Width="1.5" PointX="6" PointY="5.125" />
+        <EntityTypeShape EntityType="IUModel.LecturerTBL" Width="1.5" PointX="1.5" PointY="16.75" />
+        <EntityTypeShape EntityType="IUModel.Notification" Width="1.5" PointX="6.75" PointY="10.75" />
         <EntityTypeShape EntityType="IUModel.RefreshToken" Width="1.5" PointX="11" PointY="7" />
         <EntityTypeShape EntityType="IUModel.SemesterTBL" Width="1.5" PointX="0.75" PointY="9.5" />
-        <EntityTypeShape EntityType="IUModel.SlotTBL" Width="1.5" PointX="3.75" PointY="12.5" />
-        <EntityTypeShape EntityType="IUModel.StudentListTBL" Width="1.5" PointX="3" PointY="5.5" />
-        <EntityTypeShape EntityType="IUModel.StudentTBL" Width="1.5" PointX="3.75" PointY="8.75" />
-        <EntityTypeShape EntityType="IUModel.SubjectTBL" Width="1.5" PointX="0.75" PointY="1.625" />
-        <EntityTypeShape EntityType="IUModel.sysdiagram" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="IUModel.TestTable" Width="1.5" PointX="13.75" PointY="6.75" />
+        <EntityTypeShape EntityType="IUModel.SlotTBL" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="IUModel.StudentListTBL" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="IUModel.StudentTBL" Width="1.5" PointX="0.75" PointY="21.25" />
+        <EntityTypeShape EntityType="IUModel.SubjectTBL" Width="1.5" PointX="0.75" PointY="13" />
+        <EntityTypeShape EntityType="IUModel.sysdiagram" Width="1.5" PointX="8.75" PointY="10.75" />
+        <EntityTypeShape EntityType="IUModel.TestTable" Width="1.5" PointX="10.75" PointY="10.75" />
         <AssociationConnector Association="IUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="IUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="IUModel.FK_AttendanceTBLs_ClassTBLs" />
         <AssociationConnector Association="IUModel.FK_AttendanceTBLs_SemesterTBLs" />
         <AssociationConnector Association="IUModel.FK_AttendanceTBLs_SlotTBLs" />
-        <AssociationConnector Association="IUModel.FK_AttendanceTBLs_StudentTBLs" />
         <AssociationConnector Association="IUModel.FK_AttendanceTBLs_SubjectTBLs" />
         <AssociationConnector Association="IUModel.FK_LecturerScheduleTBLs_ClassTBLs" />
         <AssociationConnector Association="IUModel.FK_ListStudentTBLs_ClassTBLs1" />
@@ -43,6 +42,10 @@
         <AssociationConnector Association="IUModel.FK_ListStudentTBLs_StudentTBLs1" />
         <AssociationConnector Association="IUModel.AspNetUserRoles" />
         <AssociationConnector Association="IUModel.LecturerOfSubjectTBLs" />
+        <EntityTypeShape EntityType="IUModel.FeedBackTBL" Width="1.5" PointX="3.75" PointY="19" />
+        <AssociationConnector Association="IUModel.FK_FeedBackTBLs_LectureTBLs" />
+        <AssociationConnector Association="IUModel.FK_FeedBackTBLs_StudentTBLs" />
+        <AssociationConnector Association="IUModel.FK_FeedBackTBLs_StudentTBLs1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

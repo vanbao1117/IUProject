@@ -28,7 +28,6 @@ namespace IU.Domain
         public virtual ClassTBL ClassTBL { get; set; }
         public virtual SemesterTBL SemesterTBL { get; set; }
         public virtual SlotTBL SlotTBL { get; set; }
-        public virtual StudentTBL StudentTBL { get; set; }
         public virtual SubjectTBL SubjectTBL { get; set; }
     }
 }

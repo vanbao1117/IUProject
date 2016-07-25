@@ -35,6 +35,8 @@ namespace IU.Web.Models
     public class UserAttendancePagingViewModel
     {
         public int TotalPages { set; get; }
+        public string SubjectName { set; get; }
+        public string SubjectCode { set; get; }
         public UserAttendanceViewModel[] Page { set; get; }
     }
 }

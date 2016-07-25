@@ -114,7 +114,7 @@
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="/#/attendance" >
+                        <a href="#" >
                             <i class="fa fa-book"></i>
                             <span>Attendance</span>
                             <span class="pull-right-container">
@@ -128,7 +128,7 @@
                             <li><a href="/#/semester/Winter"><i class="fa fa-circle-o"></i> Winter</a></li>*@
                         </ul>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="pages/widgets.html">
                             <i class="fa fa-users"></i> <span>My Class</span>
                             <span class="pull-right-container">
@@ -141,7 +141,7 @@
                             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Class 3</a></li>
                             <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Class 4</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-edit"></i>
@@ -151,13 +151,10 @@
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
+                    <li ng-class="{'active':feedbackActiveMenu}" class="treeview feedback" ng-click="activeMenu(undefined, 'feedback')">
+                        <a href="/#/feedback">
                             <i class="fa fa-comment-o"></i>
                             <span>Feed Back</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">new</small>
-                            </span>
                         </a>
                     </li>
                 </ul>

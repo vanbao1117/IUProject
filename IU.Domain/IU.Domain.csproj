@@ -78,6 +78,9 @@
     <Compile Include="Client.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FeedBackTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IUModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

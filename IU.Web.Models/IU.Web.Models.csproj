@@ -43,6 +43,8 @@
     <Compile Include="AspNetUserViewModel.cs" />
     <Compile Include="ClassViewModel.cs" />
     <Compile Include="ClientViewModel.cs" />
+    <Compile Include="FeedbackViewModel.cs" />
+    <Compile Include="LecturerViewModel.cs" />
     <Compile Include="RefreshTokenViewModel.cs" />
     <Compile Include="DeviceViewModel.cs" />
     <Compile Include="TransViewModel.cs" />

@@ -173,9 +173,9 @@
     <EntitySetMapping Name="SemesterTBLs">
       <EntityTypeMapping TypeName="IUModel.SemesterTBL">
         <MappingFragment StoreEntitySet="SemesterTBLs">
-          <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
           <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
           <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
         </MappingFragment>
@@ -260,5 +260,19 @@
         <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="FeedBackTBLs">
+      <EntityTypeMapping TypeName="IUModel.FeedBackTBL">
+        <MappingFragment StoreEntitySet="FeedBackTBLs">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Satisfaction" ColumnName="Satisfaction" />
+          <ScalarProperty Name="Attitude" ColumnName="Attitude" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Quality" ColumnName="Quality" />
+          <ScalarProperty Name="Lecturer" ColumnName="Lecturer" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

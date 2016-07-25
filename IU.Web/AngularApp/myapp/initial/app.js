@@ -28,11 +28,16 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
                 return 'Home/Schedule'
             },
             controller: 'ScheduleController'
+        }).when('/feedback', {//Nhập liệu
+            templateUrl: function (params) {
+                return 'Home/Feedback'
+            },
+            controller: 'FeedbackController'
         })
-         //.when('/attendance', {//Attendance
-         //    templateUrl: '/Home/StuAttendance',
-         //    controller: 'NavAttendanceController'
-         //})
+         .when('/attendance', {//Attendance
+             templateUrl: '/Home/StuAttendance',
+             controller: 'NavAttendanceController'
+         })
          .when('/semester/:semesterName', {//Nhập liệu
              templateUrl: function (params) {
                  return 'Home/StuAttendance'

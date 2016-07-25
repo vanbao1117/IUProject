@@ -23,9 +23,9 @@ namespace IU.Domain
     
         public string SemesterID { get; set; }
         public string SemesterName { get; set; }
+        public string SemesterCode { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public string SemesterCode { get; set; }
     
         public virtual ICollection<AttendanceTBL> AttendanceTBLs { get; set; }
         public virtual ICollection<LecturerScheduleTBL> LecturerScheduleTBLs { get; set; }

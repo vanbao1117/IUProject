@@ -18,6 +18,7 @@ namespace IU.Domain
         {
             this.LecturerScheduleTBLs = new HashSet<LecturerScheduleTBL>();
             this.SubjectTBLs = new HashSet<SubjectTBL>();
+            this.FeedBackTBLs = new HashSet<FeedBackTBL>();
         }
     
         public string LecturerID { get; set; }
@@ -30,5 +31,6 @@ namespace IU.Domain
     
         public virtual ICollection<LecturerScheduleTBL> LecturerScheduleTBLs { get; set; }
         public virtual ICollection<SubjectTBL> SubjectTBLs { get; set; }
+        public virtual ICollection<FeedBackTBL> FeedBackTBLs { get; set; }
     }
 }

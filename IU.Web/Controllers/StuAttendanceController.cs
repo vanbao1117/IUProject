@@ -15,24 +15,49 @@ namespace IU.Web.Controllers
     [Authorize]
     public class StuAttendanceController : ApiController
     {
+        // GET api/StuAttendance/FeedbackByStudent
+        /// <summary>
+        /// Get class Attendance
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> FeedbackByStudent(FeedbackViewModel model)
+        {
+            try
+            {
+                using (FeedbackService _FeedbackService = new FeedbackService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _FeedbackService.SubmitFeedbackSync(model, userName);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/StuAttendance/GetAttendanceByStudent
         /// <summary>
         /// Get class Attendance
         /// </summary>
         /// <returns></returns>
-        [ResponseType(typeof(UserAttendancePagingViewModel))]
+        [ResponseType(typeof(IEnumerable<UserAttendancePagingViewModel>))]
         [Authorize]
         [System.Web.Http.HttpGet]
-        public async Task<IHttpActionResult> GetAttendanceByStudent(int pageNumber, int pageSize = 20, string semesterCode = "")
+        public async Task<IHttpActionResult> GetAttendanceByStudent(int pageNumber, int pageSize = 20, string semesterCode = "", string subjectCode = "")
         {
             try
             {
                 using (AttendanceService _AttendanceService = new AttendanceService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
-                    var _Attendance = await _AttendanceService.GetAttendanceByStudentSync(pageNumber, pageSize, userName, semesterCode);
-                    return Ok(_Attendance);
+                    var _Attendances = await _AttendanceService.GetAttendanceByStudentSync(pageNumber, pageSize, userName, semesterCode, subjectCode);
+                    return Ok(_Attendances);
 
                 }
             }

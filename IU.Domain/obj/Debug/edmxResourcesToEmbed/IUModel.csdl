@@ -42,10 +42,6 @@
       <End Role="SlotTBL" EntitySet="SlotTBLs" />
       <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
     </AssociationSet>
-    <AssociationSet Name="FK_AttendanceTBLs_StudentTBLs" Association="IUModel.FK_AttendanceTBLs_StudentTBLs">
-      <End Role="StudentTBL" EntitySet="StudentTBLs" />
-      <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
-    </AssociationSet>
     <AssociationSet Name="FK_AttendanceTBLs_SubjectTBLs" Association="IUModel.FK_AttendanceTBLs_SubjectTBLs">
       <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
       <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
@@ -89,6 +85,19 @@
     <AssociationSet Name="LecturerOfSubjectTBLs" Association="IUModel.LecturerOfSubjectTBLs">
       <End Role="LecturerTBL" EntitySet="LecturerTBLs" />
       <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+    </AssociationSet>
+    <EntitySet Name="FeedBackTBLs" EntityType="IUModel.FeedBackTBL" />
+    <AssociationSet Name="FK_FeedBackTBLs_LectureTBLs" Association="IUModel.FK_FeedBackTBLs_LectureTBLs">
+      <End Role="LecturerTBL" EntitySet="LecturerTBLs" />
+      <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedBackTBLs_StudentTBLs" Association="IUModel.FK_FeedBackTBLs_StudentTBLs">
+      <End Role="StudentTBL" EntitySet="StudentTBLs" />
+      <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedBackTBLs_StudentTBLs1" Association="IUModel.FK_FeedBackTBLs_StudentTBLs1">
+      <End Role="StudentTBL" EntitySet="StudentTBLs" />
+      <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AdminTBL">
@@ -176,7 +185,6 @@
     <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="AttendanceTBL" ToRole="ClassTBL" />
     <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="AttendanceTBL" ToRole="SemesterTBL" />
     <NavigationProperty Name="SlotTBL" Relationship="IUModel.FK_AttendanceTBLs_SlotTBLs" FromRole="AttendanceTBL" ToRole="SlotTBL" />
-    <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_AttendanceTBLs_StudentTBLs" FromRole="AttendanceTBL" ToRole="StudentTBL" />
     <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="AttendanceTBL" ToRole="SubjectTBL" />
   </EntityType>
   <EntityType Name="ClassScheduleTBL">
@@ -246,6 +254,7 @@
     <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_LecturerTBLs" FromRole="LecturerTBL" ToRole="LecturerScheduleTBL" />
     <NavigationProperty Name="SubjectTBLs" Relationship="IUModel.LecturerOfSubjectTBLs" FromRole="LecturerTBL" ToRole="SubjectTBL" />
+    <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_LectureTBLs" FromRole="LecturerTBL" ToRole="FeedBackTBL" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
@@ -276,12 +285,12 @@
     </Key>
     <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="SemesterName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="StartDate" Type="DateTime" Precision="3" />
     <Property Name="EndDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="AttendanceTBL" />
     <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="LecturerScheduleTBL" />
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_SemesterTBLs1" FromRole="SemesterTBL" ToRole="StudentListTBL" />
-    <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="SlotTBL">
     <Key>
@@ -318,8 +327,9 @@
     <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="ParentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_StudentTBLs" FromRole="StudentTBL" ToRole="AttendanceTBL" />
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />
+    <NavigationProperty Name="FeedBackTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="StudentTBL" ToRole="FeedBackTBL" />
+    <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
   </EntityType>
   <EntityType Name="SubjectTBL">
     <Key>
@@ -410,18 +420,6 @@
       </Principal>
       <Dependent Role="AttendanceTBL">
         <PropertyRef Name="SlotID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AttendanceTBLs_StudentTBLs">
-    <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
-    <End Type="IUModel.AttendanceTBL" Role="AttendanceTBL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StudentTBL">
-        <PropertyRef Name="StudentID" />
-      </Principal>
-      <Dependent Role="AttendanceTBL">
-        <PropertyRef Name="StudentListID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -540,5 +538,57 @@
   <Association Name="LecturerOfSubjectTBLs">
     <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="*" />
     <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="*" />
+  </Association>
+  <EntityType Name="FeedBackTBL">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Student" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Lecturer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Quality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OnTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Attitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Satisfaction" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LecturerTBL" Relationship="IUModel.FK_FeedBackTBLs_LectureTBLs" FromRole="FeedBackTBL" ToRole="LecturerTBL" />
+    <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="FeedBackTBL" ToRole="StudentTBL" />
+    <NavigationProperty Name="StudentTBL1" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="FeedBackTBL" ToRole="StudentTBL" />
+  </EntityType>
+  <Association Name="FK_FeedBackTBLs_LectureTBLs">
+    <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="0..1" />
+    <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LecturerTBL">
+        <PropertyRef Name="LecturerID" />
+      </Principal>
+      <Dependent Role="FeedBackTBL">
+        <PropertyRef Name="Lecturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedBackTBLs_StudentTBLs">
+    <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+    <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBL">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="FeedBackTBL">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedBackTBLs_StudentTBLs1">
+    <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="0..1" />
+    <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBL">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="FeedBackTBL">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

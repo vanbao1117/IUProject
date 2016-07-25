@@ -16,8 +16,8 @@ namespace IU.Domain
     {
         public StudentTBL()
         {
-            this.AttendanceTBLs = new HashSet<AttendanceTBL>();
             this.StudentListTBLs = new HashSet<StudentListTBL>();
+            this.FeedBackTBLs = new HashSet<FeedBackTBL>();
         }
     
         public string StudentID { get; set; }
@@ -29,7 +29,8 @@ namespace IU.Domain
         public string ParentPhone { get; set; }
         public string UserID { get; set; }
     
-        public virtual ICollection<AttendanceTBL> AttendanceTBLs { get; set; }
         public virtual ICollection<StudentListTBL> StudentListTBLs { get; set; }
+        public virtual FeedBackTBL FeedBackTBL { get; set; }
+        public virtual ICollection<FeedBackTBL> FeedBackTBLs { get; set; }
     }
 }

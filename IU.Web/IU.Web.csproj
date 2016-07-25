@@ -175,6 +175,7 @@
     <Compile Include="Areas\Lecturer\LecturerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountMobileController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\LecturerController.cs" />
     <Compile Include="Controllers\StuAttendanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -195,6 +196,7 @@
     <Content Include="AngularApp\1.2.6\angular-route.min.js" />
     <Content Include="AngularApp\1.2.6\angular.min.js" />
     <Content Include="AngularApp\1.2.6\ng-infinite-scroll.js" />
+    <Content Include="AngularApp\myapp\controllers\FeedbackController.js" />
     <Content Include="AngularApp\myapp\controllers\CategoryController.js" />
     <Content Include="AngularApp\myapp\controllers\ScheduleController.js" />
     <Content Include="AngularApp\myapp\controllers\NavAttendanceController.js" />
@@ -203,8 +205,10 @@
     <Content Include="AngularApp\myapp\controllers\SearchController.js" />
     <Content Include="AngularApp\myapp\controllers\ExploitController.js" />
     <Content Include="AngularApp\myapp\controllers\InputController.js" />
+    <Content Include="AngularApp\myapp\services\FeedbackServices.js" />
     <Content Include="AngularApp\myapp\services\ScheduleServices.js" />
     <Content Include="AngularApp\myapp\services\AttendanceService.js" />
+    <Content Include="AngularApp\myapp\services\LecturerService.js" />
     <Content Include="AngularApp\myapp\services\SystemCodeService.js" />
     <Content Include="AngularApp\myapp\services\SubjectService.js" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -1164,6 +1168,7 @@
     <Content Include="Views\Search\_Search.cshtml" />
     <Content Include="Views\Schedule\_Schedule.cshtml" />
     <Content Include="Views\StuAttendance\_StuAttendance.cshtml" />
+    <Content Include="Views\FeedBack\_FeedBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
