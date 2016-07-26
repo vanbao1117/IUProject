@@ -1,0 +1,97 @@
+﻿
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success direct-chat direct-chat-success">
+                <div class="box-header">
+                    <h3 class="box-title">Choose Subject</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Subject</th>
+                                            <th style=" width: 100px;">Credit</th>
+                                            <th style=" width: 100px;">Cost</th>
+                                            <th style=" width: 100px;">Select</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr role="row" class="odd" ng-class="{'active':subjectSelect}" ng-repeat="item in subjects">
+                                            <td>{{item.subjectName}}</td>
+                                            <td style=" width: 100px;">{{item.credit}}</td>
+                                            <td style=" width: 100px;">{{item.cost}}</td>
+                                            <td style=" width: 100px;"><input type="checkbox" ng-model="item.select" ng-checked="{item.select}" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-success direct-chat direct-chat-success">
+                <div class="box-header">
+                    <h3 class="box-title">Choose Class</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Class</th>
+                                            <th style=" width: 100px;">Room</th>
+                                            <th style=" width: 100px;">Slot</th>
+                                            <th style=" width: 100px;">Start Date</th>
+                                            <th style=" width: 100px;">Select</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">SE901</td>
+                                            <td style=" width: 100px;">207</td>
+                                            <td style=" width: 100px;">4</td>
+                                            <td style=" width: 100px;">Start Date</td>
+                                            <td style=" width: 100px;"><input type="checkbox" /></td>
+                                        </tr>
+                                        <tr role="row" class="even">
+                                            <td class="sorting_1">SE903</td>
+                                            <td style=" width: 100px;">202</td>
+                                            <td style=" width: 100px;">1</td>
+                                            <td style=" width: 100px;">Start Date</td>
+                                            <td style=" width: 100px;"><input type="checkbox" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -5,6 +5,8 @@ IUApp.controller('DashboardController', ['$scope', '$http', '$location', '$route
         $scope.currentPage = 1;
         $scope.schedules = {};
 
+        $scope.subjectName = "All Subjects";
+
         $scope.getAllClassSchedule = function (page) {
             $scope.currentPage = page;
             ScheduleServices.get(page, "ALL").then(
@@ -36,7 +38,7 @@ IUApp.controller('DashboardController', ['$scope', '$http', '$location', '$route
      (function init() {
          $timeout(function () {
              //set header text
-             $scope.setPageHeader('Schedule');
+             $scope.setPageHeader($scope.subjectName);
              $scope.getAllClassSchedule(1);
              console.log('System controller with timeout fired');
          }, 500);

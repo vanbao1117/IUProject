@@ -46,6 +46,11 @@
         <AssociationConnector Association="IUModel.FK_FeedBackTBLs_LectureTBLs" />
         <AssociationConnector Association="IUModel.FK_FeedBackTBLs_StudentTBLs" />
         <AssociationConnector Association="IUModel.FK_FeedBackTBLs_StudentTBLs1" />
+        <EntityTypeShape EntityType="IUModel.OpenClassTBL" Width="1.5" PointX="3" PointY="23.5" />
+        <EntityTypeShape EntityType="IUModel.OpenSubjectTBL" Width="1.5" PointX="6.25" PointY="18.125" />
+        <AssociationConnector Association="IUModel.FK_OpenClassTBLs_ClassTBLs" />
+        <AssociationConnector Association="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" />
+        <AssociationConnector Association="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

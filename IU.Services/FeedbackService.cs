@@ -26,7 +26,7 @@ namespace IU.Services
                      var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
                     var student = context.StudentTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
                     string _id = Helper.GenerateRandomId();
-                    await FeedbackRepository.SaveAsync(new FeedBackTBL() { Id = _id, Attitude = model.Attitude, Comments = model.Comments, Lecturer = model.LecturerID, OnTime = model.OnTime, Quality = model.Quality, Satisfaction = model.Satisfaction, Student = student.StudentID } );
+                    await FeedbackRepository.SaveAsync(new FeedBackTBL() { Id = _id, Attitude = model.Attitude, Comments = model.Comments, Lecturer = model.LecturerID, OnTime = model.OnTime, Quality = model.Quality, Satisfaction = model.Satisfaction, Student = student.StudentID, FeedbackDate = DateTime.Now } );
                     return model;
                 }
                 catch(Exception ex){}

@@ -22,6 +22,7 @@ namespace IU.Domain
         public string Attitude { get; set; }
         public string Satisfaction { get; set; }
         public string Comments { get; set; }
+        public Nullable<System.DateTime> FeedbackDate { get; set; }
     
         public virtual LecturerTBL LecturerTBL { get; set; }
         public virtual StudentTBL StudentTBL { get; set; }

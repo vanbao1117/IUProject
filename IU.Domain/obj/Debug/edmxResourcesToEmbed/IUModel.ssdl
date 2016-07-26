@@ -132,6 +132,7 @@
     <Property Name="Attitude" Type="nvarchar" MaxLength="100" />
     <Property Name="Satisfaction" Type="nvarchar" MaxLength="100" />
     <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="FeedbackDate" Type="datetime" />
   </EntityType>
   <EntityType Name="LecturerOfSubjectTBLs">
     <Key>

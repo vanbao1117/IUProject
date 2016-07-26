@@ -263,6 +263,7 @@
     <EntitySetMapping Name="FeedBackTBLs">
       <EntityTypeMapping TypeName="IUModel.FeedBackTBL">
         <MappingFragment StoreEntitySet="FeedBackTBLs">
+          <ScalarProperty Name="FeedbackDate" ColumnName="FeedbackDate" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="Satisfaction" ColumnName="Satisfaction" />
           <ScalarProperty Name="Attitude" ColumnName="Attitude" />

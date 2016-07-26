@@ -59,7 +59,7 @@ namespace IU.Services
 
                     var firstPageData = Helper.PagedResult(attendances, pageNumber, pageSize, attendance => attendance.DateAttendance, false, out NumberOfItems);
 
-                    var firstPage = firstPageData.ToArray().Select(f => new UserAttendanceViewModel() { Attendance = f.Attendance, AttendanceID = f.AttendanceID, Attendancer = f.Attendancer, AttendancerName = GetLecturer(f.Attendancer).LecturerName, ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), DateAttendance = f.DateAttendance, RoomID = f.RoomID, SemesterID = f.SemesterID, SlotID = f.SlotID, StudentListID = f.StudentListID, SubjectID = f.SubjectID, SubjectName = GetSubjectByName(f.SubjectID).SubjectName });
+                    var firstPage = firstPageData.ToArray().Select(f => new UserAttendanceViewModel() { Attendance = f.Attendance, AttendanceID = f.AttendanceID, Attendancer = f.Attendancer, AttendancerName = GetLecturer(f.Attendancer).LecturerName, ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), DateAttendance = f.DateAttendance, RoomID = f.RoomID, SemesterID = f.SemesterID, SlotID = GetSlotbyID(f.SlotID), StudentListID = f.StudentListID, SubjectID = f.SubjectID, SubjectName = GetSubjectByName(f.SubjectID).SubjectName });
 
                     int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
 
@@ -84,7 +84,13 @@ namespace IU.Services
             }
         }
 
-
+        private string GetSlotbyID(string SlotID)
+        {
+            using (var context = new IUContext())
+            {
+                return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotTime;
+            }
+        }
         private List<SubjectTBL> GetSubjectByStudent(string userId)
         {
             using (var context = new IUContext())

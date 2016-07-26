@@ -47,5 +47,7 @@ namespace IU.Domain
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestTable> TestTables { get; set; }
         public virtual DbSet<FeedBackTBL> FeedBackTBLs { get; set; }
+        public virtual DbSet<OpenClassTBL> OpenClassTBLs { get; set; }
+        public virtual DbSet<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
     }
 }

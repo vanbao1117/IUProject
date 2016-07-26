@@ -4,6 +4,15 @@ IUApp.controller('ScheduleController', ['$scope', '$http', '$location', '$route'
     function ($scope, $http, $location, $route, $templateCache, $timeout, $routeParams, ScheduleServices) {
 
         $scope.abbreSubjectName = $routeParams.abbreSubjectName;
+        $scope.subjectName = "All Subjects";
+
+        angular.forEach($scope.Subjects, function (item, key) {
+            if (item.abbreSubjectName == $routeParams.abbreSubjectName) {
+                $scope.subjectName = item.subjectName;
+                return;
+            }
+        });
+
         console.log('$routeParams.abbreSubjectName: ', $routeParams.abbreSubjectName);
         $scope.currentPage = 1;
         $scope.schedules = {};
@@ -41,7 +50,7 @@ IUApp.controller('ScheduleController', ['$scope', '$http', '$location', '$route'
              $timeout(function () {
                  $templateCache.removeAll();
                  //set header text
-                 $scope.setPageHeader($scope.abbreSubjectName);
+                 $scope.setPageHeader($scope.subjectName);
 
                  $scope.getAllClassSchedule($scope.currentPage);
 

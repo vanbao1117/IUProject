@@ -19,6 +19,7 @@ namespace IU.Domain
             this.AttendanceTBLs = new HashSet<AttendanceTBL>();
             this.LecturerScheduleTBLs = new HashSet<LecturerScheduleTBL>();
             this.LecturerTBLs = new HashSet<LecturerTBL>();
+            this.OpenSubjectTBLs = new HashSet<OpenSubjectTBL>();
         }
     
         public string SubjectID { get; set; }
@@ -28,5 +29,6 @@ namespace IU.Domain
         public virtual ICollection<AttendanceTBL> AttendanceTBLs { get; set; }
         public virtual ICollection<LecturerScheduleTBL> LecturerScheduleTBLs { get; set; }
         public virtual ICollection<LecturerTBL> LecturerTBLs { get; set; }
+        public virtual ICollection<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
     }
 }

@@ -19,6 +19,11 @@ namespace IU.Web.Controllers
             return PartialView("~/Views/Dashboard/_Dashboard.cshtml");
         }
 
+        public PartialViewResult Bis()
+        {
+            return PartialView("~/Views/Bis/_Bis.cshtml");
+        }
+
         public PartialViewResult StuAttendance()
         {
             return PartialView("~/Views/StuAttendance/_StuAttendance.cshtml");

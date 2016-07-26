@@ -29,7 +29,9 @@ namespace IU.Web
             bundles.Add(angular);
 
             Bundle myapp = new ScriptBundle("~/bundles/myapp").Include(
-                        "~/AngularApp/myapp/initial/app.js");
+                        "~/AngularApp/myapp/initial/app.js",
+                        "~/Content/sweet-alert/sweet-alert.min.js",
+                        "~/Content/sweet-alert/SweetAlert.js");
             myapp.Transforms.Clear();
             bundles.Add(myapp);
 

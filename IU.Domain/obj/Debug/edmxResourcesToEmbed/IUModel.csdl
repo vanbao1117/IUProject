@@ -554,6 +554,7 @@
     <NavigationProperty Name="LecturerTBL" Relationship="IUModel.FK_FeedBackTBLs_LectureTBLs" FromRole="FeedBackTBL" ToRole="LecturerTBL" />
     <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="FeedBackTBL" ToRole="StudentTBL" />
     <NavigationProperty Name="StudentTBL1" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="FeedBackTBL" ToRole="StudentTBL" />
+    <Property Name="FeedbackDate" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_FeedBackTBLs_LectureTBLs">
     <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="0..1" />
