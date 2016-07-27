@@ -99,6 +99,33 @@
       <End Role="StudentTBL" EntitySet="StudentTBLs" />
       <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
     </AssociationSet>
+    <EntitySet Name="OpenClassTBLs" EntityType="IUModel.OpenClassTBL" />
+    <EntitySet Name="OpenSubjectTBLs" EntityType="IUModel.OpenSubjectTBL" />
+    <AssociationSet Name="FK_OpenClassTBLs_ClassTBLs" Association="IUModel.FK_OpenClassTBLs_ClassTBLs">
+      <End Role="ClassTBL" EntitySet="ClassTBLs" />
+      <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpenSubjectTBLs_OpenClassTBLs" Association="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs">
+      <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+      <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpenSubjectTBLs_SubjectTBLs" Association="IUModel.FK_OpenSubjectTBLs_SubjectTBLs">
+      <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+      <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+    </AssociationSet>
+    <EntitySet Name="AcceptRegisters" EntityType="IUModel.AcceptRegister" />
+    <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="IUModel.FK_AcceptRegisters_OpenClassTBLs">
+      <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+      <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="IUModel.FK_AcceptRegisters_OpenSubjectTBLs">
+      <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+      <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="IUModel.FK_AcceptRegisters_StudentTBLs">
+      <End Role="StudentTBL" EntitySet="StudentTBLs" />
+      <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AdminTBL">
     <Key>
@@ -212,6 +239,7 @@
     <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="AttendanceTBL" />
     <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="LecturerScheduleTBL" />
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_ClassTBLs1" FromRole="ClassTBL" ToRole="StudentListTBL" />
+    <NavigationProperty Name="OpenClassTBLs" Relationship="IUModel.FK_OpenClassTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="OpenClassTBL" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -330,6 +358,7 @@
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />
     <NavigationProperty Name="FeedBackTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="StudentTBL" ToRole="FeedBackTBL" />
     <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
+    <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="StudentTBL" ToRole="AcceptRegister" />
   </EntityType>
   <EntityType Name="SubjectTBL">
     <Key>
@@ -341,6 +370,7 @@
     <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="AttendanceTBL" />
     <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="LecturerScheduleTBL" />
     <NavigationProperty Name="LecturerTBLs" Relationship="IUModel.LecturerOfSubjectTBLs" FromRole="SubjectTBL" ToRole="LecturerTBL" />
+    <NavigationProperty Name="OpenSubjectTBLs" Relationship="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="OpenSubjectTBL" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -589,6 +619,122 @@
       </Principal>
       <Dependent Role="FeedBackTBL">
         <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OpenClassTBL">
+    <Key>
+      <PropertyRef Name="OpenClassID" />
+    </Key>
+    <Property Name="OpenClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoomID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SlotID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_OpenClassTBLs_ClassTBLs" FromRole="OpenClassTBL" ToRole="ClassTBL" />
+    <NavigationProperty Name="OpenSubjectTBLs" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="OpenSubjectTBL" />
+    <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="AcceptRegister" />
+  </EntityType>
+  <EntityType Name="OpenSubjectTBL">
+    <Key>
+      <PropertyRef Name="OpenSubjectID" />
+    </Key>
+    <Property Name="OpenSubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OpenClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Credit" Type="Int32" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenSubjectTBL" ToRole="OpenClassTBL" />
+    <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" FromRole="OpenSubjectTBL" ToRole="SubjectTBL" />
+    <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="OpenSubjectTBL" ToRole="AcceptRegister" />
+  </EntityType>
+  <Association Name="FK_OpenClassTBLs_ClassTBLs">
+    <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="0..1" />
+    <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTBL">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="OpenClassTBL">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpenSubjectTBLs_OpenClassTBLs">
+    <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="0..1" />
+    <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenClassTBL">
+        <PropertyRef Name="OpenClassID" />
+      </Principal>
+      <Dependent Role="OpenSubjectTBL">
+        <PropertyRef Name="OpenClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpenSubjectTBLs_SubjectTBLs">
+    <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="0..1" />
+    <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTBL">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="OpenSubjectTBL">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AcceptRegister">
+    <Key>
+      <PropertyRef Name="AcceptRegisterID" />
+    </Key>
+    <Property Name="AcceptRegisterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OpenSubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OpenClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderNum" Type="Int32" />
+    <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="AcceptRegister" ToRole="OpenClassTBL" />
+    <NavigationProperty Name="OpenSubjectTBL" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="AcceptRegister" ToRole="OpenSubjectTBL" />
+    <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="AcceptRegister" ToRole="StudentTBL" />
+    <Property Name="Accepted" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+    <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="1" />
+    <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenClassTBL">
+        <PropertyRef Name="OpenClassID" />
+      </Principal>
+      <Dependent Role="AcceptRegister">
+        <PropertyRef Name="OpenClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+    <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="1" />
+    <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenSubjectTBL">
+        <PropertyRef Name="OpenSubjectID" />
+      </Principal>
+      <Dependent Role="AcceptRegister">
+        <PropertyRef Name="OpenSubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcceptRegisters_StudentTBLs">
+    <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+    <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBL">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="AcceptRegister">
+        <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

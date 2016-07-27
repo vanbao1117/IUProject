@@ -53,6 +53,7 @@
     <Compile Include="ScheduleClassService.cs" />
     <Compile Include="AttendanceService.cs" />
     <Compile Include="LecturerService.cs" />
+    <Compile Include="RegisterService.cs" />
     <Compile Include="SubjectService.cs" />
     <Compile Include="TransportationFormService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

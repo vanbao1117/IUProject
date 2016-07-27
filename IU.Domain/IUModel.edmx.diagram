@@ -51,6 +51,10 @@
         <AssociationConnector Association="IUModel.FK_OpenClassTBLs_ClassTBLs" />
         <AssociationConnector Association="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" />
         <AssociationConnector Association="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" />
+        <EntityTypeShape EntityType="IUModel.AcceptRegister" Width="1.5" PointX="8.5" PointY="20.875" />
+        <AssociationConnector Association="IUModel.FK_AcceptRegisters_OpenClassTBLs" />
+        <AssociationConnector Association="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" />
+        <AssociationConnector Association="IUModel.FK_AcceptRegisters_StudentTBLs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,6 +15,88 @@ namespace IU.Web.Controllers
     [Authorize]
     public class StuAttendanceController : ApiController
     {
+        // GET api/StuAttendance/GetRegisterData
+        /// <summary>
+        /// Get class Register
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetRegisterData()
+        {
+            try
+            {
+                using (RegisterService _RegisterService = new RegisterService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    List<OpenSubjectViewModel> lsModel = await _RegisterService.GetRegisterDataSync();
+                    return Ok(lsModel);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // POST api/StuAttendance/AcceptRegister
+        /// <summary>
+        /// submit class accept
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> AcceptRegister(OpenSubjectViewModel model)
+        {
+            try
+            {
+                using (RegisterService _RegisterService = new RegisterService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    OpenSubjectViewModel _model = await _RegisterService.AcceptRegisterSync(model, userName);
+                    if (_model == null) return Ok(new OpenSubjectViewModel() { Error = true });
+                    return Ok(_model);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // POST api/StuAttendance/UndoRegister
+        /// <summary>
+        /// submit class accept
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> UndoRegister(OpenSubjectViewModel model)
+        {
+            try
+            {
+                using (RegisterService _RegisterService = new RegisterService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    OpenSubjectViewModel _model = await _RegisterService.UndoRegisterSync(model, userName);
+                    if (_model == null) return Ok(new OpenSubjectViewModel() { Error = true });
+                    _model.Error = false;
+                    return Ok(_model);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+
         // GET api/StuAttendance/FeedbackByStudent
         /// <summary>
         /// Get class Attendance

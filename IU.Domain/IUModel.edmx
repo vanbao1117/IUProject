@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcceptRegisters">
+          <Key>
+            <PropertyRef Name="AcceptRegisterID" />
+          </Key>
+          <Property Name="AcceptRegisterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" />
+          <Property Name="OrderNum" Type="int" />
+          <Property Name="Accepted" Type="bit" />
+        </EntityType>
         <EntityType Name="AdminTBLs">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -282,6 +294,42 @@
           <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Test" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+          <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBLs">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+          <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenSubjectTBLs">
+              <PropertyRef Name="OpenSubjectID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="OpenSubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_StudentTBLs">
+          <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBLs">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AttendanceTBLs_ClassTBLs">
           <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
           <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
@@ -567,6 +615,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="IUModelStoreContainer">
+          <EntitySet Name="AcceptRegisters" EntityType="Self.AcceptRegisters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminTBLs" EntityType="Self.AdminTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -593,6 +642,18 @@
           <EntitySet Name="SubjectTBLs" EntityType="Self.SubjectTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="Self.FK_AcceptRegisters_OpenClassTBLs">
+            <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="Self.FK_AcceptRegisters_OpenSubjectTBLs">
+            <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="Self.FK_AcceptRegisters_StudentTBLs">
+            <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
           <AssociationSet Name="FK_AttendanceTBLs_ClassTBLs" Association="Self.FK_AttendanceTBLs_ClassTBLs">
             <End Role="ClassTBLs" EntitySet="ClassTBLs" />
             <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
@@ -802,6 +863,19 @@
           <AssociationSet Name="FK_OpenSubjectTBLs_SubjectTBLs" Association="IUModel.FK_OpenSubjectTBLs_SubjectTBLs">
             <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
             <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+          </AssociationSet>
+          <EntitySet Name="AcceptRegisters" EntityType="IUModel.AcceptRegister" />
+          <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="IUModel.FK_AcceptRegisters_OpenClassTBLs">
+            <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="IUModel.FK_AcceptRegisters_OpenSubjectTBLs">
+            <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="IUModel.FK_AcceptRegisters_StudentTBLs">
+            <End Role="StudentTBL" EntitySet="StudentTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminTBL">
@@ -1035,6 +1109,7 @@
           <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />
           <NavigationProperty Name="FeedBackTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="StudentTBL" ToRole="FeedBackTBL" />
           <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="StudentTBL" ToRole="AcceptRegister" />
         </EntityType>
         <EntityType Name="SubjectTBL">
           <Key>
@@ -1310,6 +1385,7 @@
           <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_OpenClassTBLs_ClassTBLs" FromRole="OpenClassTBL" ToRole="ClassTBL" />
           <NavigationProperty Name="OpenSubjectTBLs" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="OpenSubjectTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="AcceptRegister" />
         </EntityType>
         <EntityType Name="OpenSubjectTBL">
           <Key>
@@ -1324,6 +1400,7 @@
           <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenSubjectTBL" ToRole="OpenClassTBL" />
           <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" FromRole="OpenSubjectTBL" ToRole="SubjectTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="OpenSubjectTBL" ToRole="AcceptRegister" />
         </EntityType>
         <Association Name="FK_OpenClassTBLs_ClassTBLs">
           <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="0..1" />
@@ -1358,6 +1435,57 @@
             </Principal>
             <Dependent Role="OpenSubjectTBL">
               <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AcceptRegister">
+          <Key>
+            <PropertyRef Name="AcceptRegisterID" />
+          </Key>
+          <Property Name="AcceptRegisterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OpenSubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OpenClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderNum" Type="Int32" />
+          <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="AcceptRegister" ToRole="OpenClassTBL" />
+          <NavigationProperty Name="OpenSubjectTBL" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="AcceptRegister" ToRole="OpenSubjectTBL" />
+          <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="AcceptRegister" ToRole="StudentTBL" />
+          <Property Name="Accepted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+          <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBL">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+          <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenSubjectTBL">
+              <PropertyRef Name="OpenSubjectID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="OpenSubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_StudentTBLs">
+          <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBL">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1663,6 +1791,19 @@
                 <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
                 <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
                 <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcceptRegisters">
+            <EntityTypeMapping TypeName="IUModel.AcceptRegister">
+              <MappingFragment StoreEntitySet="AcceptRegisters">
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+                <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="AcceptRegisterID" ColumnName="AcceptRegisterID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

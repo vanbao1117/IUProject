@@ -213,9 +213,13 @@
     <Content Include="AngularApp\myapp\services\LecturerService.js" />
     <Content Include="AngularApp\myapp\services\SystemCodeService.js" />
     <Content Include="AngularApp\myapp\services\SubjectService.js" />
+    <Content Include="Content\bootstrap\css\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap\js\bootstrap-switch.js" />
+    <Content Include="Content\bootstrap\js\bootstrap-switch.min.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\npm.js" />
