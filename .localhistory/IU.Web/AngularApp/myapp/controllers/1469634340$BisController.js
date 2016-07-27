@@ -9,7 +9,22 @@ IUApp.controller('BisController', ['$scope', '$http', '$templateCache', '$timeou
             console.log('newVal', newVal);
         }, true);
 
-        $scope.subjects = [];
+     $scope.subjects = [
+         {
+             subjectName: 'Java', credit: 3, cost: 400000, select: true, subjectCode:'JAVA', active : true,
+             chooseClass: [
+                 { className: 'SE901', roomID: 207, slotName: 4, startDate: '2016-07-22', select: true },
+                 { className: 'SE903', roomID: 202, slotName: 1, startDate: '2016-07-30', select: false }
+             ]
+         },
+         {
+             subjectName: 'C# .Net', credit: 3, cost: 400000, select: false, subjectCode: 'CNET', active: false,
+             chooseClass: [
+                 { className: 'SE902', roomID: 207, slotName: 4, startDate: '2016-07-12', select: false },
+                 { className: 'SE905', roomID: 202, slotName: 1, startDate: '2016-07-18', select: false }
+             ]
+         }
+     ];
 
      $scope.chooseClass = $scope.subjects[0].chooseClass;
 
@@ -78,11 +93,6 @@ IUApp.controller('BisController', ['$scope', '$http', '$templateCache', '$timeou
 
      
      $scope.unRegister = function (submitItem) {
-         if (submitItem.status == 'Accepted') {
-             SweetAlert.swal("Warning!", "You can not cancel this subject, because it's accepted!");
-             return;
-         }
-
          BisServices.undoRegister(submitItem).then(
             function (accept) {
                 console.log('acceptRegister: ', accept);
