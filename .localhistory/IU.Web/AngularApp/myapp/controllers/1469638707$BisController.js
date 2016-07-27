@@ -11,7 +11,7 @@ IUApp.controller('BisController', ['$scope', '$http', '$templateCache', '$timeou
 
         $scope.subjects = [];
 
-     $scope.chooseClass = [];
+     $scope.chooseClass = $scope.subjects[0].chooseClass;
 
      $scope.GetRegisterData = function () {
        
