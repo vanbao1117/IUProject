@@ -369,166 +369,156 @@
 		
     <!-- Main content -->
     <section class="content">
-      <div class="col-md-9">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tasks</h3>
-              <!-- /.box-tools -->
+
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Register List</a></li>
+              <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Preview</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="activity">
+			  <div class="box">
+            <div class="box-header" style="float: left; width: 100px;">
+              <h3 class="box-title">Subject <select name="lecturer">
+							<option value="java">Java</option>
+							<option value="cnet">C# .NET</option>
+							<option value="vov">VOV</option>
+						</select></h3>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
+			</div>
+				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">StudentName</th>
+				<th class="sorting" >StudentID</th>
+				<th class="sorting" >Image</th>
+				<th class="sorting" >Subject</th>
+				<th class="sorting" >RegisterDate</th>
+				<th class="sorting" >Slot</th>
+                </thead>
+                <tbody>
+             
+                <tr role="row" class="odd">
+                  <td>Alal</td>
+                  <td>SE03124</td>
+                  <td style="width:100px;"><img width="100" height="100" src="dist/img/sess.jpg" alt="User Image"></td>
+                  <td>Java</td>
+                  <td><input type="date" /></td>
+				  <td><input type="checkbox" name="myTextEditBox" value="checked" /> Add</td>
+                </tr>
+				<td>Solos</td>
+                  <td>SE02124</td>
+                  <td style="width:100px;"><img width="100" height="100" src="dist/img/sess.jpg" alt="User Image"></td>
+                  <td>Java</td>
+                  <td><input type="date" /></td>
+				  <td><input type="checkbox" name="myTextEditBox" value="checked" /> Add</td>
+                </tr></tbody>
+				
+              </table>
+			  <button  style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success" >Save</button>
               </div>
-              <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
-                  <tbody>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">LuyenML</a></td>
-                    <td class="mailbox-subject"><b>Chuyen lich lop 032412</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">DungMC</a></td>
-                    <td class="mailbox-subject"><b>Tao lop Bis</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">28 mins ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">11 hours ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">15 hours ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">Yesterday</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  <tr>
-                    <td><div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">2 days ago</td>
-                  </tr>
-                  </tbody>
-                </table>
-                <!-- /.table -->
-              </div>
-              <!-- /.mail-box-messages -->
+              <!-- /.tab-pane -->
+              
+
+              <div class="tab-pane" id="settings">
+                 <div class="box">
+					<div class="box-header" style="float: left; width: 100px;">
+					<h3 class="box-title">Subject <select name="lecturer">
+							<option value="java">Java</option>
+							<option value="cnet">C# .NET</option>
+							<option value="vov">VOV</option>
+						</select></h3>
+					</div>
+					<div>
+					</div>
+					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Subject</th>
+				<th class="sorting" >Class</th>
+				<th class="sorting" >Lecturer</th>
+				<th class="sorting" >Days</th>
+				<th class="sorting" >Room</th>
+				<th class="sorting" >Slot</th>
+				<th class="sorting" >Edit</th>
+                </thead>
+                <tbody>
+             
+                <tr role="row" class="odd">
+                  <td>JAva</td>
+                  <td>SE801</td>
+                  <td><select name="lecturer">
+					<option value="allen">Allen</option>
+					<option value="lenanee">Lenanee</option>
+					<option value="sassha">Sassha</option>
+				</select</td>
+                  <td><input type="date" /></td>
+                  <td><select name="room">
+					<option value="222">222</option>
+					<option value="333">333</option>
+					<option value="444">444</option>
+				</select></td>
+				  <td><select name="slot">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				</select></td>
+				  <td><i class="fa fa-pencil"></td>
+                </tr>
+				<tr>
+                  <td>JAva</td>
+                  <td>SE801</td>
+                  <td><select name="lecturer">
+					<option value="allen">Allen</option>
+					<option value="lenanee">Lenanee</option>
+					<option value="sassha">Sassha</option>
+				</select</td>
+                  <td><input type="date" />	</td>
+                  <td><select name="room">
+					<option value="222">222</option>
+					<option value="333">333</option>
+					<option value="444">444</option>
+				</select></td>
+				  <td><select name="slot">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+				</select></td>
+				  <td><i class="fa fa-pencil"></td>
+                </tr></tbody>
+				
+              </table>
+			  <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
+			<button  style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success" >Save</button>
               </div>
+			  
+              <!-- /.tab-pane -->
             </div>
+			
+            <!-- /.tab-content -->
           </div>
-          <!-- /. box -->
+          <!-- /.nav-tabs-custom -->
         </div>
-        </section>
-   <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
 </div>
 <!-- ./wrapper -->
 
@@ -571,4 +561,3 @@
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
-
