@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptRegister.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AdminTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
@@ -103,6 +106,12 @@
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Notification.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OpenClassTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OpenSubjectTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

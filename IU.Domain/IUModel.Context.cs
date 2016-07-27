@@ -49,5 +49,6 @@ namespace IU.Domain
         public virtual DbSet<FeedBackTBL> FeedBackTBLs { get; set; }
         public virtual DbSet<OpenClassTBL> OpenClassTBLs { get; set; }
         public virtual DbSet<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
+        public virtual DbSet<AcceptRegister> AcceptRegisters { get; set; }
     }
 }

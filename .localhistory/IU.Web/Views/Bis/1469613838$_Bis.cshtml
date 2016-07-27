@@ -1,0 +1,112 @@
+﻿
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success direct-chat direct-chat-success">
+                <div class="box-header">
+                    <h3 class="box-title">Choose Subject</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Subject</th>
+                                            <th style=" width: 100px;">Credit</th>
+                                            <th style=" width: 100px;">Cost</th>
+                                            <th style=" width: 100px;">Select</th>
+                                            <th style=" width: 100px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr role="row" class="odd" ng-class="{'active':item.active}" ng-repeat="item in subjects" ng-click="selectRow(item)">
+                                            <td>{{item.subjectName}}</td>
+                                            <td style=" width: 100px;">{{item.credit}}</td>
+                                            <td style=" width: 100px;">{{item.cost}}</td>
+                                            <td style=" width: 100px;">
+                                                <button ng-show="item.status == 'Pending'" ng-click="unRegister()" type="button" class="btn btn-primary center-block" style="width:60px">Undo</button>
+                                                <input name="select-subject" ng-show="item.status != 'Pending'" checked type="checkbox" ng-click="selectSubject(item, !item.select)" ng-model="item.select"  />
+                                            </td>
+                                            <td style=" width: 100px;">{{item.status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-success direct-chat direct-chat-success">
+                <div class="overlay" style="display:none">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <div class="box-header">
+                    <h3 class="box-title">Choose Class</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Class</th>
+                                            <th style=" width: 100px;">Room</th>
+                                            <th style=" width: 100px;">Slot</th>
+                                            <th style=" width: 100px;">Start Date</th>
+                                            <th style=" width: 100px;">Select</th>
+                                            <th style=" width: 100px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr role="row" class="odd" ng-class="{'active':class.active}" ng-repeat="class in chooseClass">
+                                            <td class="sorting_1">{{class.className}}</td>
+                                            <td style=" width: 100px;">{{class.roomID}}</td>
+                                            <td style=" width: 100px;">{{class.slotName}}</td>
+                                            <td style=" width: 100px;">{{class.startDate}}</td>
+                                            <td style=" width: 100px;">
+                                                <input ng-show="class.status != 'Pending'" type="checkbox" ng-model="class.select" ng-checked="class.select" />
+                                            </td>
+                                            <td style=" width: 100px;">{{class.status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 center-block">
+            <button ng-click="confirm()" type="button" class="btn btn-primary center-block" style="width:100px">Save</button>
+        </div>
+        </div>
+</section>
+<script>
+    $(function (argument) {
+        $('[type="checkbox"]').bootstrapSwitch();
+    })
+</script>

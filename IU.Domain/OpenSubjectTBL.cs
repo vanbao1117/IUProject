@@ -14,6 +14,11 @@ namespace IU.Domain
     
     public partial class OpenSubjectTBL
     {
+        public OpenSubjectTBL()
+        {
+            this.AcceptRegisters = new HashSet<AcceptRegister>();
+        }
+    
         public string OpenSubjectID { get; set; }
         public string SubjectID { get; set; }
         public string OpenClassID { get; set; }
@@ -24,5 +29,6 @@ namespace IU.Domain
     
         public virtual OpenClassTBL OpenClassTBL { get; set; }
         public virtual SubjectTBL SubjectTBL { get; set; }
+        public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
     }
 }

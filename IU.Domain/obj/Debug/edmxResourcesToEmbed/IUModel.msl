@@ -275,5 +275,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OpenClassTBLs">
+      <EntityTypeMapping TypeName="IUModel.OpenClassTBL">
+        <MappingFragment StoreEntitySet="OpenClassTBLs">
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OpenSubjectTBLs">
+      <EntityTypeMapping TypeName="IUModel.OpenSubjectTBL">
+        <MappingFragment StoreEntitySet="OpenSubjectTBLs">
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AcceptRegisters">
+      <EntityTypeMapping TypeName="IUModel.AcceptRegister">
+        <MappingFragment StoreEntitySet="AcceptRegisters">
+          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="AcceptRegisterID" ColumnName="AcceptRegisterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

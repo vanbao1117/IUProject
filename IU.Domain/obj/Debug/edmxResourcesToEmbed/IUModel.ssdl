@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="IUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AcceptRegisters">
+    <Key>
+      <PropertyRef Name="AcceptRegisterID" />
+    </Key>
+    <Property Name="AcceptRegisterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RegisterDate" Type="datetime" />
+    <Property Name="OrderNum" Type="int" />
+    <Property Name="Accepted" Type="bit" />
+  </EntityType>
   <EntityType Name="AdminTBLs">
     <Key>
       <PropertyRef Name="AdminID" />
@@ -176,6 +188,29 @@
     <Property Name="Sent" Type="nchar" MaxLength="1" />
     <Property Name="MessageDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="OpenClassTBLs">
+    <Key>
+      <PropertyRef Name="OpenClassID" />
+    </Key>
+    <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" />
+    <Property Name="RoomID" Type="nvarchar" MaxLength="128" />
+    <Property Name="SlotID" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Creater" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="OpenSubjectTBLs">
+    <Key>
+      <PropertyRef Name="OpenSubjectID" />
+    </Key>
+    <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
+    <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" />
+    <Property Name="Credit" Type="int" />
+    <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Creater" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="RefreshTokens">
     <Key>
       <PropertyRef Name="Id" />
@@ -254,6 +289,42 @@
     <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="Test" Type="nvarchar(max)" />
   </EntityType>
+  <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+    <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="1" />
+    <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenClassTBLs">
+        <PropertyRef Name="OpenClassID" />
+      </Principal>
+      <Dependent Role="AcceptRegisters">
+        <PropertyRef Name="OpenClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+    <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="1" />
+    <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenSubjectTBLs">
+        <PropertyRef Name="OpenSubjectID" />
+      </Principal>
+      <Dependent Role="AcceptRegisters">
+        <PropertyRef Name="OpenSubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AcceptRegisters_StudentTBLs">
+    <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+    <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentTBLs">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="AcceptRegisters">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AttendanceTBLs_ClassTBLs">
     <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
     <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
@@ -490,6 +561,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OpenClassTBLs_ClassTBLs">
+    <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="0..1" />
+    <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTBLs">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="OpenClassTBLs">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpenSubjectTBLs_OpenClassTBLs">
+    <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="0..1" />
+    <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OpenClassTBLs">
+        <PropertyRef Name="OpenClassID" />
+      </Principal>
+      <Dependent Role="OpenSubjectTBLs">
+        <PropertyRef Name="OpenClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpenSubjectTBLs_SubjectTBLs">
+    <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="0..1" />
+    <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="OpenSubjectTBLs">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_RefreshTokens_Clients">
     <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
     <End Role="RefreshTokens" Type="Self.RefreshTokens" Multiplicity="*" />
@@ -503,6 +610,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="IUModelStoreContainer">
+    <EntitySet Name="AcceptRegisters" EntityType="Self.AcceptRegisters" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AdminTBLs" EntityType="Self.AdminTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -519,6 +627,8 @@
     <EntitySet Name="LecturerScheduleTBLs" EntityType="Self.LecturerScheduleTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LecturerTBLs" EntityType="Self.LecturerTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OpenClassTBLs" EntityType="Self.OpenClassTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OpenSubjectTBLs" EntityType="Self.OpenSubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
@@ -527,6 +637,18 @@
     <EntitySet Name="SubjectTBLs" EntityType="Self.SubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="Self.FK_AcceptRegisters_OpenClassTBLs">
+      <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+      <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="Self.FK_AcceptRegisters_OpenSubjectTBLs">
+      <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+      <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="Self.FK_AcceptRegisters_StudentTBLs">
+      <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+      <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+    </AssociationSet>
     <AssociationSet Name="FK_AttendanceTBLs_ClassTBLs" Association="Self.FK_AttendanceTBLs_ClassTBLs">
       <End Role="ClassTBLs" EntitySet="ClassTBLs" />
       <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
@@ -602,6 +724,18 @@
     <AssociationSet Name="FK_ListStudentTBLs_StudentTBLs1" Association="Self.FK_ListStudentTBLs_StudentTBLs1">
       <End Role="StudentTBLs" EntitySet="StudentTBLs" />
       <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpenClassTBLs_ClassTBLs" Association="Self.FK_OpenClassTBLs_ClassTBLs">
+      <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+      <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpenSubjectTBLs_OpenClassTBLs" Association="Self.FK_OpenSubjectTBLs_OpenClassTBLs">
+      <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+      <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpenSubjectTBLs_SubjectTBLs" Association="Self.FK_OpenSubjectTBLs_SubjectTBLs">
+      <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+      <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
     </AssociationSet>
     <AssociationSet Name="FK_RefreshTokens_Clients" Association="Self.FK_RefreshTokens_Clients">
       <End Role="Clients" EntitySet="Clients" />
