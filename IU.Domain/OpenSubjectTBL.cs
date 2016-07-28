@@ -21,14 +21,17 @@ namespace IU.Domain
     
         public string OpenSubjectID { get; set; }
         public string SubjectID { get; set; }
+        public string LecturerID { get; set; }
         public string OpenClassID { get; set; }
+        public string ModeID { get; set; }
         public Nullable<int> Credit { get; set; }
         public Nullable<decimal> Cost { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string Creater { get; set; }
     
+        public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
         public virtual OpenClassTBL OpenClassTBL { get; set; }
         public virtual SubjectTBL SubjectTBL { get; set; }
-        public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
     }
 }

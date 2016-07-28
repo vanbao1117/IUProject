@@ -1,0 +1,1943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcceptRegisters">
+          <Key>
+            <PropertyRef Name="AcceptRegisterID" />
+          </Key>
+          <Property Name="AcceptRegisterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" />
+          <Property Name="OrderNum" Type="int" />
+          <Property Name="Accepted" Type="bit" />
+        </EntityType>
+        <EntityType Name="AdminTBLs">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AdminName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AspTransports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TransCode" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="TransName" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttendanceTBLs">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Attendancer" Type="varchar(max)" Nullable="false" />
+          <Property Name="DateAttendance" Type="datetime" Nullable="false" />
+          <Property Name="Attendance" Type="bit" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassScheduleTBLs">
+          <Key>
+            <PropertyRef Name="ClassScheduleID" />
+          </Key>
+          <Property Name="ClassScheduleID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateStudy" Type="datetime" Nullable="false" />
+          <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="ClassTBLs">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Creater" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Secret" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApplicationType" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="RefreshTokenLifeTime" Type="int" Nullable="false" />
+          <Property Name="AllowedOrigin" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FeedBackTBLs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Student" Type="nvarchar" MaxLength="128" />
+          <Property Name="Lecturer" Type="nvarchar" MaxLength="128" />
+          <Property Name="Quality" Type="nvarchar" MaxLength="100" />
+          <Property Name="OnTime" Type="nvarchar" MaxLength="100" />
+          <Property Name="Attitude" Type="nvarchar" MaxLength="100" />
+          <Property Name="Satisfaction" Type="nvarchar" MaxLength="100" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="FeedbackDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LecturerOfSubjectTBLs">
+          <Key>
+            <PropertyRef Name="LecturerID" />
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LecturerScheduleTBLs">
+          <Key>
+            <PropertyRef Name="LecturerSchedule" />
+          </Key>
+          <Property Name="LecturerSchedule" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LecturerTBLs">
+          <Key>
+            <PropertyRef Name="LecturerID" />
+          </Key>
+          <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LecturerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LecturerGender" Type="bit" Nullable="false" />
+          <Property Name="LecturerBirth" Type="datetime" Nullable="false" />
+          <Property Name="LecturerPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LecturerEmail" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModeTBLs">
+          <Key>
+            <PropertyRef Name="ModeID" />
+          </Key>
+          <Property Name="ModeID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="3-5" Type="nvarchar" MaxLength="50" />
+          <Property Name="2-4" Type="nvarchar" MaxLength="50" />
+          <Property Name="3-5-6" Type="nvarchar" MaxLength="50" />
+          <Property Name="2-4-6" Type="nvarchar" MaxLength="50" />
+          <Property Name="AllWeek" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="ToUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="Received" Type="nchar" MaxLength="1" />
+          <Property Name="Sent" Type="nchar" MaxLength="1" />
+          <Property Name="MessageDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OpenClassTBLs">
+          <Key>
+            <PropertyRef Name="OpenClassID" />
+          </Key>
+          <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" />
+          <Property Name="RoomID" Type="nvarchar" MaxLength="128" />
+          <Property Name="SlotID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Limit" Type="int" />
+          <Property Name="Deadline" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Creater" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="OpenSubjectTBLs">
+          <Key>
+            <PropertyRef Name="OpenSubjectID" />
+          </Key>
+          <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
+          <Property Name="LecturerID" Type="nvarchar" MaxLength="128" />
+          <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Credit" Type="int" />
+          <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Creater" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="RefreshTokens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IssuedUtc" Type="datetime" Nullable="false" />
+          <Property Name="ExpiresUtc" Type="datetime" Nullable="false" />
+          <Property Name="ProtectedTicket" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoomTBLs">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RomName" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Decription" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="SemesterTBLs">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SemesterCode" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SlotTBLs">
+          <Key>
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SlotTime" Type="varchar(max)" Nullable="false" />
+          <Property Name="SlotName" Type="varchar" MaxLength="50" />
+          <Property Name="NumOfSlot" Type="int" />
+          <Property Name="TotalSlot" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentInClassTBLs">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentListTBLs">
+          <Key>
+            <PropertyRef Name="StudentListID" />
+          </Key>
+          <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentTBLs">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentGender" Type="bit" Nullable="false" />
+          <Property Name="StudentBirth" Type="datetime" Nullable="false" />
+          <Property Name="StudentPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentEmail" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ParentPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubjectTBLs">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="AbbreSubjectName" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Test" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+          <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBLs">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+          <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenSubjectTBLs">
+              <PropertyRef Name="OpenSubjectID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="OpenSubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_StudentTBLs">
+          <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+          <End Role="AcceptRegisters" Type="Self.AcceptRegisters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBLs">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AcceptRegisters">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_ClassTBLs">
+          <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+          <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBLs">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="AttendanceTBLs">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SemesterTBLs">
+          <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+          <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="AttendanceTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SlotTBLs">
+          <End Role="SlotTBLs" Type="Self.SlotTBLs" Multiplicity="1" />
+          <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotTBLs">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="AttendanceTBLs">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SubjectTBLs">
+          <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+          <End Role="AttendanceTBLs" Type="Self.AttendanceTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="AttendanceTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBackTBLs_LectureTBLs">
+          <End Role="LecturerTBLs" Type="Self.LecturerTBLs" Multiplicity="0..1" />
+          <End Role="FeedBackTBLs" Type="Self.FeedBackTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LecturerTBLs">
+              <PropertyRef Name="LecturerID" />
+            </Principal>
+            <Dependent Role="FeedBackTBLs">
+              <PropertyRef Name="Lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBackTBLs_StudentTBLs1">
+          <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="0..1" />
+          <End Role="FeedBackTBLs" Type="Self.FeedBackTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBLs">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="FeedBackTBLs">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerOfSubjectTBLs_LecturerTBLs">
+          <End Role="LecturerTBLs" Type="Self.LecturerTBLs" Multiplicity="1" />
+          <End Role="LecturerOfSubjectTBLs" Type="Self.LecturerOfSubjectTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LecturerTBLs">
+              <PropertyRef Name="LecturerID" />
+            </Principal>
+            <Dependent Role="LecturerOfSubjectTBLs">
+              <PropertyRef Name="LecturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerOfSubjectTBLs_SubjectTBLs">
+          <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+          <End Role="LecturerOfSubjectTBLs" Type="Self.LecturerOfSubjectTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="LecturerOfSubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_ClassTBLs">
+          <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+          <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBLs">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBLs">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_LecturerTBLs">
+          <End Role="LecturerTBLs" Type="Self.LecturerTBLs" Multiplicity="1" />
+          <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LecturerTBLs">
+              <PropertyRef Name="LecturerID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBLs">
+              <PropertyRef Name="LecturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_SemesterTBLs">
+          <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+          <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_SubjectTBLs">
+          <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="1" />
+          <End Role="LecturerScheduleTBLs" Type="Self.LecturerScheduleTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_ClassTBLs1">
+          <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="1" />
+          <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBLs">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="StudentListTBLs">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_SemesterTBLs1">
+          <End Role="SemesterTBLs" Type="Self.SemesterTBLs" Multiplicity="1" />
+          <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="StudentListTBLs">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_StudentTBLs1">
+          <End Role="StudentTBLs" Type="Self.StudentTBLs" Multiplicity="1" />
+          <End Role="StudentListTBLs" Type="Self.StudentListTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBLs">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentListTBLs">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenClassTBLs_ClassTBLs">
+          <End Role="ClassTBLs" Type="Self.ClassTBLs" Multiplicity="0..1" />
+          <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBLs">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="OpenClassTBLs">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenSubjectTBLs_OpenClassTBLs">
+          <End Role="OpenClassTBLs" Type="Self.OpenClassTBLs" Multiplicity="0..1" />
+          <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBLs">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="OpenSubjectTBLs">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenSubjectTBLs_SubjectTBLs">
+          <End Role="SubjectTBLs" Type="Self.SubjectTBLs" Multiplicity="0..1" />
+          <End Role="OpenSubjectTBLs" Type="Self.OpenSubjectTBLs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="OpenSubjectTBLs">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefreshTokens_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="RefreshTokens" Type="Self.RefreshTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RefreshTokens">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IUModelStoreContainer">
+          <EntitySet Name="AcceptRegisters" EntityType="Self.AcceptRegisters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminTBLs" EntityType="Self.AdminTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspTransports" EntityType="Self.AspTransports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttendanceTBLs" EntityType="Self.AttendanceTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassScheduleTBLs" EntityType="Self.ClassScheduleTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassTBLs" EntityType="Self.ClassTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedBackTBLs" EntityType="Self.FeedBackTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LecturerOfSubjectTBLs" EntityType="Self.LecturerOfSubjectTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LecturerScheduleTBLs" EntityType="Self.LecturerScheduleTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LecturerTBLs" EntityType="Self.LecturerTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModeTBLs" EntityType="Self.ModeTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpenClassTBLs" EntityType="Self.OpenClassTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpenSubjectTBLs" EntityType="Self.OpenSubjectTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomTBLs" EntityType="Self.RoomTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentInClassTBLs" EntityType="Self.StudentInClassTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentListTBLs" EntityType="Self.StudentListTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTBLs" EntityType="Self.StudentTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectTBLs" EntityType="Self.SubjectTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="Self.FK_AcceptRegisters_OpenClassTBLs">
+            <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="Self.FK_AcceptRegisters_OpenSubjectTBLs">
+            <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="Self.FK_AcceptRegisters_StudentTBLs">
+            <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+            <End Role="AcceptRegisters" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_ClassTBLs" Association="Self.FK_AttendanceTBLs_ClassTBLs">
+            <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+            <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SemesterTBLs" Association="Self.FK_AttendanceTBLs_SemesterTBLs">
+            <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+            <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SlotTBLs" Association="Self.FK_AttendanceTBLs_SlotTBLs">
+            <End Role="SlotTBLs" EntitySet="SlotTBLs" />
+            <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SubjectTBLs" Association="Self.FK_AttendanceTBLs_SubjectTBLs">
+            <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+            <End Role="AttendanceTBLs" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBackTBLs_LectureTBLs" Association="Self.FK_FeedBackTBLs_LectureTBLs">
+            <End Role="LecturerTBLs" EntitySet="LecturerTBLs" />
+            <End Role="FeedBackTBLs" EntitySet="FeedBackTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBackTBLs_StudentTBLs1" Association="Self.FK_FeedBackTBLs_StudentTBLs1">
+            <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+            <End Role="FeedBackTBLs" EntitySet="FeedBackTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerOfSubjectTBLs_LecturerTBLs" Association="Self.FK_LecturerOfSubjectTBLs_LecturerTBLs">
+            <End Role="LecturerTBLs" EntitySet="LecturerTBLs" />
+            <End Role="LecturerOfSubjectTBLs" EntitySet="LecturerOfSubjectTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerOfSubjectTBLs_SubjectTBLs" Association="Self.FK_LecturerOfSubjectTBLs_SubjectTBLs">
+            <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+            <End Role="LecturerOfSubjectTBLs" EntitySet="LecturerOfSubjectTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_ClassTBLs" Association="Self.FK_LecturerScheduleTBLs_ClassTBLs">
+            <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+            <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_LecturerTBLs" Association="Self.FK_LecturerScheduleTBLs_LecturerTBLs">
+            <End Role="LecturerTBLs" EntitySet="LecturerTBLs" />
+            <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_SemesterTBLs" Association="Self.FK_LecturerScheduleTBLs_SemesterTBLs">
+            <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+            <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_SubjectTBLs" Association="Self.FK_LecturerScheduleTBLs_SubjectTBLs">
+            <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+            <End Role="LecturerScheduleTBLs" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_ClassTBLs1" Association="Self.FK_ListStudentTBLs_ClassTBLs1">
+            <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+            <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_SemesterTBLs1" Association="Self.FK_ListStudentTBLs_SemesterTBLs1">
+            <End Role="SemesterTBLs" EntitySet="SemesterTBLs" />
+            <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_StudentTBLs1" Association="Self.FK_ListStudentTBLs_StudentTBLs1">
+            <End Role="StudentTBLs" EntitySet="StudentTBLs" />
+            <End Role="StudentListTBLs" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenClassTBLs_ClassTBLs" Association="Self.FK_OpenClassTBLs_ClassTBLs">
+            <End Role="ClassTBLs" EntitySet="ClassTBLs" />
+            <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenSubjectTBLs_OpenClassTBLs" Association="Self.FK_OpenSubjectTBLs_OpenClassTBLs">
+            <End Role="OpenClassTBLs" EntitySet="OpenClassTBLs" />
+            <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenSubjectTBLs_SubjectTBLs" Association="Self.FK_OpenSubjectTBLs_SubjectTBLs">
+            <End Role="SubjectTBLs" EntitySet="SubjectTBLs" />
+            <End Role="OpenSubjectTBLs" EntitySet="OpenSubjectTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefreshTokens_Clients" Association="Self.FK_RefreshTokens_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="RefreshTokens" EntitySet="RefreshTokens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IUContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminTBLs" EntityType="IUModel.AdminTBL" />
+          <EntitySet Name="AspNetRoles" EntityType="IUModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="IUModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="IUModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="IUModel.AspNetUser" />
+          <EntitySet Name="AspTransports" EntityType="IUModel.AspTransport" />
+          <EntitySet Name="AttendanceTBLs" EntityType="IUModel.AttendanceTBL" />
+          <EntitySet Name="ClassScheduleTBLs" EntityType="IUModel.ClassScheduleTBL" />
+          <EntitySet Name="ClassTBLs" EntityType="IUModel.ClassTBL" />
+          <EntitySet Name="Clients" EntityType="IUModel.Client" />
+          <EntitySet Name="LecturerScheduleTBLs" EntityType="IUModel.LecturerScheduleTBL" />
+          <EntitySet Name="LecturerTBLs" EntityType="IUModel.LecturerTBL" />
+          <EntitySet Name="Notifications" EntityType="IUModel.Notification" />
+          <EntitySet Name="RefreshTokens" EntityType="IUModel.RefreshToken" />
+          <EntitySet Name="SemesterTBLs" EntityType="IUModel.SemesterTBL" />
+          <EntitySet Name="SlotTBLs" EntityType="IUModel.SlotTBL" />
+          <EntitySet Name="StudentListTBLs" EntityType="IUModel.StudentListTBL" />
+          <EntitySet Name="StudentTBLs" EntityType="IUModel.StudentTBL" />
+          <EntitySet Name="SubjectTBLs" EntityType="IUModel.SubjectTBL" />
+          <EntitySet Name="sysdiagrams" EntityType="IUModel.sysdiagram" />
+          <EntitySet Name="TestTables" EntityType="IUModel.TestTable" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="IUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="IUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_ClassTBLs" Association="IUModel.FK_AttendanceTBLs_ClassTBLs">
+            <End Role="ClassTBL" EntitySet="ClassTBLs" />
+            <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SemesterTBLs" Association="IUModel.FK_AttendanceTBLs_SemesterTBLs">
+            <End Role="SemesterTBL" EntitySet="SemesterTBLs" />
+            <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SlotTBLs" Association="IUModel.FK_AttendanceTBLs_SlotTBLs">
+            <End Role="SlotTBL" EntitySet="SlotTBLs" />
+            <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendanceTBLs_SubjectTBLs" Association="IUModel.FK_AttendanceTBLs_SubjectTBLs">
+            <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+            <End Role="AttendanceTBL" EntitySet="AttendanceTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_ClassTBLs" Association="IUModel.FK_LecturerScheduleTBLs_ClassTBLs">
+            <End Role="ClassTBL" EntitySet="ClassTBLs" />
+            <End Role="LecturerScheduleTBL" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_ClassTBLs1" Association="IUModel.FK_ListStudentTBLs_ClassTBLs1">
+            <End Role="ClassTBL" EntitySet="ClassTBLs" />
+            <End Role="StudentListTBL" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefreshTokens_Clients" Association="IUModel.FK_RefreshTokens_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="RefreshToken" EntitySet="RefreshTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_LecturerTBLs" Association="IUModel.FK_LecturerScheduleTBLs_LecturerTBLs">
+            <End Role="LecturerTBL" EntitySet="LecturerTBLs" />
+            <End Role="LecturerScheduleTBL" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_SemesterTBLs" Association="IUModel.FK_LecturerScheduleTBLs_SemesterTBLs">
+            <End Role="SemesterTBL" EntitySet="SemesterTBLs" />
+            <End Role="LecturerScheduleTBL" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturerScheduleTBLs_SubjectTBLs" Association="IUModel.FK_LecturerScheduleTBLs_SubjectTBLs">
+            <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+            <End Role="LecturerScheduleTBL" EntitySet="LecturerScheduleTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_SemesterTBLs1" Association="IUModel.FK_ListStudentTBLs_SemesterTBLs1">
+            <End Role="SemesterTBL" EntitySet="SemesterTBLs" />
+            <End Role="StudentListTBL" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListStudentTBLs_StudentTBLs1" Association="IUModel.FK_ListStudentTBLs_StudentTBLs1">
+            <End Role="StudentTBL" EntitySet="StudentTBLs" />
+            <End Role="StudentListTBL" EntitySet="StudentListTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="IUModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="LecturerOfSubjectTBLs" Association="IUModel.LecturerOfSubjectTBLs">
+            <End Role="LecturerTBL" EntitySet="LecturerTBLs" />
+            <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+          </AssociationSet>
+          <EntitySet Name="FeedBackTBLs" EntityType="IUModel.FeedBackTBL" />
+          <AssociationSet Name="FK_FeedBackTBLs_LectureTBLs" Association="IUModel.FK_FeedBackTBLs_LectureTBLs">
+            <End Role="LecturerTBL" EntitySet="LecturerTBLs" />
+            <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBackTBLs_StudentTBLs" Association="IUModel.FK_FeedBackTBLs_StudentTBLs">
+            <End Role="StudentTBL" EntitySet="StudentTBLs" />
+            <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FeedBackTBLs_StudentTBLs1" Association="IUModel.FK_FeedBackTBLs_StudentTBLs1">
+            <End Role="StudentTBL" EntitySet="StudentTBLs" />
+            <End Role="FeedBackTBL" EntitySet="FeedBackTBLs" />
+          </AssociationSet>
+          <EntitySet Name="OpenClassTBLs" EntityType="IUModel.OpenClassTBL" />
+          <EntitySet Name="OpenSubjectTBLs" EntityType="IUModel.OpenSubjectTBL" />
+          <AssociationSet Name="FK_OpenClassTBLs_ClassTBLs" Association="IUModel.FK_OpenClassTBLs_ClassTBLs">
+            <End Role="ClassTBL" EntitySet="ClassTBLs" />
+            <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenSubjectTBLs_OpenClassTBLs" Association="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs">
+            <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+            <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenSubjectTBLs_SubjectTBLs" Association="IUModel.FK_OpenSubjectTBLs_SubjectTBLs">
+            <End Role="SubjectTBL" EntitySet="SubjectTBLs" />
+            <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+          </AssociationSet>
+          <EntitySet Name="AcceptRegisters" EntityType="IUModel.AcceptRegister" />
+          <AssociationSet Name="FK_AcceptRegisters_OpenClassTBLs" Association="IUModel.FK_AcceptRegisters_OpenClassTBLs">
+            <End Role="OpenClassTBL" EntitySet="OpenClassTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_OpenSubjectTBLs" Association="IUModel.FK_AcceptRegisters_OpenSubjectTBLs">
+            <End Role="OpenSubjectTBL" EntitySet="OpenSubjectTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcceptRegisters_StudentTBLs" Association="IUModel.FK_AcceptRegisters_StudentTBLs">
+            <End Role="StudentTBL" EntitySet="StudentTBLs" />
+            <End Role="AcceptRegister" EntitySet="AcceptRegisters" />
+          </AssociationSet>
+          <EntitySet Name="ModeTBLs" EntityType="IUModel.ModeTBL" />
+          <EntitySet Name="RoomTBLs" EntityType="IUModel.RoomTBL" />
+          <EntitySet Name="StudentInClassTBLs" EntityType="IUModel.StudentInClassTBL" />
+        </EntityContainer>
+        <EntityType Name="AdminTBL">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="IUModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="IUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="IUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="IUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="IUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="IUModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="AspTransport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TransCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="TransName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AttendanceTBL">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SlotID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Attendancer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateAttendance" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Attendance" Type="Boolean" Nullable="false" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="AttendanceTBL" ToRole="ClassTBL" />
+          <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="AttendanceTBL" ToRole="SemesterTBL" />
+          <NavigationProperty Name="SlotTBL" Relationship="IUModel.FK_AttendanceTBLs_SlotTBLs" FromRole="AttendanceTBL" ToRole="SlotTBL" />
+          <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="AttendanceTBL" ToRole="SubjectTBL" />
+        </EntityType>
+        <EntityType Name="ClassScheduleTBL">
+          <Key>
+            <PropertyRef Name="ClassScheduleID" />
+          </Key>
+          <Property Name="ClassScheduleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SlotID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LecturerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DateStudy" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ClassTBL">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creater" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="AttendanceTBL" />
+          <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="LecturerScheduleTBL" />
+          <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_ClassTBLs1" FromRole="ClassTBL" ToRole="StudentListTBL" />
+          <NavigationProperty Name="OpenClassTBLs" Relationship="IUModel.FK_OpenClassTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="OpenClassTBL" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Secret" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationType" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="RefreshTokenLifeTime" Type="Int32" Nullable="false" />
+          <Property Name="AllowedOrigin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RefreshTokens" Relationship="IUModel.FK_RefreshTokens_Clients" FromRole="Client" ToRole="RefreshToken" />
+        </EntityType>
+        <EntityType Name="LecturerScheduleTBL">
+          <Key>
+            <PropertyRef Name="LecturerSchedule" />
+          </Key>
+          <Property Name="LecturerSchedule" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LecturerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_LecturerScheduleTBLs_ClassTBLs" FromRole="LecturerScheduleTBL" ToRole="ClassTBL" />
+          <NavigationProperty Name="LecturerTBL" Relationship="IUModel.FK_LecturerScheduleTBLs_LecturerTBLs" FromRole="LecturerScheduleTBL" ToRole="LecturerTBL" />
+          <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_LecturerScheduleTBLs_SemesterTBLs" FromRole="LecturerScheduleTBL" ToRole="SemesterTBL" />
+          <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_LecturerScheduleTBLs_SubjectTBLs" FromRole="LecturerScheduleTBL" ToRole="SubjectTBL" />
+        </EntityType>
+        <EntityType Name="LecturerTBL">
+          <Key>
+            <PropertyRef Name="LecturerID" />
+          </Key>
+          <Property Name="LecturerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LecturerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LecturerGender" Type="Boolean" Nullable="false" />
+          <Property Name="LecturerBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LecturerPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LecturerEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_LecturerTBLs" FromRole="LecturerTBL" ToRole="LecturerScheduleTBL" />
+          <NavigationProperty Name="SubjectTBLs" Relationship="IUModel.LecturerOfSubjectTBLs" FromRole="LecturerTBL" ToRole="SubjectTBL" />
+          <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_LectureTBLs" FromRole="LecturerTBL" ToRole="FeedBackTBL" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Received" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Sent" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MessageDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RefreshToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiresUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProtectedTicket" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="IUModel.FK_RefreshTokens_Clients" FromRole="RefreshToken" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="SemesterTBL">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="AttendanceTBL" />
+          <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="LecturerScheduleTBL" />
+          <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_SemesterTBLs1" FromRole="SemesterTBL" ToRole="StudentListTBL" />
+        </EntityType>
+        <EntityType Name="SlotTBL">
+          <Key>
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="SlotID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SlotTime" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SlotName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumOfSlot" Type="Int32" />
+          <Property Name="TotalSlot" Type="Int32" />
+          <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SlotTBLs" FromRole="SlotTBL" ToRole="AttendanceTBL" />
+        </EntityType>
+        <EntityType Name="StudentListTBL">
+          <Key>
+            <PropertyRef Name="StudentListID" />
+          </Key>
+          <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_ListStudentTBLs_ClassTBLs1" FromRole="StudentListTBL" ToRole="ClassTBL" />
+          <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_ListStudentTBLs_SemesterTBLs1" FromRole="StudentListTBL" ToRole="SemesterTBL" />
+          <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentListTBL" ToRole="StudentTBL" />
+        </EntityType>
+        <EntityType Name="StudentTBL">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentGender" Type="Boolean" Nullable="false" />
+          <Property Name="StudentBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StudentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ParentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />
+          <NavigationProperty Name="FeedBackTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="StudentTBL" ToRole="FeedBackTBL" />
+          <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="StudentTBL" ToRole="AcceptRegister" />
+        </EntityType>
+        <EntityType Name="SubjectTBL">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AbbreSubjectName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="AttendanceTBL" />
+          <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="LecturerScheduleTBL" />
+          <NavigationProperty Name="LecturerTBLs" Relationship="IUModel.LecturerOfSubjectTBLs" FromRole="SubjectTBL" ToRole="LecturerTBL" />
+          <NavigationProperty Name="OpenSubjectTBLs" Relationship="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" FromRole="SubjectTBL" ToRole="OpenSubjectTBL" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Test" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="IUModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IUModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="IUModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IUModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_ClassTBLs">
+          <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="1" />
+          <End Type="IUModel.AttendanceTBL" Role="AttendanceTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBL">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="AttendanceTBL">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SemesterTBLs">
+          <End Type="IUModel.SemesterTBL" Role="SemesterTBL" Multiplicity="1" />
+          <End Type="IUModel.AttendanceTBL" Role="AttendanceTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBL">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="AttendanceTBL">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SlotTBLs">
+          <End Type="IUModel.SlotTBL" Role="SlotTBL" Multiplicity="1" />
+          <End Type="IUModel.AttendanceTBL" Role="AttendanceTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotTBL">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="AttendanceTBL">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendanceTBLs_SubjectTBLs">
+          <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="1" />
+          <End Type="IUModel.AttendanceTBL" Role="AttendanceTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBL">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="AttendanceTBL">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_ClassTBLs">
+          <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="1" />
+          <End Type="IUModel.LecturerScheduleTBL" Role="LecturerScheduleTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBL">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBL">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_ClassTBLs1">
+          <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="1" />
+          <End Type="IUModel.StudentListTBL" Role="StudentListTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBL">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="StudentListTBL">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefreshTokens_Clients">
+          <End Type="IUModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="IUModel.RefreshToken" Role="RefreshToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RefreshToken">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_LecturerTBLs">
+          <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="1" />
+          <End Type="IUModel.LecturerScheduleTBL" Role="LecturerScheduleTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LecturerTBL">
+              <PropertyRef Name="LecturerID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBL">
+              <PropertyRef Name="LecturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_SemesterTBLs">
+          <End Type="IUModel.SemesterTBL" Role="SemesterTBL" Multiplicity="1" />
+          <End Type="IUModel.LecturerScheduleTBL" Role="LecturerScheduleTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBL">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBL">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturerScheduleTBLs_SubjectTBLs">
+          <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="1" />
+          <End Type="IUModel.LecturerScheduleTBL" Role="LecturerScheduleTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBL">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="LecturerScheduleTBL">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_SemesterTBLs1">
+          <End Type="IUModel.SemesterTBL" Role="SemesterTBL" Multiplicity="1" />
+          <End Type="IUModel.StudentListTBL" Role="StudentListTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SemesterTBL">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="StudentListTBL">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListStudentTBLs_StudentTBLs1">
+          <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+          <End Type="IUModel.StudentListTBL" Role="StudentListTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBL">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentListTBL">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="IUModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="IUModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="LecturerOfSubjectTBLs">
+          <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="*" />
+          <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FeedBackTBL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Student" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Lecturer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Quality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OnTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Attitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Satisfaction" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LecturerTBL" Relationship="IUModel.FK_FeedBackTBLs_LectureTBLs" FromRole="FeedBackTBL" ToRole="LecturerTBL" />
+          <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs" FromRole="FeedBackTBL" ToRole="StudentTBL" />
+          <NavigationProperty Name="StudentTBL1" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="FeedBackTBL" ToRole="StudentTBL" />
+          <Property Name="FeedbackDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_FeedBackTBLs_LectureTBLs">
+          <End Type="IUModel.LecturerTBL" Role="LecturerTBL" Multiplicity="0..1" />
+          <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LecturerTBL">
+              <PropertyRef Name="LecturerID" />
+            </Principal>
+            <Dependent Role="FeedBackTBL">
+              <PropertyRef Name="Lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBackTBLs_StudentTBLs">
+          <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+          <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBL">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="FeedBackTBL">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FeedBackTBLs_StudentTBLs1">
+          <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="0..1" />
+          <End Type="IUModel.FeedBackTBL" Role="FeedBackTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBL">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="FeedBackTBL">
+              <PropertyRef Name="Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OpenClassTBL">
+          <Key>
+            <PropertyRef Name="OpenClassID" />
+          </Key>
+          <Property Name="OpenClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoomID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SlotID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_OpenClassTBLs_ClassTBLs" FromRole="OpenClassTBL" ToRole="ClassTBL" />
+          <NavigationProperty Name="OpenSubjectTBLs" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="OpenSubjectTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="OpenClassTBL" ToRole="AcceptRegister" />
+          <Property Name="Limit" Type="Int32" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <Property Name="SemesterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OpenSubjectTBL">
+          <Key>
+            <PropertyRef Name="OpenSubjectID" />
+          </Key>
+          <Property Name="OpenSubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OpenClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Credit" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Creater" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_OpenSubjectTBLs_OpenClassTBLs" FromRole="OpenSubjectTBL" ToRole="OpenClassTBL" />
+          <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_OpenSubjectTBLs_SubjectTBLs" FromRole="OpenSubjectTBL" ToRole="SubjectTBL" />
+          <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="OpenSubjectTBL" ToRole="AcceptRegister" />
+          <Property Name="LecturerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_OpenClassTBLs_ClassTBLs">
+          <End Type="IUModel.ClassTBL" Role="ClassTBL" Multiplicity="0..1" />
+          <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTBL">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="OpenClassTBL">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenSubjectTBLs_OpenClassTBLs">
+          <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="0..1" />
+          <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBL">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="OpenSubjectTBL">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenSubjectTBLs_SubjectTBLs">
+          <End Type="IUModel.SubjectTBL" Role="SubjectTBL" Multiplicity="0..1" />
+          <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTBL">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="OpenSubjectTBL">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AcceptRegister">
+          <Key>
+            <PropertyRef Name="AcceptRegisterID" />
+          </Key>
+          <Property Name="AcceptRegisterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OpenSubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OpenClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderNum" Type="Int32" />
+          <NavigationProperty Name="OpenClassTBL" Relationship="IUModel.FK_AcceptRegisters_OpenClassTBLs" FromRole="AcceptRegister" ToRole="OpenClassTBL" />
+          <NavigationProperty Name="OpenSubjectTBL" Relationship="IUModel.FK_AcceptRegisters_OpenSubjectTBLs" FromRole="AcceptRegister" ToRole="OpenSubjectTBL" />
+          <NavigationProperty Name="StudentTBL" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="AcceptRegister" ToRole="StudentTBL" />
+          <Property Name="Accepted" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_AcceptRegisters_OpenClassTBLs">
+          <End Type="IUModel.OpenClassTBL" Role="OpenClassTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenClassTBL">
+              <PropertyRef Name="OpenClassID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="OpenClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_OpenSubjectTBLs">
+          <End Type="IUModel.OpenSubjectTBL" Role="OpenSubjectTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpenSubjectTBL">
+              <PropertyRef Name="OpenSubjectID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="OpenSubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcceptRegisters_StudentTBLs">
+          <End Type="IUModel.StudentTBL" Role="StudentTBL" Multiplicity="1" />
+          <End Type="IUModel.AcceptRegister" Role="AcceptRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTBL">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AcceptRegister">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModeTBL">
+          <Key>
+            <PropertyRef Name="ModeID" />
+          </Key>
+          <Property Name="ModeID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="C3_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C2_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C3_5_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C2_4_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AllWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RoomTBL">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RomName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StudentInClassTBL">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="ClassID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IUModelStoreContainer" CdmEntityContainer="IUContext">
+          <EntitySetMapping Name="AdminTBLs">
+            <EntityTypeMapping TypeName="IUModel.AdminTBL">
+              <MappingFragment StoreEntitySet="AdminTBLs">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdminPhone" ColumnName="AdminPhone" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="IUModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="IUModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="IUModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="IUModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspTransports">
+            <EntityTypeMapping TypeName="IUModel.AspTransport">
+              <MappingFragment StoreEntitySet="AspTransports">
+                <ScalarProperty Name="TransName" ColumnName="TransName" />
+                <ScalarProperty Name="TransCode" ColumnName="TransCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttendanceTBLs">
+            <EntityTypeMapping TypeName="IUModel.AttendanceTBL">
+              <MappingFragment StoreEntitySet="AttendanceTBLs">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+                <ScalarProperty Name="DateAttendance" ColumnName="DateAttendance" />
+                <ScalarProperty Name="Attendancer" ColumnName="Attendancer" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassScheduleTBLs">
+            <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
+              <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+                <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+                <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
+                <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />
+                <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassScheduleID" ColumnName="ClassScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassTBLs">
+            <EntityTypeMapping TypeName="IUModel.ClassTBL">
+              <MappingFragment StoreEntitySet="ClassTBLs">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="IUModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="AllowedOrigin" ColumnName="AllowedOrigin" />
+                <ScalarProperty Name="RefreshTokenLifeTime" ColumnName="RefreshTokenLifeTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Secret" ColumnName="Secret" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LecturerScheduleTBLs">
+            <EntityTypeMapping TypeName="IUModel.LecturerScheduleTBL">
+              <MappingFragment StoreEntitySet="LecturerScheduleTBLs">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="LecturerSchedule" ColumnName="LecturerSchedule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LecturerTBLs">
+            <EntityTypeMapping TypeName="IUModel.LecturerTBL">
+              <MappingFragment StoreEntitySet="LecturerTBLs">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LecturerEmail" ColumnName="LecturerEmail" />
+                <ScalarProperty Name="LecturerPhone" ColumnName="LecturerPhone" />
+                <ScalarProperty Name="LecturerBirth" ColumnName="LecturerBirth" />
+                <ScalarProperty Name="LecturerGender" ColumnName="LecturerGender" />
+                <ScalarProperty Name="LecturerName" ColumnName="LecturerName" />
+                <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="IUModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="Sent" ColumnName="Sent" />
+                <ScalarProperty Name="Received" ColumnName="Received" />
+                <ScalarProperty Name="ToUser" ColumnName="ToUser" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefreshTokens">
+            <EntityTypeMapping TypeName="IUModel.RefreshToken">
+              <MappingFragment StoreEntitySet="RefreshTokens">
+                <ScalarProperty Name="ProtectedTicket" ColumnName="ProtectedTicket" />
+                <ScalarProperty Name="ExpiresUtc" ColumnName="ExpiresUtc" />
+                <ScalarProperty Name="IssuedUtc" ColumnName="IssuedUtc" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SemesterTBLs">
+            <EntityTypeMapping TypeName="IUModel.SemesterTBL">
+              <MappingFragment StoreEntitySet="SemesterTBLs">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
+                <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotTBLs">
+            <EntityTypeMapping TypeName="IUModel.SlotTBL">
+              <MappingFragment StoreEntitySet="SlotTBLs">
+                <ScalarProperty Name="TotalSlot" ColumnName="TotalSlot" />
+                <ScalarProperty Name="NumOfSlot" ColumnName="NumOfSlot" />
+                <ScalarProperty Name="SlotName" ColumnName="SlotName" />
+                <ScalarProperty Name="SlotTime" ColumnName="SlotTime" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentListTBLs">
+            <EntityTypeMapping TypeName="IUModel.StudentListTBL">
+              <MappingFragment StoreEntitySet="StudentListTBLs">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTBLs">
+            <EntityTypeMapping TypeName="IUModel.StudentTBL">
+              <MappingFragment StoreEntitySet="StudentTBLs">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentPhone" ColumnName="ParentPhone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="StudentPhone" ColumnName="StudentPhone" />
+                <ScalarProperty Name="StudentBirth" ColumnName="StudentBirth" />
+                <ScalarProperty Name="StudentGender" ColumnName="StudentGender" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectTBLs">
+            <EntityTypeMapping TypeName="IUModel.SubjectTBL">
+              <MappingFragment StoreEntitySet="SubjectTBLs">
+                <ScalarProperty Name="AbbreSubjectName" ColumnName="AbbreSubjectName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IUModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTables">
+            <EntityTypeMapping TypeName="IUModel.TestTable">
+              <MappingFragment StoreEntitySet="TestTable">
+                <ScalarProperty Name="Test" ColumnName="Test" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="IUModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LecturerOfSubjectTBLs" TypeName="IUModel.LecturerOfSubjectTBLs" StoreEntitySet="LecturerOfSubjectTBLs">
+            <EndProperty Name="SubjectTBL">
+              <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+            </EndProperty>
+            <EndProperty Name="LecturerTBL">
+              <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="FeedBackTBLs">
+            <EntityTypeMapping TypeName="IUModel.FeedBackTBL">
+              <MappingFragment StoreEntitySet="FeedBackTBLs">
+                <ScalarProperty Name="FeedbackDate" ColumnName="FeedbackDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Satisfaction" ColumnName="Satisfaction" />
+                <ScalarProperty Name="Attitude" ColumnName="Attitude" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                <ScalarProperty Name="Lecturer" ColumnName="Lecturer" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenClassTBLs">
+            <EntityTypeMapping TypeName="IUModel.OpenClassTBL">
+              <MappingFragment StoreEntitySet="OpenClassTBLs">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenSubjectTBLs">
+            <EntityTypeMapping TypeName="IUModel.OpenSubjectTBL">
+              <MappingFragment StoreEntitySet="OpenSubjectTBLs">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+                <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcceptRegisters">
+            <EntityTypeMapping TypeName="IUModel.AcceptRegister">
+              <MappingFragment StoreEntitySet="AcceptRegisters">
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+                <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="AcceptRegisterID" ColumnName="AcceptRegisterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeTBLs">
+            <EntityTypeMapping TypeName="IUModel.ModeTBL">
+              <MappingFragment StoreEntitySet="ModeTBLs">
+                <ScalarProperty Name="AllWeek" ColumnName="AllWeek" />
+                <ScalarProperty Name="C2_4_6" ColumnName="2-4-6" />
+                <ScalarProperty Name="C3_5_6" ColumnName="3-5-6" />
+                <ScalarProperty Name="C2_4" ColumnName="2-4" />
+                <ScalarProperty Name="C3_5" ColumnName="3-5" />
+                <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomTBLs">
+            <EntityTypeMapping TypeName="IUModel.RoomTBL">
+              <MappingFragment StoreEntitySet="RoomTBLs">
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="RomName" ColumnName="RomName" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentInClassTBLs">
+            <EntityTypeMapping TypeName="IUModel.StudentInClassTBL">
+              <MappingFragment StoreEntitySet="StudentInClassTBLs">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

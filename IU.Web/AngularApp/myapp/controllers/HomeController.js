@@ -5,11 +5,16 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices, AttendanceService) {
         $scope.Subjects = [];
         $scope.semesters = [];
+        $scope.userInfo = {};
 
         $scope.activeScheduleItems = [];
         $scope.activeAttendanceItems = [];
         $scope.feedbackActiveMenu = false;
     
+        $scope.getUserInfo = function () {
+            $scope.userInfo = { userName: 'vanan08@gmail.com', fullName: 'Nguyễn Văn An', className: 'Software Engineer 812', semester: 'Summer 2016' };
+        };
+
     $scope.gotoMenu = function (url, header) {
         if (header) {
             $scope.setPageHeader(header);
@@ -86,6 +91,7 @@ IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$
 
      (function init() {
          $timeout(function () {
+             $scope.getUserInfo();
              $scope.activeMenu();
              $scope.getSubjects();
              $scope.getSemesterByStudent();

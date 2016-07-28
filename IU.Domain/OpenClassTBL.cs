@@ -16,19 +16,22 @@ namespace IU.Domain
     {
         public OpenClassTBL()
         {
-            this.OpenSubjectTBLs = new HashSet<OpenSubjectTBL>();
             this.AcceptRegisters = new HashSet<AcceptRegister>();
+            this.OpenSubjectTBLs = new HashSet<OpenSubjectTBL>();
         }
     
         public string OpenClassID { get; set; }
+        public string SemesterID { get; set; }
         public string ClassID { get; set; }
         public string RoomID { get; set; }
         public string SlotID { get; set; }
+        public Nullable<int> Limit { get; set; }
+        public Nullable<System.DateTime> Deadline { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string Creater { get; set; }
     
+        public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
         public virtual ClassTBL ClassTBL { get; set; }
         public virtual ICollection<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
-        public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
     }
 }

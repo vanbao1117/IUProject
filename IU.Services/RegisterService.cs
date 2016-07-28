@@ -14,10 +14,14 @@ namespace IU.Services
     public class RegisterService : IDisposable
     {
         private IRepository<AcceptRegister> AcceptRegisterRepository;
+        private IRepository<ClassScheduleTBL> ClassScheduleRepository;
+        private IRepository<StudentListTBL> StudentListRepository;
 
         public RegisterService()
         {
             AcceptRegisterRepository = new Repository<AcceptRegister>();
+            ClassScheduleRepository = new Repository<ClassScheduleTBL>();
+            StudentListRepository = new Repository<StudentListTBL>();
         }
 
         public async Task<OpenSubjectViewModel> UndoRegisterSync(OpenSubjectViewModel model, string userName)
@@ -30,11 +34,16 @@ namespace IU.Services
                     var student = context.StudentTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
 
                     var acceptRegister = AcceptRegisterRepository.FindAllBy(a => a.StudentID == student.StudentID && a.OpenSubjectID == model.OpenSubjectID).FirstOrDefault();
-                    
+
                     if (acceptRegister != null)
                     {
                         await AcceptRegisterRepository.DeleteAsync(acceptRegister);
                     }
+
+                    var nextAcceptRegister = AcceptRegisterRepository.FindAllBy(a => a.OrderNum == acceptRegister.OrderNum + 1).FirstOrDefault();
+                    //Accept next student
+                    if (nextAcceptRegister != null)
+                        createClassSchedule(nextAcceptRegister);
 
                     return model;
                 }
@@ -65,12 +74,42 @@ namespace IU.Services
                         return null;
                     }
 
+                    //Check limited
+                    var limited = checkLimit(model.OpenClassID);
+                    if (limited) return null;
+
                     string _id = Helper.GenerateRandomId();
                     await AcceptRegisterRepository.SaveAsync(new AcceptRegister() { AcceptRegisterID = _id, OpenClassID = model.OpenClassID, OpenSubjectID = model.OpenSubjectID, OrderNum = orderNum, RegisterDate = DateTime.Now, StudentID = student.StudentID, Accepted = false });
+
+                    var accept = AcceptRegisterRepository.FindOneBy(a => a.AcceptRegisterID == _id);
+
+                    createClassSchedule(accept);
+
                     return model;
                 }
                 catch (Exception ex) { }
                 return null;
+            }
+        }
+
+
+        private void createClassSchedule(AcceptRegister accept)
+        {
+            using (var context = new IUContext())
+            {
+                var openClass = context.OpenClassTBLs.Where(o => o.OpenClassID == accept.OpenClassID).FirstOrDefault();
+                var openSubject = context.OpenSubjectTBLs.Where(o => o.OpenSubjectID == accept.OpenSubjectID).FirstOrDefault();
+                var classID = openClass.ClassID;
+                var RoomId = openClass.RoomID;
+                var slotID = openClass.SlotID;
+                var lecturerID = openSubject.LecturerID;
+                var semesterID = openClass.SemesterID;
+                var studentID = accept.StudentID;
+                var studentListId = Helper.GenerateRandomId();
+
+                StudentListRepository.Save(new StudentListTBL() { ClassID = classID, SemesterID = semesterID, StudentID = studentID, StudentListID = studentListId });
+
+                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = openSubject.StartDate.Value, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID });
             }
         }
 
@@ -153,6 +192,35 @@ namespace IU.Services
                 }
             }
         }
+
+        private bool checkLimit(string openClassID)
+        {
+            using (var context = new IUContext())
+            {
+                var currentCount = context.AcceptRegisters.Where(a => a.OpenClassID == openClassID).ToArray().Count();
+                var _class = context.OpenClassTBLs.Where(o => o.OpenClassID == openClassID).FirstOrDefault();
+                if (_class != null && _class.Limit == currentCount)
+                {
+                    return true;
+                }
+                else
+                {
+                    var currentDate = DateTime.Now;
+                    _class = context.OpenClassTBLs.Where(o => o.OpenClassID == openClassID && o.Deadline.Value < currentDate).FirstOrDefault();
+                    if (_class != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+            }
+        }
+
+
 
         private AcceptRegister GetAcceptRegister(string openClassID)
         {

@@ -105,6 +105,9 @@
     <Compile Include="LecturerTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Notification.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
@@ -118,10 +121,16 @@
     <Compile Include="RefreshToken.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RoomTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SemesterTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SlotTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentInClassTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentListTBL.cs">

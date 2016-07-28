@@ -109,6 +109,7 @@
     <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateStudy" Type="datetime" Nullable="false" />
+    <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="ClassTBLs">
     <Key>
@@ -177,6 +178,17 @@
     <Property Name="LecturerEmail" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
+  <EntityType Name="ModeTBLs">
+    <Key>
+      <PropertyRef Name="ModeID" />
+    </Key>
+    <Property Name="ModeID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="3-5" Type="nvarchar" MaxLength="50" />
+    <Property Name="2-4" Type="nvarchar" MaxLength="50" />
+    <Property Name="3-5-6" Type="nvarchar" MaxLength="50" />
+    <Property Name="2-4-6" Type="nvarchar" MaxLength="50" />
+    <Property Name="AllWeek" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Notifications">
     <Key>
       <PropertyRef Name="Id" />
@@ -193,9 +205,12 @@
       <PropertyRef Name="OpenClassID" />
     </Key>
     <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" />
     <Property Name="ClassID" Type="nvarchar" MaxLength="128" />
     <Property Name="RoomID" Type="nvarchar" MaxLength="128" />
     <Property Name="SlotID" Type="nvarchar" MaxLength="128" />
+    <Property Name="Limit" Type="int" />
+    <Property Name="Deadline" Type="datetime" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="Creater" Type="nvarchar" MaxLength="128" />
   </EntityType>
@@ -205,9 +220,12 @@
     </Key>
     <Property Name="OpenSubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
+    <Property Name="LecturerID" Type="nvarchar" MaxLength="128" />
     <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
     <Property Name="Credit" Type="int" />
     <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="StartDate" Type="datetime" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="Creater" Type="nvarchar" MaxLength="128" />
   </EntityType>
@@ -221,6 +239,14 @@
     <Property Name="IssuedUtc" Type="datetime" Nullable="false" />
     <Property Name="ExpiresUtc" Type="datetime" Nullable="false" />
     <Property Name="ProtectedTicket" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoomTBLs">
+    <Key>
+      <PropertyRef Name="RoomID" />
+    </Key>
+    <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RomName" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="Decription" Type="varchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="SemesterTBLs">
     <Key>
@@ -241,6 +267,14 @@
     <Property Name="SlotName" Type="varchar" MaxLength="50" />
     <Property Name="NumOfSlot" Type="int" />
     <Property Name="TotalSlot" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentInClassTBLs">
+    <Key>
+      <PropertyRef Name="ClassID" />
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentListTBLs">
     <Key>
@@ -626,12 +660,15 @@
     <EntitySet Name="LecturerOfSubjectTBLs" EntityType="Self.LecturerOfSubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LecturerScheduleTBLs" EntityType="Self.LecturerScheduleTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LecturerTBLs" EntityType="Self.LecturerTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModeTBLs" EntityType="Self.ModeTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OpenClassTBLs" EntityType="Self.OpenClassTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OpenSubjectTBLs" EntityType="Self.OpenSubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomTBLs" EntityType="Self.RoomTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentInClassTBLs" EntityType="Self.StudentInClassTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentListTBLs" EntityType="Self.StudentListTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentTBLs" EntityType="Self.StudentTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubjectTBLs" EntityType="Self.SubjectTBLs" Schema="dbo" store:Type="Tables" />

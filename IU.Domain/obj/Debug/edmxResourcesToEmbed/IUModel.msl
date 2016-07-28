@@ -1,6 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="IUModelStoreContainer" CdmEntityContainer="IUContext">
+    <EntitySetMapping Name="AcceptRegisters">
+      <EntityTypeMapping TypeName="IUModel.AcceptRegister">
+        <MappingFragment StoreEntitySet="AcceptRegisters">
+          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="AcceptRegisterID" ColumnName="AcceptRegisterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AdminTBLs">
       <EntityTypeMapping TypeName="IUModel.AdminTBL">
         <MappingFragment StoreEntitySet="AdminTBLs">
@@ -86,6 +99,7 @@
     <EntitySetMapping Name="ClassScheduleTBLs">
       <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
         <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+          <ScalarProperty Name="ModeID" ColumnName="ModeID" />
           <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
           <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />
           <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
@@ -121,6 +135,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FeedBackTBLs">
+      <EntityTypeMapping TypeName="IUModel.FeedBackTBL">
+        <MappingFragment StoreEntitySet="FeedBackTBLs">
+          <ScalarProperty Name="FeedbackDate" ColumnName="FeedbackDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Satisfaction" ColumnName="Satisfaction" />
+          <ScalarProperty Name="Attitude" ColumnName="Attitude" />
+          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+          <ScalarProperty Name="Quality" ColumnName="Quality" />
+          <ScalarProperty Name="Lecturer" ColumnName="Lecturer" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="LecturerScheduleTBLs">
       <EntityTypeMapping TypeName="IUModel.LecturerScheduleTBL">
         <MappingFragment StoreEntitySet="LecturerScheduleTBLs">
@@ -146,6 +175,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ModeTBLs">
+      <EntityTypeMapping TypeName="IUModel.ModeTBL">
+        <MappingFragment StoreEntitySet="ModeTBLs">
+          <ScalarProperty Name="AllWeek" ColumnName="AllWeek" />
+          <ScalarProperty Name="C2_4_6" ColumnName="2-4-6" />
+          <ScalarProperty Name="C3_5_6" ColumnName="3-5-6" />
+          <ScalarProperty Name="C2_4" ColumnName="2-4" />
+          <ScalarProperty Name="C3_5" ColumnName="3-5" />
+          <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Notifications">
       <EntityTypeMapping TypeName="IUModel.Notification">
         <MappingFragment StoreEntitySet="Notifications">
@@ -158,6 +199,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OpenClassTBLs">
+      <EntityTypeMapping TypeName="IUModel.OpenClassTBL">
+        <MappingFragment StoreEntitySet="OpenClassTBLs">
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Limit" ColumnName="Limit" />
+          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OpenSubjectTBLs">
+      <EntityTypeMapping TypeName="IUModel.OpenSubjectTBL">
+        <MappingFragment StoreEntitySet="OpenSubjectTBLs">
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+          <ScalarProperty Name="ModeID" ColumnName="ModeID" />
+          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
+          <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="RefreshTokens">
       <EntityTypeMapping TypeName="IUModel.RefreshToken">
         <MappingFragment StoreEntitySet="RefreshTokens">
@@ -167,6 +239,15 @@
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomTBLs">
+      <EntityTypeMapping TypeName="IUModel.RoomTBL">
+        <MappingFragment StoreEntitySet="RoomTBLs">
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="RomName" ColumnName="RomName" />
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -189,6 +270,14 @@
           <ScalarProperty Name="SlotName" ColumnName="SlotName" />
           <ScalarProperty Name="SlotTime" ColumnName="SlotTime" />
           <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentInClassTBLs">
+      <EntityTypeMapping TypeName="IUModel.StudentInClassTBL">
+        <MappingFragment StoreEntitySet="StudentInClassTBLs">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -260,58 +349,5 @@
         <ScalarProperty Name="LecturerID" ColumnName="LecturerID" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="FeedBackTBLs">
-      <EntityTypeMapping TypeName="IUModel.FeedBackTBL">
-        <MappingFragment StoreEntitySet="FeedBackTBLs">
-          <ScalarProperty Name="FeedbackDate" ColumnName="FeedbackDate" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="Satisfaction" ColumnName="Satisfaction" />
-          <ScalarProperty Name="Attitude" ColumnName="Attitude" />
-          <ScalarProperty Name="OnTime" ColumnName="OnTime" />
-          <ScalarProperty Name="Quality" ColumnName="Quality" />
-          <ScalarProperty Name="Lecturer" ColumnName="Lecturer" />
-          <ScalarProperty Name="Student" ColumnName="Student" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OpenClassTBLs">
-      <EntityTypeMapping TypeName="IUModel.OpenClassTBL">
-        <MappingFragment StoreEntitySet="OpenClassTBLs">
-          <ScalarProperty Name="Creater" ColumnName="Creater" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
-          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
-          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
-          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OpenSubjectTBLs">
-      <EntityTypeMapping TypeName="IUModel.OpenSubjectTBL">
-        <MappingFragment StoreEntitySet="OpenSubjectTBLs">
-          <ScalarProperty Name="Creater" ColumnName="Creater" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Cost" ColumnName="Cost" />
-          <ScalarProperty Name="Credit" ColumnName="Credit" />
-          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
-          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AcceptRegisters">
-      <EntityTypeMapping TypeName="IUModel.AcceptRegister">
-        <MappingFragment StoreEntitySet="AcceptRegisters">
-          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
-          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
-          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
-          <ScalarProperty Name="OpenClassID" ColumnName="OpenClassID" />
-          <ScalarProperty Name="OpenSubjectID" ColumnName="OpenSubjectID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="AcceptRegisterID" ColumnName="AcceptRegisterID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

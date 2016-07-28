@@ -16,9 +16,9 @@ namespace IU.Domain
     {
         public StudentTBL()
         {
-            this.StudentListTBLs = new HashSet<StudentListTBL>();
-            this.FeedBackTBLs = new HashSet<FeedBackTBL>();
             this.AcceptRegisters = new HashSet<AcceptRegister>();
+            this.FeedBackTBLs = new HashSet<FeedBackTBL>();
+            this.StudentListTBLs = new HashSet<StudentListTBL>();
         }
     
         public string StudentID { get; set; }
@@ -30,9 +30,8 @@ namespace IU.Domain
         public string ParentPhone { get; set; }
         public string UserID { get; set; }
     
-        public virtual ICollection<StudentListTBL> StudentListTBLs { get; set; }
-        public virtual FeedBackTBL FeedBackTBL { get; set; }
-        public virtual ICollection<FeedBackTBL> FeedBackTBLs { get; set; }
         public virtual ICollection<AcceptRegister> AcceptRegisters { get; set; }
+        public virtual ICollection<FeedBackTBL> FeedBackTBLs { get; set; }
+        public virtual ICollection<StudentListTBL> StudentListTBLs { get; set; }
     }
 }

@@ -26,6 +26,5 @@ namespace IU.Domain
     
         public virtual LecturerTBL LecturerTBL { get; set; }
         public virtual StudentTBL StudentTBL { get; set; }
-        public virtual StudentTBL StudentTBL1 { get; set; }
     }
 }

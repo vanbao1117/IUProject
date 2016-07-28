@@ -25,6 +25,7 @@ namespace IU.Domain
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AcceptRegister> AcceptRegisters { get; set; }
         public virtual DbSet<AdminTBL> AdminTBLs { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -35,20 +36,22 @@ namespace IU.Domain
         public virtual DbSet<ClassScheduleTBL> ClassScheduleTBLs { get; set; }
         public virtual DbSet<ClassTBL> ClassTBLs { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<FeedBackTBL> FeedBackTBLs { get; set; }
         public virtual DbSet<LecturerScheduleTBL> LecturerScheduleTBLs { get; set; }
         public virtual DbSet<LecturerTBL> LecturerTBLs { get; set; }
+        public virtual DbSet<ModeTBL> ModeTBLs { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<OpenClassTBL> OpenClassTBLs { get; set; }
+        public virtual DbSet<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+        public virtual DbSet<RoomTBL> RoomTBLs { get; set; }
         public virtual DbSet<SemesterTBL> SemesterTBLs { get; set; }
         public virtual DbSet<SlotTBL> SlotTBLs { get; set; }
+        public virtual DbSet<StudentInClassTBL> StudentInClassTBLs { get; set; }
         public virtual DbSet<StudentListTBL> StudentListTBLs { get; set; }
         public virtual DbSet<StudentTBL> StudentTBLs { get; set; }
         public virtual DbSet<SubjectTBL> SubjectTBLs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TestTable> TestTables { get; set; }
-        public virtual DbSet<FeedBackTBL> FeedBackTBLs { get; set; }
-        public virtual DbSet<OpenClassTBL> OpenClassTBLs { get; set; }
-        public virtual DbSet<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
-        public virtual DbSet<AcceptRegister> AcceptRegisters { get; set; }
     }
 }
