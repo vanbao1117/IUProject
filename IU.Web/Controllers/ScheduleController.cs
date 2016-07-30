@@ -16,6 +16,33 @@ namespace IU.Web.Controllers
     public class ScheduleController : ApiController
     {
 
+        // GET api/Schedule/getClass
+        /// <summary>
+        /// Get class Schedule
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(ClassViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> getClass()
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var classs = await _ClassService.GetLecuterClassList(userName);
+                    return Ok(classs);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/Schedule/GetAllClassScheduleSync
         /// <summary>

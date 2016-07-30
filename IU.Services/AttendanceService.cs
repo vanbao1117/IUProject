@@ -162,15 +162,17 @@ namespace IU.Services
             {
 
                 var semesters =
-                 from semesterTBLs in context.SemesterTBLs
-                 join studentListTBLs in context.StudentListTBLs
-                     on semesterTBLs.SemesterID equals studentListTBLs.SemesterID
-                 join studentTBLs in context.StudentTBLs
-                    on studentListTBLs.StudentID equals studentTBLs.StudentID
-                 where studentTBLs.UserID == userId
-                 select new UserSemesterViewModel() { SemesterID = semesterTBLs.SemesterID, SemesterName = semesterTBLs.SemesterName, StartDate = semesterTBLs.StartDate, EndDate = semesterTBLs.EndDate, SemesterCode = semesterTBLs.SemesterCode };
+                 (from semesterTBLs in context.SemesterTBLs
+                  join studentListTBLs in context.StudentListTBLs
+                      on semesterTBLs.SemesterID equals studentListTBLs.SemesterID
+                  join studentTBLs in context.StudentTBLs
+                     on studentListTBLs.StudentID equals studentTBLs.StudentID
+                  where studentTBLs.UserID == userId
+                  select semesterTBLs).Distinct().OrderByDescending(a => a.StartDate);
+                
+                var datas = semesters.ToArray().Select(semesterTBLs=> new UserSemesterViewModel() { SemesterID = semesterTBLs.SemesterID, SemesterName = semesterTBLs.SemesterName, StartDate = semesterTBLs.StartDate, EndDate = semesterTBLs.EndDate, SemesterCode = semesterTBLs.SemesterCode });
 
-                return semesters.ToArray();
+                return datas.ToArray();
             }
         }
 

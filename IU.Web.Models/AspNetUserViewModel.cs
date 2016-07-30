@@ -22,6 +22,11 @@ namespace IU.Web.Models
         public string UserName { get; set; }
         public string Image { get; set; }
         public string CountryId { get; set; }
+        public string AccountType { get; set; }
+        public string FullName { get; set; }
+        public string Class { get; set; }
+        public string Semester { get; set; }
+        public string Subject { get; set; }
     }
 
     public class Register

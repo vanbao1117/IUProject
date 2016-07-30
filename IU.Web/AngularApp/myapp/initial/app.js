@@ -19,7 +19,7 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
     $locationProvider.html5Mode(false);
 
     $routeProvider
-        .when('/', {//Dashboard
+        .when('/schedule', {//Dashboard
             templateUrl: '/Home/Dashboard',
             controller: 'DashboardController'
         })
@@ -28,6 +28,18 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
                 return 'Home/Schedule'
             },
             controller: 'ScheduleController'
+        })
+        .when('/lecture/attendance', {//Nhập liệu
+            templateUrl: function (params) {
+                return 'Home/Lecturer'
+            },
+            controller: 'LecturerHomeController'
+        })
+        .when('/lecture/feedback', {//Nhập liệu
+            templateUrl: function (params) {
+                return 'Home/Feedback'
+            },
+            controller: 'FeedbackController'
         })
         .when('/feedback', {//Nhập liệu
             templateUrl: function (params) {
@@ -65,8 +77,8 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
         }).when('/search', {//Tra cứu
             templateUrl: '/Home/Search',
             controller: 'SearchController'
-        })
-        .otherwise({ redirectTo: '/' });
+        });
+        //.otherwise({ redirectTo: '/' });
 });
 
 

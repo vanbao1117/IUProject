@@ -16,6 +16,37 @@ namespace IU.Web.Controllers
     public class SubjectController : ApiController
     {
 
+        // GET api/Subject/GetSubjectByLecturer
+        /// <summary>
+        /// Get subject flow student
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserSubjectViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetSubjectByLecturer()
+        {
+            try
+            {
+                List<UserSubjectViewModel> modelArray = null;
+                string userName = HttpContext.Current.User.Identity.Name;
+                using (UserService _userService = new UserService())
+                {
+                    var currentUser = await _userService.FindUserSync(userName);
+                    using (SubjectService _subjectService = new SubjectService())
+                    {
+                        modelArray = await _subjectService.GetSubjectByLecturerSync(currentUser.Id);
+                    }
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/Subject/GetSubjectByStudent
         /// <summary>

@@ -182,12 +182,10 @@
     <Key>
       <PropertyRef Name="ModeID" />
     </Key>
-    <Property Name="ModeID" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="3-5" Type="nvarchar" MaxLength="50" />
-    <Property Name="2-4" Type="nvarchar" MaxLength="50" />
-    <Property Name="3-5-6" Type="nvarchar" MaxLength="50" />
-    <Property Name="2-4-6" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModeID" Type="int" Nullable="false" />
     <Property Name="AllWeek" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Decription" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Notifications">
     <Key>

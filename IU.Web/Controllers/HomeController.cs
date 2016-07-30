@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IU.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,21 @@ namespace IU.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (UserService service = new UserService())
+            {
+                string userName = HttpContext.User.Identity.Name;
+                var user = service.GetUserInfo(userName);
+                if (user != null)
+                    return View(user);
+                else
+                    return View();
+            }
+            
+        }
+
+        public PartialViewResult Lecturer()
+        {
+            return PartialView("~/Views/Lecturer/_LecturerHome.cshtml");
         }
 
         public PartialViewResult Dashboard()

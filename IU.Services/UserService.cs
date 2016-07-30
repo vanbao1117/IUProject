@@ -26,6 +26,93 @@ namespace IU.Services
             return AccountRepository;
         }
 
+        public AspNetUserViewModel GetUserInfo(string username)
+        {
+            var user = AccountRepository.FindOneBy(u => u.UserName == username);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userModelView = new AspNetUserViewModel()
+            {
+                Id = user.Id,
+                AccessFailedCount = user.AccessFailedCount,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                LockoutEnabled = user.LockoutEnabled,
+                LockoutEndDateUtc = user.LockoutEndDateUtc,
+                PasswordHash = user.PasswordHash,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                SecurityStamp = user.SecurityStamp,
+                TwoFactorEnabled = user.TwoFactorEnabled,
+                UserName = user.UserName
+            };
+
+
+            using (var context = new IUContext())
+            {
+
+                //Check if user is student
+                var student = context.StudentTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
+                if (student != null)
+                {
+                    userModelView.AccountType = "STUDENT";
+                    userModelView.FullName = student.StudentName;
+                    userModelView.Semester = GetCurrentSemester().SemesterName;
+                    userModelView.Class = GetClass(student.StudentID).ClassName;
+                    return userModelView;
+                }
+                //Check if user is Lecturer
+                var lecturer = context.LecturerTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
+                if (lecturer != null)
+                {
+                    userModelView.AccountType = "LECTURER";
+                    userModelView.FullName = lecturer.LecturerName;
+                   
+                    return userModelView;
+                }
+
+                //Check if user is ADMIN
+                var admin = context.AdminTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
+                if (admin != null)
+                {
+                    userModelView.AccountType = "Admin";
+                    userModelView.FullName = admin.AdminName;
+                    return userModelView;
+                }
+            }
+
+
+            return null;
+
+        }
+
+        private ClassTBL GetClass(string studentID)
+        {
+            using (var context = new IUContext())
+            {
+                var classTBL =
+                (from classTBLs in context.ClassTBLs
+                 join studentInClassTBLs in context.StudentInClassTBLs
+                     on classTBLs.ClassID equals studentInClassTBLs.ClassID
+                 where studentInClassTBLs.StudentID == studentID
+                 select classTBLs).SingleOrDefault();
+
+                return classTBL;
+            }
+        }
+
+        private SemesterTBL GetCurrentSemester()
+        {
+            using (var context = new IUContext())
+            {
+                var currentDate = DateTime.Now;
+                var sem = context.SemesterTBLs.Where(obj => obj.StartDate <= currentDate && currentDate <= obj.EndDate);
+                return sem.FirstOrDefault();
+            }
+        }
 
         private AspNetUserViewModel FindUser(string username, string password)
         {

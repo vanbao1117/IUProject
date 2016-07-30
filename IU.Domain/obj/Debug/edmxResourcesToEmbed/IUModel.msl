@@ -178,11 +178,9 @@
     <EntitySetMapping Name="ModeTBLs">
       <EntityTypeMapping TypeName="IUModel.ModeTBL">
         <MappingFragment StoreEntitySet="ModeTBLs">
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
           <ScalarProperty Name="AllWeek" ColumnName="AllWeek" />
-          <ScalarProperty Name="C2_4_6" ColumnName="2-4-6" />
-          <ScalarProperty Name="C3_5_6" ColumnName="3-5-6" />
-          <ScalarProperty Name="C2_4" ColumnName="2-4" />
-          <ScalarProperty Name="C3_5" ColumnName="3-5" />
           <ScalarProperty Name="ModeID" ColumnName="ModeID" />
         </MappingFragment>
       </EntityTypeMapping>

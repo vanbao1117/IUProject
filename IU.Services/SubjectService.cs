@@ -13,21 +13,31 @@ namespace IU.Services
 {
     public class SubjectService : IDisposable
     {
-        private IRepository<StudentListTBL> ListStudentTBLRepository;
+        private IRepository<LecturerTBL> LecturerTBLRepository;
 
         public SubjectService()
         {
-            //ListStudentTBLRepository = new Repository<StudentListTBL>();
-            //var studentlist = await ListStudentTBLRepository.FindAllByAsync(ls => ls.StudentID == "");
-
-
-            //using (var stx = new IUContext()){
-            //    var studentClass = (from c in stx.AttendanceTBLs
-            //                        where c.StudentListID == "SE03131"
-            //                        select new { c.ClassID, c.SubjectID, c.Attendancer, c.SlotID, c.DateAttendance });
-            //}
+            LecturerTBLRepository = new Repository<LecturerTBL>();
+            
         }
 
+        public async Task<List<UserSubjectViewModel>> GetSubjectByLecturerSync(string userId)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetSubjectByLecturer(userId));
+            }
+        }
+
+        private List<UserSubjectViewModel> GetSubjectByLecturer(string userId)
+        {
+            using (var context = new IUContext())
+            {
+                var lecturer = context.LecturerTBLs.Include("SubjectTBLs").Where(l => l.UserID == userId).FirstOrDefault();
+                var subjects = lecturer.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName, UserId = userId });
+                return subjects.ToList();
+            }
+        }
 
         public async Task<List<UserSubjectViewModel>> GetSubjectByStudentSync(string userId)
         {

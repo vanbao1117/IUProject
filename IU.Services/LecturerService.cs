@@ -13,6 +13,28 @@ namespace IU.Services
 {
     public class LecturerService : IDisposable
     {
+        public async Task<List<LecturerViewModel>> GetLecturersScheduleSync(string userName)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetLecturersSchedule(userName));
+            }
+        }
+
+        private List<LecturerViewModel> GetLecturersSchedule(string userName)
+        {
+            using (var context = new IUContext())
+            {
+                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
+                var lecturer =
+                 from lecturerTBLs in context.LecturerTBLs
+                 where lecturerTBLs.UserID == user.Id
+                 select new LecturerViewModel() { LecturerID = lecturerTBLs.LecturerID, LecturerBirth = lecturerTBLs.LecturerBirth, LecturerEmail = lecturerTBLs.LecturerEmail, LecturerGender = lecturerTBLs.LecturerGender, LecturerName = lecturerTBLs.LecturerName, LecturerPhone = lecturerTBLs.LecturerPhone, UserID = lecturerTBLs.UserID };
+
+                return null;
+            }
+        }
+
         public async Task<List<LecturerViewModel>> GetLecturersSync(string userName)
         {
             using (var context = new IUContext())

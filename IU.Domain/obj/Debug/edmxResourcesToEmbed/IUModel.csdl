@@ -319,12 +319,10 @@
     <Key>
       <PropertyRef Name="ModeID" />
     </Key>
-    <Property Name="ModeID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="C3_5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="C2_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="C3_5_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="C2_4_6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModeID" Type="Int32" Nullable="false" />
     <Property Name="AllWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>

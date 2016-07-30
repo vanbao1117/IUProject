@@ -8,7 +8,7 @@ namespace IU.Web.Models
 {
     public class ClassViewModel
     {
-        public string Id { get; set; }
+        public string ClassID { get; set; }
         public string ClassName { get; set; }
     }
 }

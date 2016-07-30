@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IU.Web.Models.AspNetUserViewModel
+<!DOCTYPE html>
 <html ng-app="IUApp">
 <head>
   <meta charset="utf-8">
@@ -39,7 +40,22 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini" ng-controller="HomeController">
+@{
+    var controller = "";
+    if (Model.AccountType == "LECTURER")
+    {
+        controller = "LecturerHomeController";
+    }
+    else if (Model.AccountType == "ADMIN")
+    {
+        controller = "AdminHomeController";
+    }
+    else
+    {
+        controller = "HomeController";
+    }
+}
+<body class="hold-transition skin-blue sidebar-mini" ng-controller="@controller">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
@@ -62,16 +78,29 @@
                         <!-- User Account: style can be found in dropdown.less -->
 
                         <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">{{userInfo.fullName}}</span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="return false;">
+                                <span class="hidden-xs">@Model.FullName</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header" style="height:auto !important">
-                                    <p>
-                                        {{userInfo.className}}
-                                        <small>{{userInfo.semester}}</small>
-                                    </p>
+                                    @{
+                                        if (Model.AccountType == "LECTURER" || Model.AccountType == "ADMIN")
+                                        {
+                                            <p>
+                                                @Model.Semester
+                                            </p>
+                                        }
+                                        if (Model.AccountType == "STUDENT")
+                                        {
+                                            <p>
+                                       
+                                                @Model.Class
+                                                <small>@Model.Semester</small>
+                                            </p>
+                                        }
+                                    }
+                                    
                                 </li>
 
                                 <!-- Menu Footer-->
@@ -92,70 +121,102 @@
         </header>
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
+            <!-- LecturerHome sidebar: style can be found in sidebar.less  -->
+            @{
+                if (Model.AccountType == "LECTURER")
+                {
+                    <section class="sidebar">
+                        <!-- sidebar menu: : style can be found in sidebar.less -->
+                        <ul class="sidebar-menu">
+                            <li class="header">MAIN NAVIGATION</li>
+                    
+                            <li class="treeview active">
+                                <a href="/#/lecture/attendance">
+                                    <i class="fa fa-book"></i>
+                                    <span>Attendance</span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li ng-repeat="item in subjects"><a href="/#/lecture/schedule/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}}</a></li>
 
+                                </ul>
+                            </li>
+                    
+                            <li class="treeview feedback">
+                                <a href="/#/lecture/feedback">
+                                    <i class="fa fa-comment-o"></i>
+                                    <span>Feed Back</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                }
+                else if (Model.AccountType == "STUDENT")
+                {
+                     <section class="sidebar">
+                        <!-- sidebar menu: : style can be found in sidebar.less -->
+                        <ul class="sidebar-menu">
+                            <li class="header">MAIN NAVIGATION</li>
+                            <li class="active treeview">
+                                <a href="/#/schedule" >
+                                    <i class="fa fa-calendar"></i> <span>Schedule</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li ng-class="{'active':item.clicked}" ng-repeat="item in Subjects" ng-click="activeMenu(item, 'schedule')"><a href="/#/schedule/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}} </a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#" onclick="return false;">
+                                    <i class="fa fa-book"></i>
+                                    <span>Attendance</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li ng-class="{'active':item.clicked}" ng-click="activeMenu(item, 'attendance')" ng-repeat="item in semesters"><a href="/#/semester/{{item.semesterCode}}"><i class="fa fa-circle-o"></i> {{item.semesterName}}</a></li>
+                                    @*<li><a href="/#/semester/Summer"><i class="fa fa-circle-o"></i> Summer</a></li>
+                                <li><a href="/#/semester/Autumn"><i class="fa fa-circle-o"></i> Autumn</a></li>
+                                <li><a href="/#/semester/Winter"><i class="fa fa-circle-o"></i> Winter</a></li>*@
+                                </ul>
+                            </li>
+                            @*<li>
+                            <a href="pages/widgets.html">
+                                <i class="fa fa-users"></i> <span>My Class</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Class 1</a></li>
+                                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Class 2</a></li>
+                                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Class 3</a></li>
+                                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Class 4</a></li>
+                            </ul>
+                        </li>*@
+                            <li class="treeview">
+                                <a href="/#/bis">
+                                    <i class="fa fa-edit"></i>
+                                    <span>Register BIS-Class</span>
 
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="active treeview">
-                        <a href="#" ng-click="gotoMenu('/', 'Schedule')">
-                            <i class="fa fa-calendar"></i> <span>Schedule</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li ng-class="{'active':item.clicked}" ng-repeat="item in Subjects" ng-click="activeMenu(item, 'schedule')"><a href="/#/schedule/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}} </a></li>
+                                </a>
+                            </li>
+                            <li ng-class="{'active':feedbackActiveMenu}" class="treeview feedback" ng-click="activeMenu(undefined, 'feedback')">
+                                <a href="/#/feedback">
+                                    <i class="fa fa-comment-o"></i>
+                                    <span>Feed Back</span>
+                                </a>
+                            </li>
                         </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#" >
-                            <i class="fa fa-book"></i>
-                            <span>Attendance</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li ng-class="{'active':item.clicked}" ng-click="activeMenu(item, 'attendance')" ng-repeat="item in semesters"><a href="/#/semester/{{item.semesterCode}}"><i class="fa fa-circle-o"></i> {{item.semesterName}}</a></li>
-                            @*<li><a href="/#/semester/Summer"><i class="fa fa-circle-o"></i> Summer</a></li>
-                            <li><a href="/#/semester/Autumn"><i class="fa fa-circle-o"></i> Autumn</a></li>
-                            <li><a href="/#/semester/Winter"><i class="fa fa-circle-o"></i> Winter</a></li>*@
-                        </ul>
-                    </li>
-                    @*<li>
-                        <a href="pages/widgets.html">
-                            <i class="fa fa-users"></i> <span>My Class</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Class 1</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Class 2</a></li>
-                            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Class 3</a></li>
-                            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Class 4</a></li>
-                        </ul>
-                    </li>*@
-                    <li class="treeview">
-                        <a href="/#/bis">
-                            <i class="fa fa-edit"></i>
-                            <span>Register BIS-Class</span>
-                            
-                        </a>
-                    </li>
-                    <li ng-class="{'active':feedbackActiveMenu}" class="treeview feedback" ng-click="activeMenu(undefined, 'feedback')">
-                        <a href="/#/feedback">
-                            <i class="fa fa-comment-o"></i>
-                            <span>Feed Back</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+                    </section>
+                }
+            }
+            
+           
+                <!-- /.sidebar -->
+</aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->

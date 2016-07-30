@@ -14,11 +14,9 @@ namespace IU.Domain
     
     public partial class ModeTBL
     {
-        public string ModeID { get; set; }
-        public string C3_5 { get; set; }
-        public string C2_4 { get; set; }
-        public string C3_5_6 { get; set; }
-        public string C2_4_6 { get; set; }
+        public int ModeID { get; set; }
         public string AllWeek { get; set; }
+        public string Mode { get; set; }
+        public string Decription { get; set; }
     }
 }
