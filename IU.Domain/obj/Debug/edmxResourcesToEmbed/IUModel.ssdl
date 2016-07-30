@@ -183,7 +183,6 @@
       <PropertyRef Name="ModeID" />
     </Key>
     <Property Name="ModeID" Type="int" Nullable="false" />
-    <Property Name="AllWeek" Type="nvarchar" MaxLength="50" />
     <Property Name="Mode" Type="nvarchar" MaxLength="50" />
     <Property Name="Decription" Type="nvarchar(max)" />
   </EntityType>

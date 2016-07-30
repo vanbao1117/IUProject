@@ -180,7 +180,6 @@
         <MappingFragment StoreEntitySet="ModeTBLs">
           <ScalarProperty Name="Decription" ColumnName="Decription" />
           <ScalarProperty Name="Mode" ColumnName="Mode" />
-          <ScalarProperty Name="AllWeek" ColumnName="AllWeek" />
           <ScalarProperty Name="ModeID" ColumnName="ModeID" />
         </MappingFragment>
       </EntityTypeMapping>

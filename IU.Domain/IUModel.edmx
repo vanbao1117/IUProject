@@ -188,7 +188,6 @@
             <PropertyRef Name="ModeID" />
           </Key>
           <Property Name="ModeID" Type="int" Nullable="false" />
-          <Property Name="AllWeek" Type="nvarchar" MaxLength="50" />
           <Property Name="Mode" Type="nvarchar" MaxLength="50" />
           <Property Name="Decription" Type="nvarchar(max)" />
         </EntityType>
@@ -1106,7 +1105,6 @@
             <PropertyRef Name="ModeID" />
           </Key>
           <Property Name="ModeID" Type="Int32" Nullable="false" />
-          <Property Name="AllWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -1726,7 +1724,6 @@
               <MappingFragment StoreEntitySet="ModeTBLs">
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Mode" ColumnName="Mode" />
-                <ScalarProperty Name="AllWeek" ColumnName="AllWeek" />
                 <ScalarProperty Name="ModeID" ColumnName="ModeID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -320,7 +320,6 @@
       <PropertyRef Name="ModeID" />
     </Key>
     <Property Name="ModeID" Type="Int32" Nullable="false" />
-    <Property Name="AllWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
