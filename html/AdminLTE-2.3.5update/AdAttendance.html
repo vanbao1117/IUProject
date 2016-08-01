@@ -378,71 +378,141 @@
     <!-- Main content -->
     <section class="content">
       <div class="col-md-12">
-          <div class="box">
-            <div class="box-header">
-					<div class="box-header" style="float: left; width: 100px;">
-					<h3 class="box-title">Semester <select name="semester">
-							<option value="sp2016">Spring 2016</option>
-							<option value="sm2016">Summer 2016</option>
-							<option value="f2016">Fall 2016</option>
-						</select></h3>
-					</div>
-					<div class="box-header" style="float: left; width: 100px;">
-					<h3 class="box-title">Subject <select name="lecturer">
+           <div class="box" style="overflow: scroll">
+            <div class="box-header" style="float: left; width: 100px;" >
+              <h3 class="box-title">Subject <select name="subject">
 							<option value="java">Java</option>
 							<option value="cnet">C# .NET</option>
 							<option value="vov">VOV</option>
 						</select></h3>
+            </div>
+			<div  class="box-header" style="float: left; width: 100px;">
+					<h3 class="box-title">Class <select name="class">
+							<option value="sp2016">SE0908</option>
+							<option value="sm2016">SE0902</option>
+							<option value="fl2106">SE0911</option>
+						</select></h3>
 					</div>
+					<div  class="box-header" style="float: left; width: 100px;">
+					<h3 class="box-title">Lecturer <select name="class">
+							<option value="sp2016">Allen</option>
+							<option value="sm2016">LAvi</option>
+							<option value="fl2106">Cross</option>
+						</select></h3>
+					</div>
+					 <div class="box-header">
+			  <h3 class="box-title" style="float: right">Spring 2016 (binding Semester)</h3>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tbody><tr>
-                  <th>Class</th>
-                  <th>Lecturer</th>
-                  <th>Room</th>
-				  <th>Days</th>
-				  <th>Slot</th>  
-                  <th>Preview</th>
-
-                </tr>
-                <tr>
-                  <td>JS183</td>
-                  <td>John Doe</td>
-                  <td>313</td>
-				  <td><input type="date" /></td>
-				  <td>1</td>
-                  <td><i class="fa fa-pencil"></td>
-                </tr>
-                <tr>
-                  <td>Ba219</td>
-                  <td>Alexander Pierce</td>
-				  <td>312</td>
-				  <td><input type="date" /></td>
-				  <td>2</td>
-                  <td><i class="fa fa-pencil"></td>
-                </tr>
-                <tr>
-                  <td>Fin657</td>
-                  <td>Bob Doe</td>
-                  <td>202</td>
-				  <td><input type="date" /></td>
-				  <td>2</td>
-                  <td><i class="fa fa-pencil"></td>
-                </tr>
-                <tr>
-                  <td>IA175</td>
-                  <td>Mike Doe</td>
-                  <td>201</td>
-				  <td><input type="date" /></td>
-				  <td>3</td>
-                  <td><i class="fa fa-pencil"></td>
-                </tr>
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          </div>
+			<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row">
+					<th rowspan="2" >No</th>
+					<th rowspan="2" >StudentID</th>
+					<th  >11/3</th>
+					<th class="sorting"  >11/3</th>
+					<th class="sorting" >13/3</th>
+					<th class="sorting" >13/3</th>
+					<th class="sorting" >18/3</th>
+					<th class="sorting" >18/3</th>
+					<th class="sorting" >20/3</th>
+					<th class="sorting" >20/3</th>
+					<th class="sorting" >27/3</th>
+					<th class="sorting" >4/4</th>
+					<th class="sorting" >11/4</th>
+					<th class="sorting" >18/4</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >11/5</th>
+				</tr>
+				<tr role="row">
+					<th >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+				</tr>
+                </thead>
+                <tbody>
+             
+                <tr role="row" class="odd">
+                  <td>1</td>
+                  <td>baonvse03195</td>
+                  <td style="width:150px;white-space:nowrap;">p</td>
+                  <td>a</td>
+                  <td>p</td>
+				  <td>p</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+                </tr></tbody>
+				
+              </table>
+			</div>
+			
+			
             <!-- /.box-body -->
           </div>
           <!-- /. box -->

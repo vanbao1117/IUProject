@@ -36,6 +36,14 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  	  <style>
+	  thead > tr > th {
+	      vertical-align: middle !important;
+		  text-align: center !important;
+	  }
+	  </style>
+	  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -306,10 +314,6 @@
           </a>
         </li>
 
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -378,37 +382,22 @@
 	  
 					</tr>
 				</tbody>
-              </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+              </table></div></div></div>
+			  <button  style="float: right; width: 100px; margin-left: 10px" type="button" class="btn btn-block btn-warning" >Back</button>
             <button  style="float: right; width: 100px; margin-top: 0px" type="button" class="btn btn-block btn-success" >Save</button>
+			
 			</div>
             <!-- /.box-body -->
 			
           </div>
 		  <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Show student's detail like image(Fix position)</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-             
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-         
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
 	  
 	  </div>
 			  </div>
 			  
 
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
+              <div class="tab-pane" id="timeline" style="overflow: scroll">
 			 <div class="box">
             <div class="box-header" style="float: left; width: 100px;">
               <h3 class="box-title">Subject <select name="subject">
@@ -430,39 +419,72 @@
 			</div>
 				<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
-                <tr role="row"><th span="1" style="width: 1px;">No</th>
-				<th  style="width: 1px;" >StudentID</th>
-				<th  style="width: 1px;" >11/3-1</th>
-				<th class="sorting"  >11/3-2</th>
-				<th class="sorting" >13/3-1</th>
-				<th class="sorting" >13/3-2</th>
-				<th class="sorting" >18/3-1</th>
-				<th class="sorting" >18/3-2</th>
-				<th class="sorting" >20/3-1</th>
-				<th class="sorting" >20/3-2</th>
-				<th class="sorting" >27/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >12/3-1</th>
-				<th class="sorting" >11/5-1</th>
-				
+                <tr role="row">
+					<th rowspan="2" >No</th>
+					<th rowspan="2" >StudentID</th>
+					<th  >11/3</th>
+					<th class="sorting"  >11/3</th>
+					<th class="sorting" >13/3</th>
+					<th class="sorting" >13/3</th>
+					<th class="sorting" >18/3</th>
+					<th class="sorting" >18/3</th>
+					<th class="sorting" >20/3</th>
+					<th class="sorting" >20/3</th>
+					<th class="sorting" >27/3</th>
+					<th class="sorting" >4/4</th>
+					<th class="sorting" >11/4</th>
+					<th class="sorting" >18/4</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >12/3</th>
+					<th class="sorting" >11/5</th>
+				</tr>
+				<tr role="row">
+					<th >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >2</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+					<th class="sorting" >1</th>
+				</tr>
                 </thead>
                 <tbody>
              
@@ -473,6 +495,32 @@
                   <td>a</td>
                   <td>p</td>
 				  <td>p</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
+				  <td>-</td>
                 </tr></tbody>
 				
               </table>
@@ -485,6 +533,7 @@
 
       </div>
 	  </div>
+
     </section>
     <!-- /.content -->
   </div>
