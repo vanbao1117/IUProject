@@ -196,11 +196,11 @@
     <Content Include="AngularApp\1.2.6\angular-route.min.js" />
     <Content Include="AngularApp\1.2.6\angular.min.js" />
     <Content Include="AngularApp\1.2.6\ng-infinite-scroll.js" />
+    <Content Include="AngularApp\myapp\controllers\EditAttendanceController.js" />
     <Content Include="AngularApp\myapp\controllers\BisController.js" />
     <Content Include="AngularApp\myapp\controllers\FeedbackController.js" />
     <Content Include="AngularApp\myapp\controllers\CategoryController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminHomeController.js" />
-    <Content Include="AngularApp\myapp\controllers\LecturerController.js" />
     <Content Include="AngularApp\myapp\controllers\LecturerHomeController.js" />
     <Content Include="AngularApp\myapp\controllers\ScheduleController.js" />
     <Content Include="AngularApp\myapp\controllers\NavAttendanceController.js" />
@@ -1184,6 +1184,7 @@
     <Content Include="Views\FeedBack\_FeedBack.cshtml" />
     <Content Include="Views\Bis\_Bis.cshtml" />
     <Content Include="Views\Lecturer\_LecturerHome.cshtml" />
+    <Content Include="Views\Lecturer\_TakeAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

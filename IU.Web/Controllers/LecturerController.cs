@@ -43,7 +43,87 @@ namespace IU.Web.Controllers
 
         }
 
-        
 
+        // GET api/Lecturer/GetAttendanceTwoDaysBefore
+        /// <summary>
+        /// Get attendances
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserAttendanceViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAttendanceTwoDaysBefore()
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var attendances = await _LecturerService.GetAttendancesSync(userName, 0);
+                    return Ok(attendances);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+
+        // GET api/Lecturer/GetAttendanceToDay
+        /// <summary>
+        /// Get attendances
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserAttendanceViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAttendanceToDay()
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var attendances = await _LecturerService.GetAttendancesSync(userName, 1);
+                    return Ok(attendances);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Lecturer/GetAttendancesNext
+        /// <summary>
+        /// Get attendances
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserAttendanceViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAttendancesNext()
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var attendances = await _LecturerService.GetAttendancesSync(userName, 2);
+                    return Ok(attendances);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
     }
 }

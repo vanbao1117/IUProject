@@ -37,3 +37,4 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.xml
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.pdb
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Domain\obj\Debug\IU.Domain.csprojResolveAssemblyReference.cache

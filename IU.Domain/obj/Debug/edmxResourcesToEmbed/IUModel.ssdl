@@ -92,10 +92,11 @@
     <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Attendancer" Type="varchar(max)" Nullable="false" />
+    <Property Name="Attendancer" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateAttendance" Type="datetime" Nullable="false" />
     <Property Name="Attendance" Type="bit" Nullable="false" />
     <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ClassScheduleTBLs">
     <Key>

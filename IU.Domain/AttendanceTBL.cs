@@ -24,6 +24,7 @@ namespace IU.Domain
         public System.DateTime DateAttendance { get; set; }
         public bool Attendance { get; set; }
         public string RoomID { get; set; }
+        public string Note { get; set; }
     
         public virtual ClassTBL ClassTBL { get; set; }
         public virtual SemesterTBL SemesterTBL { get; set; }

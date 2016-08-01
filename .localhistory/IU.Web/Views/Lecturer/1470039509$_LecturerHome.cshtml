@@ -1,0 +1,120 @@
+﻿<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">2 days before</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                    <tbody>
+
+                                        <tr role="row" class="odd" ng-repeat="item in attendances">
+                                            <td class="sorting_1">{{item.subjectName}}</td>
+                                            <td>{{item.className}}</td>
+                                            <td>{{item.roomID}}</td>
+                                            <td>{{item.slotTime}}</td>
+                                            <td>{{item.note}}</td>
+                                            <td><a href="return false;" ng-click="editAttendance(item)">Edit</a></td>
+                                        </tr>
+                                        @*<tr role="row" class="even">
+                                            <td class="sorting_1">JSP</td>
+                                            <td>SE801</td>
+                                            <td>208</td>
+                                            <td>4</td>
+                                            <td>Take Attendance</td>
+                                            <td>Edit</td>
+                                        </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h3 class="box-title">Today</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                    <tbody>
+
+                                        <tr role="row" class="odd" ng-repeat="item in attendancesToday">
+                                            <td class="sorting_1">{{item.subjectName}}</td>
+                                            <td>{{item.className}}</td>
+                                            <td>{{item.roomID}}</td>
+                                            <td>{{item.slotTime}}</td>
+                                            <td>{{item.note}}</td>
+                                            <td><a href="/#/lecture/attendance/{{item.attendanceID}}" >Edit</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">2 days next</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+                                    <tbody>
+
+                                        <tr role="row" class="odd" ng-repeat="item in attendancesNext">
+                                            <td class="sorting_1">{{item.subjectName}}</td>
+                                            <td>{{item.className}}</td>
+                                            <td>{{item.roomID}}</td>
+                                            <td>{{item.slotTime}}</td>
+                                            <td>{{item.note}}</td>
+                                            <td><a href="/#/lecture/attendance/take">Edit</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+</section>

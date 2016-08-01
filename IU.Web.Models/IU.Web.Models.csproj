@@ -54,6 +54,7 @@
     <Compile Include="ClassScheduleViewModel.cs" />
     <Compile Include="UserSemesterViewModel.cs" />
     <Compile Include="LecturerSubjectViewModel.cs" />
+    <Compile Include="UserAttendanceViewModel.cs" />
     <Compile Include="UserSubjectViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

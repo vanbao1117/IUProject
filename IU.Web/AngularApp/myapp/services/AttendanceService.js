@@ -14,14 +14,36 @@ IUApp.factory('AttendanceService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
-        getAttendance: function (page, semesterCode, subjectCode) {
+        getAttendanceTwoDaysBefore: function () {
             var def = $q.defer();
-            $http.get("api/StuAttendance/GetAttendanceByStudent?pageNumber=" + page + "&pageSize=20" + "&semesterCode=" + semesterCode + "&subjectCode=" + subjectCode)
+            $http.get("api/Lecturer/GetAttendanceTwoDaysBefore")
                 .success(function (attendance) {
                     def.resolve(attendance);
                 })
                 .error(function () {
-                    def.reject("Failed to get attendance");
+                    def.reject("Failed to get getAttendanceTwoDaysBefore");
+                });
+            return def.promise;
+        },
+        getAttendanceToDay: function () {
+            var def = $q.defer();
+            $http.get("api/Lecturer/GetAttendanceToDay")
+                .success(function (attendance) {
+                    def.resolve(attendance);
+                })
+                .error(function () {
+                    def.reject("Failed to get getAttendanceToDay");
+                });
+            return def.promise;
+        },
+        getAttendancesNext: function () {
+            var def = $q.defer();
+            $http.get("api/Lecturer/GetAttendancesNext")
+                .success(function (attendance) {
+                    def.resolve(attendance);
+                })
+                .error(function () {
+                    def.reject("Failed to get getAttendancesNext");
                 });
             return def.promise;
         }

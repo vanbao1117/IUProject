@@ -97,10 +97,11 @@
           <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SlotID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Attendancer" Type="varchar(max)" Nullable="false" />
+          <Property Name="Attendancer" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateAttendance" Type="datetime" Nullable="false" />
           <Property Name="Attendance" Type="bit" Nullable="false" />
           <Property Name="RoomID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ClassScheduleTBLs">
           <Key>
@@ -1004,7 +1005,7 @@
           <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SubjectID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SlotID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Attendancer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Attendancer" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DateAttendance" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Attendance" Type="Boolean" Nullable="false" />
           <Property Name="RoomID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -1012,6 +1013,7 @@
           <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="AttendanceTBL" ToRole="SemesterTBL" />
           <NavigationProperty Name="SlotTBL" Relationship="IUModel.FK_AttendanceTBLs_SlotTBLs" FromRole="AttendanceTBL" ToRole="SlotTBL" />
           <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="AttendanceTBL" ToRole="SubjectTBL" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ClassScheduleTBL">
           <Key>
@@ -1627,6 +1629,7 @@
           <EntitySetMapping Name="AttendanceTBLs">
             <EntityTypeMapping TypeName="IUModel.AttendanceTBL">
               <MappingFragment StoreEntitySet="AttendanceTBLs">
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
                 <ScalarProperty Name="Attendance" ColumnName="Attendance" />
                 <ScalarProperty Name="DateAttendance" ColumnName="DateAttendance" />

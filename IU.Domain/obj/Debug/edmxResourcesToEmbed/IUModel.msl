@@ -83,6 +83,7 @@
     <EntitySetMapping Name="AttendanceTBLs">
       <EntityTypeMapping TypeName="IUModel.AttendanceTBL">
         <MappingFragment StoreEntitySet="AttendanceTBLs">
+          <ScalarProperty Name="Note" ColumnName="Note" />
           <ScalarProperty Name="RoomID" ColumnName="RoomID" />
           <ScalarProperty Name="Attendance" ColumnName="Attendance" />
           <ScalarProperty Name="DateAttendance" ColumnName="DateAttendance" />

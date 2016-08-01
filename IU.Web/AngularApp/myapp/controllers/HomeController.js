@@ -3,13 +3,15 @@
 IUApp.controller('HomeController', ['$scope', '$http', '$location', '$route', '$templateCache', '$timeout', 'SubjectService', 'ScheduleServices',
     'AttendanceService',
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices, AttendanceService) {
-        $scope.Subjects = [];
-        $scope.semesters = [];
-        $scope.userInfo = {};
 
-        $scope.activeScheduleItems = [];
-        $scope.activeAttendanceItems = [];
-        $scope.feedbackActiveMenu = false;
+    $scope.Subjects = [];
+    $scope.semesters = [];
+    $scope.userInfo = {};
+
+    $scope.activeScheduleItems = [];
+    $scope.activeAttendanceItems = [];
+    $scope.feedbackActiveMenu = false;
+    
     
 
     $scope.gotoMenu = function (url, header) {

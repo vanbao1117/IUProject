@@ -13,6 +13,23 @@ namespace IU.Services
     public class Helper
     {
 
+        public static DateTime[] GetTwoDaysBefore()
+        {
+            var dt = DateTime.Now;
+            var twoDaysBefore = dt.AddDays(-2);
+            List<DateTime> ls = new List<DateTime>();
+            ls.Add(dt.AddDays(-1));
+            ls.Add(dt.AddDays(-2));
+            return ls.ToArray();
+        }
+
+        public static DateTime GetTwoDaysNext()
+        {
+            var dt = DateTime.Now;
+            var twoDaysNext = dt.AddDays(2);
+            return twoDaysNext;
+        }
+
         /// <summary>
         /// Pages the specified query.
         /// </summary>

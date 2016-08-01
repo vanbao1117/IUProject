@@ -1,11 +1,9 @@
 ﻿//'use strict';
 
-IUApp.controller('LecturerController', ['$scope', '$http', '$location', '$route', '$templateCache', '$timeout', 'SubjectService', 'ScheduleServices',
+IUApp.controller('TakeAttendanceController', ['$scope', '$http', '$location', '$route', '$templateCache', '$timeout', 'SubjectService', 'ScheduleServices',
     'AttendanceService', 'SubjectService',
     function ($scope, $http, $location, $route, $templateCache, $timeout, SubjectService, ScheduleServices, AttendanceService, SubjectService) {
        
-    
-    
 
     $scope.setPageHeader = function (header) {
         $('.content-header').html('<h1>' + header + '</h1><ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">' + header + '</li></ol>');
@@ -18,8 +16,13 @@ IUApp.controller('LecturerController', ['$scope', '$http', '$location', '$route'
      (function init() {
          $timeout(function () {
              $scope.setPageHeader('Attendance');
-             
-             console.log('LecturerController initial with timeout fired');
+             $templateCache.removeAll();
+             $scope.getSubject();
+             $scope.getAttendanceTwoDaysBefore();
+             $scope.getAttendanceToDay();
+             $scope.getAttendancesNext();
+             $location.path("/lecture/attendance");
+             console.log('LecturerHomeController initial with timeout fired');
          }, 500);
      })();
 }]);
