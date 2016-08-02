@@ -23,5 +23,6 @@ namespace IU.Domain
         public string StudentListID { get; set; }
         public System.DateTime DateStudy { get; set; }
         public string ModeID { get; set; }
+        public Nullable<bool> IsAttendance { get; set; }
     }
 }

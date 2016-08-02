@@ -9,8 +9,36 @@ IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$
 
         $scope.attendance = JSON.parse($window.localStorage.getItem('attendance'));
 
+
+
     $scope.setPageHeader = function (header) {
         $('.content-header').html('<h1>' + header + '</h1><ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">' + header + '</li></ol>');
+    };
+
+
+
+    $scope.getAttendance = function (item) {
+        AttendanceService.getAttendances(item).then(
+             function (attendances) {
+                 $scope.listAttendances = attendances;
+                 console.log('getAttendances: ', $scope.listAttendances);
+             },
+             function (error) {
+                 console.log('getAttendances error: ' + error);
+             });
+    };
+
+    $scope.saveAttendance = function () {
+        console.log('takeAttendances: ', $scope.listAttendances);
+        AttendanceService.takeAttendances($scope.listAttendances).then(
+             function (attendances) {
+                
+                 console.log('takeAttendances ok');
+                 $scope.getAttendance($scope.attendance.item);
+             },
+             function (error) {
+                 console.log('getAttendances error: ' + error);
+             });
     };
 
     $scope.range = function (n) {
@@ -22,6 +50,7 @@ IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$
              $scope.setPageHeader('Edit Attendance');
              if ($scope.attendance.key == $scope.key) {
                  console.log('$scope.attendance:', $scope.attendance);
+                 $scope.getAttendance($scope.attendance.item);
              }
              console.log('EditAttendanceController initial with timeout fired');
          }, 500);

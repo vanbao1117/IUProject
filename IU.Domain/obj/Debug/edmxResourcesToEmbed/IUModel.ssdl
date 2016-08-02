@@ -72,7 +72,7 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="AspTransports">
     <Key>
@@ -111,6 +111,7 @@
     <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateStudy" Type="datetime" Nullable="false" />
     <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsAttendance" Type="bit" />
   </EntityType>
   <EntityType Name="ClassTBLs">
     <Key>

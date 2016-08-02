@@ -100,6 +100,7 @@
     <EntitySetMapping Name="ClassScheduleTBLs">
       <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
         <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+          <ScalarProperty Name="IsAttendance" ColumnName="IsAttendance" />
           <ScalarProperty Name="ModeID" ColumnName="ModeID" />
           <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
           <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />

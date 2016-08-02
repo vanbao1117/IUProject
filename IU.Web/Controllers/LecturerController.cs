@@ -59,6 +59,7 @@ namespace IU.Web.Controllers
                 using (LecturerService _LecturerService = new LecturerService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
+                    
                     var attendances = await _LecturerService.GetAttendancesSync(userName, 0);
                     return Ok(attendances);
 
@@ -125,5 +126,64 @@ namespace IU.Web.Controllers
             }
 
         }
+
+        // GET api/Lecturer/GetTakeAttendances
+        /// <summary>
+        /// GetTakeAttendances
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserAttendanceViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> GetTakeAttendances(UserAttendanceViewModel model)
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var dateAttendance = model.DateStudy;
+                    if (model.isAttendanced) dateAttendance = model.DateAttendance;
+                    var attendances = await _LecturerService.GetTakeAttendancesSync(model.SubjectID, model.SemesterID, model.ClassID, dateAttendance, model.isAttendanced);
+                    return Ok(attendances);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // Post api/Lecturer/TakeAttendances
+        /// <summary>
+        /// GetTakeAttendances
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserAttendanceViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> TakeAttendances(List<UserAttendanceViewModel> models)
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+
+                    bool x = await _LecturerService.TakeAttendancesSync(models, userName);
+
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
     }
 }

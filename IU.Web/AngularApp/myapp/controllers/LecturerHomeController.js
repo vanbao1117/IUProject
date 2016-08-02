@@ -6,6 +6,15 @@ IUApp.controller('LecturerHomeController', ['$scope', '$http', '$location', '$ro
        
     $scope.abbreSubjectName = $routeParams.abbreSubjectName;
 
+    $scope.showTabs = function (show, hide) {
+        $('#' + show).css('display', 'block');
+        $('#' + hide).css('display', 'none');
+    };
+
+    $scope.back = function () {
+        $window.history.back();
+    };
+
     $scope.attendance = { key: '', item: '' };
 
     $scope.editAttendance = function (_item) {

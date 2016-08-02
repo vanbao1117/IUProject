@@ -77,7 +77,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AspTransports">
           <Key>
@@ -116,6 +116,7 @@
           <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateStudy" Type="datetime" Nullable="false" />
           <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsAttendance" Type="bit" />
         </EntityType>
         <EntityType Name="ClassTBLs">
           <Key>
@@ -982,7 +983,7 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="IUModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="IUModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="IUModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
@@ -1009,11 +1010,11 @@
           <Property Name="DateAttendance" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Attendance" Type="Boolean" Nullable="false" />
           <Property Name="RoomID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClassTBL" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="AttendanceTBL" ToRole="ClassTBL" />
           <NavigationProperty Name="SemesterTBL" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="AttendanceTBL" ToRole="SemesterTBL" />
           <NavigationProperty Name="SlotTBL" Relationship="IUModel.FK_AttendanceTBLs_SlotTBLs" FromRole="AttendanceTBL" ToRole="SlotTBL" />
           <NavigationProperty Name="SubjectTBL" Relationship="IUModel.FK_AttendanceTBLs_SubjectTBLs" FromRole="AttendanceTBL" ToRole="SubjectTBL" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ClassScheduleTBL">
           <Key>
@@ -1028,6 +1029,7 @@
           <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DateStudy" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsAttendance" Type="Boolean" />
         </EntityType>
         <EntityType Name="ClassTBL">
           <Key>
@@ -1646,6 +1648,7 @@
           <EntitySetMapping Name="ClassScheduleTBLs">
             <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
               <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+                <ScalarProperty Name="IsAttendance" ColumnName="IsAttendance" />
                 <ScalarProperty Name="ModeID" ColumnName="ModeID" />
                 <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
                 <ScalarProperty Name="StudentListID" ColumnName="StudentListID" />

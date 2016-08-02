@@ -1,20 +1,13 @@
 ﻿//'use strict';
 var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider, $locationProvider) {
     //check browser support
-    //if (window.history && window.history.pushState) {
-        //$locationProvider.html5Mode(true); will cause an error $location in HTML5 mode requires a  tag to be present! Unless you set baseUrl tag after head tag like so: <head> <base href="/">
-
-        // to know more about setting base URL visit: https://docs.angularjs.org/error/$location/nobase
-
-        // if you don't wish to set base URL then use this
-
-        // check if browser supports history API
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false,
-        //    hashPrefix: '!'
-        //});
-    //}
+    if (window.history && window.history.pushState) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false,
+            hashPrefix: '!'
+        });
+    }
 
     $locationProvider.html5Mode(false);
 

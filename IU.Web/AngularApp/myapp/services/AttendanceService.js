@@ -46,6 +46,28 @@ IUApp.factory('AttendanceService', ['$http', '$q', function ($http, $q) {
                     def.reject("Failed to get getAttendancesNext");
                 });
             return def.promise;
+        },
+        getAttendances: function (item) {
+            var def = $q.defer();
+            $http.post("api/Lecturer/GetTakeAttendances", item)
+                .success(function (attendance) {
+                    def.resolve(attendance);
+                })
+                .error(function () {
+                    def.reject("Failed to get GetTakeAttendances");
+                });
+            return def.promise;
+        },
+        takeAttendances: function (item) {
+            var def = $q.defer();
+            $http.post("api/Lecturer/TakeAttendances", item)
+                .success(function (attendance) {
+                    def.resolve(attendance);
+                })
+                .error(function () {
+                    def.reject("Failed to get takeAttendances");
+                });
+            return def.promise;
         }
     };
 }]);

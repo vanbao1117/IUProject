@@ -15,6 +15,7 @@ namespace IU.Web.Models
         public string StudentListID { get; set; }
         public string SubjectID { get; set; }
         public string SubjectName { get; set; }
+        public string SubjectCode { get; set; }
         public string SlotID { get; set; }
         public string SlotTime { get; set; }
         public string Attendancer { get; set; }
@@ -23,5 +24,12 @@ namespace IU.Web.Models
         public bool Attendance { get; set; }
         public string RoomID { get; set; }
         public string Note { get; set; }
+        public string Avata { get; set; }
+        public string StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string UserID { get; set; }
+        public bool isAttendanced { get; set; }
+        public bool Present { get; set; }
+        public System.DateTime DateStudy { get; set; }
     }
 }
