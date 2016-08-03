@@ -85,6 +85,7 @@ namespace IU.Web.Controllers
         {
             try
             {
+                
                 using (LecturerService _LecturerService = new LecturerService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
@@ -144,7 +145,7 @@ namespace IU.Web.Controllers
                     string userName = HttpContext.Current.User.Identity.Name;
                     var dateAttendance = model.DateStudy;
                     if (model.isAttendanced) dateAttendance = model.DateAttendance;
-                    var attendances = await _LecturerService.GetTakeAttendancesSync(model.SubjectID, model.SemesterID, model.ClassID, dateAttendance, model.isAttendanced);
+                    var attendances = await _LecturerService.GetTakeAttendancesSync(model.SubjectID, model.SemesterID, model.ClassID, dateAttendance, model.isAttendanced, model.SlotID);
                     return Ok(attendances);
 
                 }

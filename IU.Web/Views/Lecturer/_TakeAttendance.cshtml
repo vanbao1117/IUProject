@@ -1,4 +1,14 @@
 ﻿<section class="content">
+    <style>
+        th,td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .mygrid-wrapper-div {
+            overflow: scroll;
+            height: 70%;
+        }
+    </style>
     <div class="row">
         <!-- /.col -->
         <div class="col-md-12">
@@ -38,9 +48,9 @@
                                                         <td>{{item.studentName}}</td>
                                                         <td style="width:100px;">{{item.subjectCode}}</td>
                                                         <td style="width:100px;"><img width="100" height="100" src="Content/dist/img/avatar5.png" alt="User Image"></td>
-                                                        <td style="width:100px;"><input type="radio" name="attendance"  ng-model="item.present" ng-value="true"> Present</td>
-                                                        <td style="width:100px;"><input type="radio" name="attendance" ng-model="item.present" ng-value="false"> Absent</td>
-                                                        <td> <input type="text" name="note" style="width:100%;" ng-model="item.note"></td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance-{{item.studentID}}-{{item.slotID}}" ng-model="item.present" ng-value="true"> Present</td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance-{{item.studentID}}-{{item.slotID}}" ng-model="item.present" ng-value="false"> Absent</td>
+                                                        <td> <input type="text" name="note" style="width:100%;" ng-model="item.note" value="{{item.note}}"></td>
 
                                                     </tr>
                                                     @*<tr role="row">
@@ -69,80 +79,118 @@
 
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
+
                         <div class="box">
-                            <div class="box-header" style="float: left; width: 100px;">
+                            <div  style="float: left; width: 100px;">
                                 <h3 class="box-title">
-                                    Subject <select name="subject">
-                                        <option value="java">Java</option>
-                                        <option value="cnet">C# .NET</option>
-                                        <option value="vov">VOV</option>
-                                    </select>
+                                    Subject 
                                 </h3>
+                                <select name="subject">
+                                    <option value="java">Java</option>
+                                    <option value="cnet">C# .NET</option>
+                                    <option value="vov">VOV</option>
+                                </select>
                             </div>
-                            <div class="box-header" style="float: left; width: 100px;">
+                            <div  style="float: left; width: 100px;">
                                 <h3 class="box-title">
-                                    Class <select name="class">
-                                        <option value="sp2016">SE0908</option>
-                                        <option value="sm2016">SE0902</option>
-                                        <option value="fl2106">SE0911</option>
-                                    </select>
+                                    Class 
                                 </h3>
+                                <select name="class">
+                                    <option value="sp2016">SE0908</option>
+                                    <option value="sm2016">SE0902</option>
+                                    <option value="fl2106">SE0911</option>
+                                </select>
                             </div>
-                            <div class="box-header">
+                            <div class="box-title" style="float:right">
                                 <h3 class="box-title" style="float: right">Spring 2016 (binding Semester)</h3>
                             </div>
                         </div>
-                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                            <thead>
-                                <tr role="row">
-                                    <th span="1" style="width: 1px;">No</th>
-                                    <th style="width: 1px;">StudentID</th>
-                                    <th style="width: 1px;">11/3-1</th>
-                                    <th class="sorting">11/3-2</th>
-                                    <th class="sorting">13/3-1</th>
-                                    <th class="sorting">13/3-2</th>
-                                    <th class="sorting">18/3-1</th>
-                                    <th class="sorting">18/3-2</th>
-                                    <th class="sorting">20/3-1</th>
-                                    <th class="sorting">20/3-2</th>
-                                    <th class="sorting">27/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">12/3-1</th>
-                                    <th class="sorting">11/5-1</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="box mygrid-wrapper-div">
+                            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">No</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">StudentID</th>
+                                        <th class="sorting">11/3</th>
+                                        <th class="sorting">11/3</th>
+                                        <th class="sorting">13/3</th>
+                                        <th class="sorting">13/3</th>
+                                        <th class="sorting">18/3</th>
+                                        <th class="sorting">18/3</th>
+                                        <th class="sorting">20/3</th>
+                                        <th class="sorting">20/3</th>
+                                        <th class="sorting">27/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">12/3</th>
+                                        <th class="sorting">11/5</th>
+                                    </tr>
+                                    <tr role="row">
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">2</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">2</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">2</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">2</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
+                                        <th class="sorting">1</th>
 
-                                <tr role="row" class="odd">
-                                    <td>1</td>
-                                    <td>baonvse03195</td>
-                                    <td style="width:150px;white-space:nowrap;">p</td>
-                                    <td>a</td>
-                                    <td>p</td>
-                                    <td>p</td>
-                                </tr>
-                            </tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </table>
+                                    <tr role="row" class="odd">
+                                        <td>1</td>
+                                        <td>baonvse03195</td>
+                                        <td style="width:150px;white-space:nowrap;">p</td>
+                                        <td>a</td>
+                                        <td>p</td>
+                                        <td>p</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
 
                     <!-- /.tab-content -->

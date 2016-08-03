@@ -24,6 +24,26 @@ namespace IU.Services
             ClassScheduleTBLRepository = new Repository<ClassScheduleTBL>();
         }
 
+
+        public async Task<List<LectureSubjectAndClassViewModel>> GetLectureSubjectAndClassSync(string userName)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetLectureSubjectAndClass(userName));
+            }
+        }
+
+        private List<LectureSubjectAndClassViewModel> GetLectureSubjectAndClass(string userName)
+        {
+            using (var context = new IUContext())
+            {
+                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
+                //context.AttendanceTBLs
+
+                return new List<LectureSubjectAndClassViewModel>();
+            }
+        }
+
         public async Task<bool> TakeAttendancesSync(List<UserAttendanceViewModel> models, string userName)
         {
             using (var context = new IUContext())
@@ -40,16 +60,21 @@ namespace IU.Services
                 if(model.isAttendanced){
                     var attendance = AttendanceTBLRepository.FindOneBy(a => a.AttendanceID == model.AttendanceID);
                     attendance.Note = model.Note;
-                    attendance.DateAttendance = DateTime.Now;
+                    attendance.DateAttendance = model.DateStudy;
                     attendance.Attendance = model.Present;
-                    AttendanceTBLRepository.SaveAsync(attendance);
+                    AttendanceTBLRepository.UpdateAsync(attendance);
                 }
                 else
                 {
-                    AttendanceTBLRepository.SaveAsync(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id, ClassID = model.ClassID, DateAttendance = DateTime.Now, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
+                    AttendanceTBLRepository.SaveAsync(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id, ClassID = model.ClassID, DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
+
                     var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID == model.SubjectID && c.StudentListID == model.StudentListID && c.DateStudy == model.DateStudy);
-                    classTbl.IsAttendance = true;
-                    ClassScheduleTBLRepository.Update(classTbl);
+                    if (classTbl != null)
+                    {
+                        classTbl.IsAttendance = true;
+                        ClassScheduleTBLRepository.Update(classTbl);
+                    }
+                    
                 }
 
                 
@@ -60,16 +85,16 @@ namespace IU.Services
         }
 
 
-        public async Task<List<UserAttendanceViewModel>> GetTakeAttendancesSync(string subjectID, string semesterID, string classID, DateTime dateStudy, bool isAttendanced)
+        public async Task<List<UserAttendanceViewModel>> GetTakeAttendancesSync(string subjectID, string semesterID, string classID, DateTime dateStudy, bool isAttendanced, string slotID)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetTakeAttendances(subjectID, semesterID, classID, dateStudy, isAttendanced));
+                return await Task.Run(() => GetTakeAttendances(subjectID, semesterID, classID, dateStudy, isAttendanced, slotID));
             }
         }
 
 
-        private List<UserAttendanceViewModel> GetTakeAttendances(string subjectID, string semesterID, string classID, DateTime dateStudy, bool isAttendanced)
+        private List<UserAttendanceViewModel> GetTakeAttendances(string subjectID, string semesterID, string classID, DateTime dateStudy, bool isAttendanced, string slotID)
         {
             List<UserAttendanceViewModel> lsAttendance = new List<UserAttendanceViewModel>();
             using (var context = new IUContext())
@@ -95,7 +120,8 @@ namespace IU.Services
                               && classScheduleTBLs.DateStudy.Month == dateStudy.Month
                               && classScheduleTBLs.DateStudy.Day == dateStudy.Day
                               && classScheduleTBLs.IsAttendance == false
-                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = classScheduleTBLs.SlotID, RoomID = classScheduleTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = classScheduleTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName });
+                              && classScheduleTBLs.SlotID == slotID
+                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = classScheduleTBLs.SlotID, RoomID = classScheduleTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = classScheduleTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName, DateStudy = classScheduleTBLs.DateStudy, isAttendanced = false });
                             return attendances.ToList();
                 }
                 else
@@ -118,7 +144,8 @@ namespace IU.Services
                        && attendanceTBLs.DateAttendance.Year == dateStudy.Year
                               && attendanceTBLs.DateAttendance.Month == dateStudy.Month
                               && attendanceTBLs.DateAttendance.Day == dateStudy.Day
-                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = attendanceTBLs.SlotID, RoomID = attendanceTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = attendanceTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName, isAttendanced = attendanceTBLs.Attendance, Attendance = attendanceTBLs.Attendance, Present = attendanceTBLs.Attendance });
+                              && attendanceTBLs.SlotID == slotID
+                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = attendanceTBLs.SlotID, RoomID = attendanceTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = attendanceTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName, isAttendanced = true, Attendance = attendanceTBLs.Attendance, Present = attendanceTBLs.Attendance, DateStudy = dateStudy, Note = attendanceTBLs.Note, AttendanceID = attendanceTBLs.AttendanceID, Attendancer = attendanceTBLs.Attendancer, DateAttendance = attendanceTBLs.DateAttendance });
                     return attendances.ToList();
                 }
                

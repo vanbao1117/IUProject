@@ -1,8 +1,8 @@
 ﻿//'use strict';
 
 IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$route', '$templateCache', '$timeout', '$routeParams', '$window', 'SubjectService', 'ScheduleServices',
-    'AttendanceService',
-    function ($scope, $http, $location, $route, $templateCache, $timeout, $routeParams, $window, SubjectService, ScheduleServices, AttendanceService) {
+    'AttendanceService', 'SweetAlert',
+    function ($scope, $http, $location, $route, $templateCache, $timeout, $routeParams, $window, SubjectService, ScheduleServices, AttendanceService, SweetAlert) {
        
         $scope.key = $routeParams.key;
         console.log('$scope.key: ', $scope.key);
@@ -34,6 +34,7 @@ IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$
              function (attendances) {
                 
                  console.log('takeAttendances ok');
+                 SweetAlert.swal("Take Attendances!", "Take Attendances successfuly!", "success");
                  $scope.getAttendance($scope.attendance.item);
              },
              function (error) {
