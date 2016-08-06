@@ -85,24 +85,16 @@
                                 <h3 class="box-title">
                                     Subject 
                                 </h3>
-                                <select name="subject">
-                                    <option value="java">Java</option>
-                                    <option value="cnet">C# .NET</option>
-                                    <option value="vov">VOV</option>
-                                </select>
+                                <select id="lectureSubject" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in classSubjects.lectureSubject track by $index"></select>
                             </div>
                             <div  style="float: left; width: 100px;">
                                 <h3 class="box-title">
                                     Class 
                                 </h3>
-                                <select name="class">
-                                    <option value="sp2016">SE0908</option>
-                                    <option value="sm2016">SE0902</option>
-                                    <option value="fl2106">SE0911</option>
-                                </select>
+                                <select id="lectureClass" ng-init="classSelected = classSubjects.lectureClass[0]" ng-model="classSelected" ng-options="item as item.className for item in classSubjects.lectureClass track by $index"></select>
                             </div>
                             <div class="box-title" style="float:right">
-                                <h3 class="box-title" style="float: right">Spring 2016 (binding Semester)</h3>
+                                <h3 class="box-title" style="float: right">{{lecturerPreviews.currentSemmeter}}</h3>
                             </div>
                         </div>
 
@@ -111,81 +103,22 @@
                                 <thead>
                                     <tr role="row">
                                         <th rowspan="2" style="vertical-align: middle; text-align: center;">No</th>
-                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">StudentID</th>
-                                        <th class="sorting">11/3</th>
-                                        <th class="sorting">11/3</th>
-                                        <th class="sorting">13/3</th>
-                                        <th class="sorting">13/3</th>
-                                        <th class="sorting">18/3</th>
-                                        <th class="sorting">18/3</th>
-                                        <th class="sorting">20/3</th>
-                                        <th class="sorting">20/3</th>
-                                        <th class="sorting">27/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">12/3</th>
-                                        <th class="sorting">11/5</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">Student Name</th>
+                                        <th ng-repeat="item in lecturerPreviews.preview" class="sorting">{{item.day}}</th>
+                                        
                                     </tr>
                                     <tr role="row">
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">2</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">2</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">2</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">2</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
-                                        <th class="sorting">1</th>
+                                        <th class="sorting" ng-repeat="item in lecturerPreviews.preview">{{item.slot}}</th>
+                                        
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr role="row" class="odd">
-                                        <td>1</td>
-                                        <td>baonvse03195</td>
-                                        <td style="width:150px;white-space:nowrap;">p</td>
-                                        <td>a</td>
-                                        <td>p</td>
-                                        <td>p</td>
+                                    <tr role="row" class="odd" ng-repeat="row in lecturerPreviews.data track by $index">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{row.row}}</td>
+                                        <td ng-repeat="col in row.cols">{{col.status}}</td>
                                     </tr>
                                 </tbody>
 

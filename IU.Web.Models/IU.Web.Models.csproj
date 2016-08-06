@@ -48,6 +48,7 @@
     <Compile Include="LecturerViewModel.cs" />
     <Compile Include="RefreshTokenViewModel.cs" />
     <Compile Include="DeviceViewModel.cs" />
+    <Compile Include="PreviewViewModel.cs" />
     <Compile Include="TransViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

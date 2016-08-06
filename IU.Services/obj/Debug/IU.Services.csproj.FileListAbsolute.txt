@@ -54,3 +54,5 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.x
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.pdb
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\NReco.PivotData.dll
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\NReco.PivotData.xml

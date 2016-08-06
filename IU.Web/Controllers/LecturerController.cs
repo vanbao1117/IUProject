@@ -15,6 +15,60 @@ namespace IU.Web.Controllers
     [Authorize]
     public class LecturerController : ApiController
     {
+        // GET api/Lecturer/GetLecturerPreview
+        /// <summary>
+        /// Get GetLecturerPreview
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(PreviewListViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetLecturerPreview(string classID, string subjectID)
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var _Lecturers = await _LecturerService.GetLecturerPreviewSync(userName, classID, subjectID);
+                    return Ok(_Lecturers);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Lecturer/GetLectureClassSubject
+        /// <summary>
+        /// Get GetLectureClassSubject
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(LectureClassSubjectViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetLectureClassSubject()
+        {
+            try
+            {
+                using (LecturerService _LecturerService = new LecturerService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var _Lecturers = await _LecturerService.GetLectureClassSubjectSync(userName);
+                    return Ok(_Lecturers);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
 
         // GET api/Lecturer/GetLecturers
         /// <summary>

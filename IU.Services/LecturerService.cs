@@ -2,9 +2,12 @@
 using IU.Services.Repositories;
 using IU.Services.Utilities;
 using IU.Web.Models;
+using NReco.PivotData;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,25 +27,84 @@ namespace IU.Services
             ClassScheduleTBLRepository = new Repository<ClassScheduleTBL>();
         }
 
-
-        public async Task<List<LectureSubjectAndClassViewModel>> GetLectureSubjectAndClassSync(string userName)
+        public async Task<LectureClassSubjectViewModel> GetLectureClassSubjectSync(string userName)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetLectureSubjectAndClass(userName));
+                return await Task.Run(() => GetLectureClassSubject(userName));
             }
         }
 
-        private List<LectureSubjectAndClassViewModel> GetLectureSubjectAndClass(string userName)
+        private LectureClassSubjectViewModel GetLectureClassSubject(string userName)
         {
             using (var context = new IUContext())
             {
                 var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
-                //context.AttendanceTBLs
+                var lectures = context.LecturerTBLs.Include("SubjectTBLs").Include("LecturerScheduleTBLs").Where(l => l.UserID == user.Id).FirstOrDefault();
 
-                return new List<LectureSubjectAndClassViewModel>();
+                var subjects = lectures.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName, UserId = user.Id }).ToList();
+
+                var classs = lectures.LecturerScheduleTBLs.Where(c => c.SemesterID == GetCurrentSemester().SemesterID).ToList();
+                var lecClass = classs.Select(c => new ClassViewModel() { ClassID = c.ClassID, ClassName = GetClass(c.ClassID).ClassName }).ToList();
+
+
+                LectureClassSubjectViewModel model = new LectureClassSubjectViewModel() { LectureClass = lecClass, LectureSubject = subjects };
+                return model;
             }
         }
+
+        public async Task<PreviewListViewModel> GetLecturerPreviewSync(string userName, string classID, string subjectID)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetLecturerPreview(userName, classID, subjectID));
+            }
+        }
+
+        private PreviewListViewModel GetLecturerPreview(string userName, string classID, string subjectID)
+        {
+            using (var context = new IUContext())
+            {
+                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
+                //var lecture = context.LecturerTBLs.Where(l => l.UserID == user.Id).FirstOrDefault();
+
+                var attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID == subjectID && a.Attendancer == user.Id).ToList();
+
+                var previewViewModels = attandances.Select(a => new PreviewViewModel() { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID).SlotName, Status = (a.Attendance == true ? "P" : "A"), StudentName = GetStudent(a.StudentListID).StudentName }).OrderBy(p => p.Day).ToList();
+
+
+                var rows = previewViewModels
+                    .GroupBy(lab =>
+                            new
+                            {
+                                StudentName = lab.StudentName
+                            }
+                            )
+                    .Select(labtests =>
+                            new
+                            {
+                                StudentName = labtests.Key.StudentName
+                            }
+                );
+
+                PreviewListViewModel model = new PreviewListViewModel() { ClassID = classID, SubjectID = subjectID, Preview = previewViewModels, Data = new List<LecturePreviewViewModel>(), CurrentSemmeter = GetCurrentSemester().SemesterName };
+
+                foreach (var studnt in rows)
+                {
+                    
+                    var _cols = previewViewModels.Where(p => p.StudentName == studnt.StudentName).OrderBy(p=>p.Day).ToList();
+                    LecturePreviewViewModel row = new LecturePreviewViewModel() { Row = studnt.StudentName, Cols = _cols };
+                    
+                    model.Data.Add(row);
+                }
+
+                
+                return model;
+            }
+        }
+
+
+        
 
         public async Task<bool> TakeAttendancesSync(List<UserAttendanceViewModel> models, string userName)
         {
@@ -278,6 +340,13 @@ namespace IU.Services
                 return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotTime;
             }
         }
+        private SlotTBL GetSlot(string SlotID)
+        {
+            using (var context = new IUContext())
+            {
+                return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault();
+            }
+        }
 
         private ClassTBL GetClass(string ClassID)
         {
@@ -419,4 +488,6 @@ namespace IU.Services
 
         #endregion
     }
+
+
 }
