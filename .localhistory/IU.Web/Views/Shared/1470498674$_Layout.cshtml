@@ -85,7 +85,7 @@
                                 <!-- User image -->
                                 <li class="user-header" style="height:auto !important">
                                     @{
-                                        if (Model.AccountType == "LECTURER" || Model.AccountType == "Admin")
+                                        if (Model.AccountType == "LECTURER" || Model.AccountType == "ADMIN")
                                         {
                                             <p>
                                                 @Model.Semester
@@ -149,8 +149,7 @@
                             </li>
                         </ul>
                     </section>
-                }
-                else if (Model.AccountType == "Admin")
+                } else if (Model.AccountType == "ADMIN")
                 {
                     <section class="sidebar">
                         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -166,7 +165,7 @@
 
                                 </ul>
                             </li>
-                            <li class="treeview">
+                            <li class="treeview active">
                                 <a href="/#/lecture/attendance">
                                     <i class="fa fa-book"></i>
                                     <span>Attendance</span>

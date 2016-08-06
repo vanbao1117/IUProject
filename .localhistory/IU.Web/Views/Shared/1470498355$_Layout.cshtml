@@ -46,7 +46,7 @@
     {
         controller = "LecturerHomeController";
     }
-    else if (Model.AccountType == "Admin")
+    else if (Model.AccountType == "ADMIN")
     {
         controller = "AdminHomeController";
     }
@@ -85,7 +85,7 @@
                                 <!-- User image -->
                                 <li class="user-header" style="height:auto !important">
                                     @{
-                                        if (Model.AccountType == "LECTURER" || Model.AccountType == "Admin")
+                                        if (Model.AccountType == "LECTURER" || Model.AccountType == "ADMIN")
                                         {
                                             <p>
                                                 @Model.Semester
@@ -149,24 +149,14 @@
                             </li>
                         </ul>
                     </section>
-                }
-                else if (Model.AccountType == "Admin")
+                } else if (Model.AccountType == "ADMIN")
                 {
                     <section class="sidebar">
                         <!-- sidebar menu: : style can be found in sidebar.less -->
                         <ul class="sidebar-menu">
                             <li class="header">MAIN NAVIGATION</li>
+                    
                             <li class="treeview active">
-                                <a href="/#/lecture/attendance">
-                                    <i class="fa fa-book"></i>
-                                    <span>Class</span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li ng-repeat="item in subjects"><a href="/#/lecture/attendance/{{item.abbreSubjectName}}"><i class="fa fa-circle-o"></i> {{item.subjectName}}</a></li>
-
-                                </ul>
-                            </li>
-                            <li class="treeview">
                                 <a href="/#/lecture/attendance">
                                     <i class="fa fa-book"></i>
                                     <span>Attendance</span>
@@ -180,19 +170,7 @@
                             <li class="treeview feedback">
                                 <a href="/#/lecture/feedback">
                                     <i class="fa fa-comment-o"></i>
-                                    <span>Schedule</span>
-                                </a>
-                            </li>
-                            <li class="treeview feedback">
-                                <a href="/#/lecture/feedback">
-                                    <i class="fa fa-comment-o"></i>
-                                    <span>Create Schedule</span>
-                                </a>
-                            </li>
-                            <li class="treeview feedback">
-                                <a href="/#/lecture/feedback">
-                                    <i class="fa fa-comment-o"></i>
-                                    <span>Create Account</span>
+                                    <span>Feed Back</span>
                                 </a>
                             </li>
                         </ul>

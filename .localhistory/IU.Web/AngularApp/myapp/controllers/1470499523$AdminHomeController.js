@@ -15,8 +15,8 @@ IUApp.controller('AdminHomeController', ['$scope', '$http', '$location', '$route
 
      (function init() {
          $timeout(function () {
-             $location.path('/admin');
-             console.log('AdminHomeController initial with timeout fired');
+            
+             console.log('LecturerHomeController initial with timeout fired');
          }, 500);
      })();
 }]);
