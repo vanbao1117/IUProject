@@ -23,7 +23,7 @@ namespace IU.Domain
         public string SubjectID { get; set; }
         public string LecturerID { get; set; }
         public string OpenClassID { get; set; }
-        public string ModeID { get; set; }
+        public Nullable<int> ModeID { get; set; }
         public Nullable<int> Credit { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }

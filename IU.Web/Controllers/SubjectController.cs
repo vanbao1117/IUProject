@@ -15,6 +15,193 @@ namespace IU.Web.Controllers
     [Authorize]
     public class SubjectController : ApiController
     {
+        // GET api/Subject/GetAllModes
+        /// <summary>
+        /// Get GetAllModes
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<ModeViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllModes()
+        {
+            try
+            {
+                List<ModeViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllModesSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetAllSlots
+        /// <summary>
+        /// Get GetAllSlots
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<SlotViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllSlots()
+        {
+            try
+            {
+                List<SlotViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllSlotsSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetAllRooms
+        /// <summary>
+        /// Get GetAllRooms
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<RoomViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllRooms()
+        {
+            try
+            {
+                List<RoomViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllRoomsSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetAllLecturer
+        /// <summary>
+        /// Get GetAllLecturer
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<LecturerViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllLecturer()
+        {
+            try
+            {
+                List<LecturerViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllLecturerSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetAllClass
+        /// <summary>
+        /// Get GetAllClass
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<ClassViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllClass()
+        {
+            try
+            {
+                List<ClassViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllClassSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetSubjects
+        /// <summary>
+        /// Get GetSubjects
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserSubjectViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetSubjects()
+        {
+            try
+            {
+                List<UserSubjectViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllSubjectsSync();
+                }
+
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Subject/GetAllSemester
+        /// <summary>
+        /// Get GetSubjects
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<UserSemesterViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetAllSemester()
+        {
+            try
+            {
+                List<UserSemesterViewModel> modelArray = null;
+                using (SubjectService _subjectService = new SubjectService())
+                {
+                    modelArray = await _subjectService.GetAllSemesterSync();
+                }
+                return Ok(modelArray);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/Subject/GetSubjectByLecturer
         /// <summary>

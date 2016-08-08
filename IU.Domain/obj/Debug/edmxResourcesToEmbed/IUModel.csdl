@@ -241,7 +241,7 @@
     <Property Name="LecturerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="StudentListID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="DateStudy" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModeID" Type="Int32" />
     <Property Name="IsAttendance" Type="Boolean" />
   </EntityType>
   <EntityType Name="ClassTBL">
@@ -361,7 +361,7 @@
     <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="LecturerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="OpenClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ModeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModeID" Type="Int32" />
     <Property Name="Credit" Type="Int32" />
     <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="StartDate" Type="DateTime" Precision="3" />

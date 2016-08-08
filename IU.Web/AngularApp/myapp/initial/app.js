@@ -12,6 +12,22 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
     $locationProvider.html5Mode(false);
 
     $routeProvider
+        .when('/admin', {//AdminHome
+            templateUrl: '/Home/AdminHome',
+            controller: 'AdminHomeController'
+        })
+        .when('/admin/account', {//AdminHome
+            templateUrl: '/Home/AdminAccount',
+            controller: 'AdminAccountController'
+        })
+        .when('/admin/schedule', {//AdminSchedule
+            templateUrl: '/Home/AdminSchedule',
+            controller: 'AdminScheduleController'
+        })
+        .when('/admin/attendance', {//AdminAttenance
+            templateUrl: '/Home/AdminAttenance',
+            controller: 'AdminAttendanceController'
+        })
         .when('/schedule', {//Dashboard
             templateUrl: '/Home/Dashboard',
             controller: 'DashboardController'

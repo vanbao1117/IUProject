@@ -1,0 +1,136 @@
+﻿<section class="content">
+    <style>
+        th,td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .mygrid-wrapper-div {
+            overflow: scroll;
+            height: 70%;
+        }
+    </style>
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="" ng-click="showTabs('activity', 'timeline')" data-toggle="tab" aria-expanded="true">Take Attendance</a></li>
+                    <li class=""><a href="" ng-click="showTabs('timeline', 'activity')" data-toggle="tab" aria-expanded="false">Preview</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="activity">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Class: {{attendance.item.className}}</h3>
+                            </div>
+                            <div class="box-header">
+                                <h3 class="box-title">Subject: {{attendance.item.subjectName}}</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                    <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th>Student</th>
+                                                        <th>ID</th>
+                                                        <th>Image</th>
+                                                        <th>Present</th>
+                                                        <th>Absent</th>
+                                                        <th>Note</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr role="row" ng-repeat="item in listAttendances">
+                                                        <td>{{item.studentName}}</td>
+                                                        <td style="width:100px;">{{item.subjectCode}}</td>
+                                                        <td style="width:100px;"><img width="100" height="100" src="Content/dist/img/avatar5.png" alt="User Image"></td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance-{{item.studentID}}-{{item.slotID}}" ng-model="item.present" ng-value="true"> Present</td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance-{{item.studentID}}-{{item.slotID}}" ng-model="item.present" ng-value="false"> Absent</td>
+                                                        <td> <input type="text" name="note" style="width:100%;" ng-model="item.note" value="{{item.note}}"></td>
+
+                                                    </tr>
+                                                    @*<tr role="row">
+                                                        <td>Nguyen F</td>
+                                                        <td style="width:100px;">SE3801</td>
+                                                        <td style="width:100px;"><img width="100" height="100" src="Content/dist/img/avatar5.png" alt="User Image"></td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance" value="present"> Present</td>
+                                                        <td style="width:100px;"><input type="radio" name="attendance" value="absent"> Absent</td>
+                                                        <td> <input type="text" name="note" style="width:100%;"></td>
+
+                                                    </tr>*@
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button ng-click="back()" style="float: right; width: 100px; margin-top: 0px; margin-left: 5px;" type="button" class="btn btn-block btn-success">Back</button>
+                                <button ng-click="saveAttendance()" style="float: right; width: 100px; margin-top: 0px" type="button" class="btn btn-block btn-success">Save</button>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="timeline">
+
+                        <div class="box">
+                            <div  style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject 
+                                </h3>
+                                <select id="lectureSubject" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in classSubjects.lectureSubject track by $index"></select>
+                            </div>
+                            <div  style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Class 
+                                </h3>
+                                <select id="lectureClass" ng-init="classSelected = classSubjects.lectureClass[0]" ng-model="classSelected" ng-options="item as item.className for item in classSubjects.lectureClass"></select>
+                            </div>
+                            <div class="box-title" style="float:right">
+                                <h3 class="box-title" style="float: right">{{lecturerPreviews.currentSemmeter}}</h3>
+                            </div>
+                        </div>
+
+                        <div class="box mygrid-wrapper-div">
+                            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">No</th>
+                                        <th rowspan="2" style="vertical-align: middle; text-align: center;">Student Name</th>
+                                        <th ng-repeat="item in lecturerPreviews.preview" class="sorting">{{item.day}}</th>
+                                        
+                                    </tr>
+                                    <tr role="row">
+                                        <th class="sorting" ng-repeat="item in lecturerPreviews.preview">{{item.slot}}</th>
+                                        
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr role="row" class="odd" ng-repeat="row in lecturerPreviews.data track by $index">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{row.row}}</td>
+                                        <td ng-repeat="col in row.cols">{{col.status}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- /.tab-content -->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>

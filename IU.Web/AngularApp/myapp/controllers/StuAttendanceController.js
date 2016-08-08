@@ -15,7 +15,7 @@ IUApp.controller('StuAttendanceController', ['$scope', '$http', '$location', '$r
         $scope.getAttendances = function (page) {
             
       
-            AttendanceService.getAttendance(page, $scope.semester.semesterCode, "").then(
+            AttendanceService.getAttendanceByStudent(page, $scope.semester.semesterCode, "").then(
               function (attendances) {
                   $scope.attendances = attendances;
                   angular.forEach($scope.attendances, function (item, key) {

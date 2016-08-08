@@ -110,7 +110,7 @@
     <Property Name="LecturerID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="StudentListID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="DateStudy" Type="datetime" Nullable="false" />
-    <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModeID" Type="int" />
     <Property Name="IsAttendance" Type="bit" />
   </EntityType>
   <EntityType Name="ClassTBLs">
@@ -221,7 +221,7 @@
     <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
     <Property Name="LecturerID" Type="nvarchar" MaxLength="128" />
     <Property Name="OpenClassID" Type="nvarchar" MaxLength="128" />
-    <Property Name="ModeID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModeID" Type="int" />
     <Property Name="Credit" Type="int" />
     <Property Name="Cost" Type="numeric" Precision="18" Scale="0" />
     <Property Name="StartDate" Type="datetime" />
