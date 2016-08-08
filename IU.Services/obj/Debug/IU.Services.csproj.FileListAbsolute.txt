@@ -26,20 +26,6 @@ D:\Source\Source\IU.Services\bin\Debug\EntityFramework.xml
 D:\Source\Source\IU.Services\bin\Debug\EntityFramework.SqlServer.xml
 D:\Source\Source\IU.Services\obj\Debug\IU.Services.dll
 D:\Source\Source\IU.Services\obj\Debug\IU.Services.pdb
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll.config
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.pdb
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Domain.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Web.Models.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Domain.pdb
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Web.Models.pdb
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.xml
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.csprojResolveAssemblyReference.cache
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.dll
-C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.pdb
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.csprojResolveAssemblyReference.cache
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll.config
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll
@@ -56,3 +42,17 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.pdb
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\NReco.PivotData.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Services\bin\Debug\NReco.PivotData.xml
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll.config
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Services.pdb
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Domain.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Web.Models.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Domain.pdb
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\IU.Web.Models.pdb
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.xml
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.csprojResolveAssemblyReference.cache
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.dll
+C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Services\obj\Debug\IU.Services.pdb
