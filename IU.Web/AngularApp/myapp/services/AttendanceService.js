@@ -58,6 +58,17 @@ IUApp.factory('AttendanceService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
+        getAttendanceByStudent: function (pageNumber, semesterCode, subjectCode) {
+            var def = $q.defer();
+            $http.get("api/StuAttendance/GetAttendanceByStudent?pageNumber=" + pageNumber + "&semesterCode=" + semesterCode + "&subjectCode=" + subjectCode)
+                .success(function (attendance) {
+                    def.resolve(attendance);
+                })
+                .error(function () {
+                    def.reject("Failed to get GetTakeAttendances");
+                });
+            return def.promise;
+        },
         takeAttendances: function (item) {
             var def = $q.defer();
             $http.post("api/Lecturer/TakeAttendances", item)

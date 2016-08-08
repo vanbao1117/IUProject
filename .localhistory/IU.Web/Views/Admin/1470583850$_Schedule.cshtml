@@ -1,0 +1,339 @@
+﻿<section class="content">
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs admin-tab-schedule">
+                    <li class="active bis"><a href="" ng-click="activeTab('activity', 'bis')">Create BIS-Class</a></li>
+                    <li class="lecture"><a href="" ng-click="activeTab('timeline', 'lecture')">Lecturer Schedule</a></li>
+                    <li class="setting"><a href="" ng-click="activeTab('settings', 'setting')">Classes Schedule</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="activity">
+                        <div class="box">
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject 
+                                    <select id="subjects" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Semester 
+                                    <select id="semesters" ng-model="semesterSelected" ng-options="item as item.semesterName for item in semesters"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: right; margin-top: 12px ">
+                                <h3 class="box-title">DeadLine<input type="date"></h3>
+                            </div>
+                            <div class="box-header" style="float: right;margin-top: 13px ">
+                                <h3 class="box-title">Quantity<input type="note"></h3>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">StartDay</th>
+                                    <th class="sorting">Class</th>
+                                    <th class="sorting">Lecturer</th>
+                                    <th class="sorting">Mode</th>
+                                    <th class="sorting">Room</th>
+                                    <th class="sorting">Slot</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd">
+                                    <td><input type="date"></td>
+                                    <td><input type="note"></td>
+                                    <td>
+                                        <select ng-model="editLecturerSelected" ng-options="item as item.lecturerName for item in lecturers"></select>
+                                    </td>
+                                    <td>
+                                        <select name="mode">
+                                            <option value="35">35</option>
+                                            <option value="24">24</option>
+                                            <option value="356">356</option>
+                                            <option value="246">246</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="room">
+                                            <option value="222">222</option>
+                                            <option value="333">333</option>
+                                            <option value="444">444</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="timeline">
+                        <div class="box">
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject 
+                                    <select ng-model="lecturerSubjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Lecturer 
+                                    <select ng-model="lecturerSelected" ng-options="item as item.lecturerName for item in lecturers"></select>
+                                </h3>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Subject</th>
+                                    <th class="sorting">Class</th>
+                                    <th class="sorting">Lecturer</th>
+                                    <th class="sorting">Days</th>
+                                    <th class="sorting">Room</th>
+                                    <th class="sorting">Slot</th>
+                                    <th class="sorting">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd">
+                                    <td>JAva</td>
+                                    <td>SE801</td>
+                                    <td>
+                                        <select name="lecturer">
+                                            <option value="allen">Allen</option>
+                                            <option value="lenanee">Lenanee</option>
+                                            <option value="sassha">Sassha</option>
+
+                                        </select>
+                                    </td>
+                                    <td><input type="date"></td>
+                                    <td>
+                                        <select name="room">
+                                            <option value="222">222</option>
+                                            <option value="333">333</option>
+                                            <option value="444">444</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </td>
+                                    <td><i class="fa fa-pencil"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>JAva</td>
+                                    <td>SE801</td>
+                                    <td>
+                                        <select name="lecturer">
+                                            <option value="allen">Allen</option>
+                                            <option value="lenanee">Lenanee</option>
+                                            <option value="sassha">Sassha</option>
+
+                                        </select>
+                                    </td>
+                                    <td><input type="date">	</td>
+                                    <td>
+                                        <select name="room">
+                                            <option value="222">222</option>
+                                            <option value="333">333</option>
+                                            <option value="444">444</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>&gt;
+                                    </td>
+                                    <td><i class="fa fa-pencil"></i></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                    </div>
+                    <!-- /.tab-pane -->
+
+                    <div class="tab-pane" id="settings">
+                        <div class="box">
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject 
+                                    <select ng-model="classSubjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Class 
+                                    <select ng-model="classSelected" ng-options="item as item.ClassName for item in classes"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Semester 
+                                    <select ng-model="classSemesterSelected" ng-options="item as item.semesterName for item in semesters"></select>
+                                </h3>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Subject</th>
+                                    <th class="sorting">Class</th>
+                                    <th class="sorting">Lecturer</th>
+                                    <th class="sorting">Days</th>
+                                    <th class="sorting">Room</th>
+                                    <th class="sorting">Slot</th>
+                                    <th class="sorting">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd">
+                                    <td>JAva</td>
+                                    <td>SE801</td>
+                                    <td>
+                                        <select name="lecturer">
+                                            <option value="allen">Allen</option>
+                                            <option value="lenanee">Lenanee</option>
+                                            <option value="sassha">Sassha</option>
+
+                                        </select>
+                                    </td>
+                                    <td><input type="date"></td>
+                                    <td>
+                                        <select name="room">
+                                            <option value="222">222</option>
+                                            <option value="333">333</option>
+                                            <option value="444">444</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </td>
+                                    <td><i class="fa fa-pencil"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>JAva</td>
+                                    <td>SE801</td>
+                                    <td>
+                                        <select name="lecturer">
+                                            <option value="allen">Allen</option>
+                                            <option value="lenanee">Lenanee</option>
+                                            <option value="sassha">Sassha</option>
+
+                                        </select>
+                                    </td>
+                                    <td><input type="date">	</td>
+                                    <td>
+                                        <select name="room">
+                                            <option value="222">222</option>
+                                            <option value="333">333</option>
+                                            <option value="444">444</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select><select name="slot">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </td>
+                                    <td><i class="fa fa-pencil"></i></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                    </div>
+                </div>
+
+                <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+</section>

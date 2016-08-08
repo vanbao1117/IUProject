@@ -23,14 +23,14 @@ namespace IU.Web.Controllers
         [ResponseType(typeof(PreviewListViewModel))]
         [Authorize]
         [System.Web.Http.HttpGet]
-        public async Task<IHttpActionResult> GetLecturerPreview(string classID, string subjectID)
+        public async Task<IHttpActionResult> GetLecturerPreview(string classID, string subjectID, string lecturerID = null)
         {
             try
             {
                 using (LecturerService _LecturerService = new LecturerService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
-                    var _Lecturers = await _LecturerService.GetLecturerPreviewSync(userName, classID, subjectID);
+                    var _Lecturers = await _LecturerService.GetLecturerPreviewSync(userName, classID, subjectID, lecturerID);
                     return Ok(_Lecturers);
 
                 }
@@ -50,13 +50,17 @@ namespace IU.Web.Controllers
         [ResponseType(typeof(LectureClassSubjectViewModel))]
         [Authorize]
         [System.Web.Http.HttpGet]
-        public async Task<IHttpActionResult> GetLectureClassSubject()
+        public async Task<IHttpActionResult> GetLectureClassSubject(string lectureID = null)
         {
             try
             {
                 using (LecturerService _LecturerService = new LecturerService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
+                    if (lectureID != null)
+                    {
+
+                    }
                     var _Lecturers = await _LecturerService.GetLectureClassSubjectSync(userName);
                     return Ok(_Lecturers);
 

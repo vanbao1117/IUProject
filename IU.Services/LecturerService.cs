@@ -37,38 +37,80 @@ namespace IU.Services
 
         private LectureClassSubjectViewModel GetLectureClassSubject(string userName)
         {
+            AspNetUserViewModel userInfo = null;
+            using (UserService service = new UserService())
+            {
+                userInfo = service.GetUserInfo(userName);
+            }
+
             using (var context = new IUContext())
             {
-                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
-                var lectures = context.LecturerTBLs.Include("SubjectTBLs").Include("LecturerScheduleTBLs").Where(l => l.UserID == user.Id).FirstOrDefault();
+                if (userInfo.AccountType.Equals("Admin"))
+                {
+                    var _subjects = context.SubjectTBLs.ToList();
 
-                var subjects = lectures.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName, UserId = user.Id }).ToList();
+                    var subjects = _subjects.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName}).ToList();
 
-                var classs = lectures.LecturerScheduleTBLs.Where(c => c.SemesterID == GetCurrentSemester().SemesterID).ToList();
-                var lecClass = classs.Select(c => new ClassViewModel() { ClassID = c.ClassID, ClassName = GetClass(c.ClassID).ClassName }).ToList();
+                    var classs = context.ClassTBLs.ToList();
+                    var lecClass = classs.Select(c => new ClassViewModel() { ClassID = c.ClassID, ClassName = GetClass(c.ClassID).ClassName }).ToList();
+
+                    var lectures = context.LecturerTBLs.Select(l => new LecturerViewModel() { LecturerID = l.LecturerID, LecturerBirth = l.LecturerBirth, LecturerEmail = l.LecturerEmail, LecturerGender = l.LecturerGender, LecturerName = l.LecturerName, LecturerPhone = l.LecturerPhone, UserID = l.UserID }).ToList();
+
+                    LectureClassSubjectViewModel model = new LectureClassSubjectViewModel() { LectureClass = lecClass, LectureSubject = subjects, Lectures = lectures };
+                    return model;
+                }
+                else
+                {
+                    var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
+                    var lectures = context.LecturerTBLs.Include("SubjectTBLs").Include("LecturerScheduleTBLs").Where(l => l.UserID == user.Id).FirstOrDefault();
+
+                    var subjects = lectures.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName, UserId = user.Id }).ToList();
+
+                    var classs = lectures.LecturerScheduleTBLs.Where(c => c.SemesterID == GetCurrentSemester().SemesterID).ToList();
+                    var lecClass = classs.Select(c => new ClassViewModel() { ClassID = c.ClassID, ClassName = GetClass(c.ClassID).ClassName }).ToList();
 
 
-                LectureClassSubjectViewModel model = new LectureClassSubjectViewModel() { LectureClass = lecClass, LectureSubject = subjects };
-                return model;
+                    LectureClassSubjectViewModel model = new LectureClassSubjectViewModel() { LectureClass = lecClass, LectureSubject = subjects };
+                    return model;
+                }
+               
             }
         }
 
-        public async Task<PreviewListViewModel> GetLecturerPreviewSync(string userName, string classID, string subjectID)
+        public async Task<PreviewListViewModel> GetLecturerPreviewSync(string userName, string classID, string subjectID, string lectureID)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetLecturerPreview(userName, classID, subjectID));
+                return await Task.Run(() => GetLecturerPreview(userName, classID, subjectID, lectureID));
             }
         }
 
-        private PreviewListViewModel GetLecturerPreview(string userName, string classID, string subjectID)
+        private PreviewListViewModel GetLecturerPreview(string userName, string classID, string subjectID, string lectureID)
         {
+            AspNetUserViewModel userInfo = null;
+            using (UserService service = new UserService())
+            {
+                userInfo = service.GetUserInfo(userName);
+            }
+
             using (var context = new IUContext())
             {
                 var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
                 //var lecture = context.LecturerTBLs.Where(l => l.UserID == user.Id).FirstOrDefault();
 
-                var attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID == subjectID && a.Attendancer == user.Id).ToList();
+                List<AttendanceTBL> attandances = new List<AttendanceTBL>();
+
+                if (userInfo.AccountType.Equals("Admin") && lectureID != null)
+                {
+                    var userID = context.LecturerTBLs.Where(l => l.LecturerID == lectureID).FirstOrDefault().UserID;
+                    attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID == subjectID && a.Attendancer == userID).ToList();
+                }
+                else
+                {
+                    attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID == subjectID && a.Attendancer == user.Id).ToList();
+                }
+
+                
 
                 var previewViewModels = attandances.Select(a => new PreviewViewModel() { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID).SlotName, Status = (a.Attendance == true ? "P" : "A"), StudentName = GetStudent(a.StudentListID).StudentName }).OrderBy(p => p.Day).ToList();
 

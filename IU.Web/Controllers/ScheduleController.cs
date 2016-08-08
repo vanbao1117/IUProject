@@ -16,6 +16,60 @@ namespace IU.Web.Controllers
     public class ScheduleController : ApiController
     {
 
+        // GET api/Schedule/CreateBis
+        /// <summary>
+        /// CreateBis
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> CreateBis(BisViewModel model)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _SubjectService.CreateBisSync(model, userName);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Schedule/GetClassSchedule
+        /// <summary>
+        /// Get GetClassSchedule
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(ClassScheduleViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetClassSchedule(string classID, string semesterID)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var classs = await _SubjectService.GetClassScheduleSync(classID, semesterID);
+                    return Ok(classs);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
         // GET api/Schedule/getClass
         /// <summary>
         /// Get class Schedule

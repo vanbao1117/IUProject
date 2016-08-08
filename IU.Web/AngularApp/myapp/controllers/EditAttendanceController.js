@@ -13,9 +13,11 @@ IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$
         $scope.selectedSubject = {};
         $scope.$watch('selectedClass', function (newVal, oldVal) {
             console.log('selectedClass changed', newVal);
+            $scope.GetLecturerPreview();
         });
         $scope.$watch('selectedSubject', function (newVal, oldVal) {
             console.log('selectedSubject changed', newVal);
+            $scope.GetLecturerPreview();
         });
 
 
@@ -42,9 +44,15 @@ IUApp.controller('EditAttendanceController', ['$scope', '$http', '$location', '$
     };
 
     $scope.GetLecturerPreview = function () {
-        var classID = 'd5e7b9bc-2614-4fcb-a1ba-6d6b11752858';
-        var subjectID = 'd5e7b9bc-2614-4fcb-a1ba-6d6b11702851';
-        LecturerService.GetLecturerPreview(subjectID, classID).then(
+        //var classID = 'd5e7b9bc-2614-4fcb-a1ba-6d6b11752858';
+        //var subjectID = 'd5e7b9bc-2614-4fcb-a1ba-6d6b11702851';
+        if ($scope.selectedClass === undefined) return;
+        if ($scope.selectedSubject === undefined) return;
+        var classID = $scope.selectedClass.classID;
+        var subjectID = $scope.selectedSubject.subjectID;
+        console.log('classID: ', $scope.selectedClass.classID);
+        console.log('subjectID: ', $scope.selectedSubject.subjectID);
+        LecturerService.GetLecturerPreview(classID, subjectID).then(
              function (lecturerPreviews) {
                  $scope.lecturerPreviews = lecturerPreviews;
 

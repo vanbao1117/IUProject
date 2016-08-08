@@ -30,6 +30,8 @@ namespace IU.Web.Models
         public List<UserSubjectViewModel> LectureSubject { get; set; }
         public ClassViewModel SelectedClass { get; set; }
         public UserSubjectViewModel SelectedSubject { get; set; }
+
+        public List<LecturerViewModel> Lectures { get; set; }
     }
 
     public class LecturePreviewViewModel

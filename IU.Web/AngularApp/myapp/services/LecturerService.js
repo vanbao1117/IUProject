@@ -25,9 +25,17 @@ IUApp.factory('LecturerService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
-        GetLecturerPreview: function (classID, subjectID) {
+        GetLecturerPreview: function (classID, subjectID, lecturerID) {
             var def = $q.defer();
-            $http.get("api/Lecturer/GetLecturerPreview?classID=" + classID + "&subjectID=" + subjectID)
+            var url = "api/Lecturer/GetLecturerPreview?classID=" + classID + "&subjectID=" + subjectID;
+            
+            if (lecturerID !== undefined) {
+                url += "&lecturerID=" + lecturerID
+            }
+
+            console.log("GetLecturerPreview URL: ", url);
+
+            $http.get(url)
                 .success(function (LecturerPreviews) {
                     def.resolve(LecturerPreviews);
                 })

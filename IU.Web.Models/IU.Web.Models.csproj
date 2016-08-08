@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspNetUserViewModel.cs" />
+    <Compile Include="BisViewModel.cs" />
+    <Compile Include="RoomViewModel.cs" />
     <Compile Include="ClassViewModel.cs" />
     <Compile Include="ClientViewModel.cs" />
     <Compile Include="OpenClassViewModel.cs" />

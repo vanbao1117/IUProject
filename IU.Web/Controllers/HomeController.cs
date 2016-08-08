@@ -24,6 +24,25 @@ namespace IU.Web.Controllers
             
         }
 
+        public PartialViewResult AdminAccount()
+        {
+            return PartialView("~/Views/Admin/_Account.cshtml");
+        }
+
+        public PartialViewResult AdminHome()
+        {
+            return PartialView("~/Views/Admin/_Home.cshtml");
+        }
+
+        public PartialViewResult AdminSchedule()
+        {
+            return PartialView("~/Views/Admin/_Schedule.cshtml");
+        }
+        public PartialViewResult AdminAttenance()
+        {
+            return PartialView("~/Views/Admin/_Attendance.cshtml");
+        }
+
         public PartialViewResult Lecturer()
         {
             return PartialView("~/Views/Lecturer/_LecturerHome.cshtml");
