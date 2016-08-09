@@ -42,6 +42,32 @@ namespace IU.Web.Controllers
 
         }
 
+        // GET api/Schedule/UpdateClassSchedule
+        /// <summary>
+        /// UpdateClassSchedule
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> UpdateClassSchedule(ClassScheduleViewModel model)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _SubjectService.UpdateClassScheduleSync(model, userName);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
         // GET api/Schedule/GetClassSchedule
         /// <summary>
         /// Get GetClassSchedule

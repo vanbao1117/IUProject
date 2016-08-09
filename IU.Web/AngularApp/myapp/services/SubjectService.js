@@ -14,6 +14,17 @@ IUApp.factory('SubjectService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
+        updateClassSchedule: function (classSchedule) {
+            var def = $q.defer();
+            $http.post('api/Schedule/UpdateClassSchedule', classSchedule)
+                .success(function (classSchedule) {
+                    def.resolve(classSchedule);
+                })
+                .error(function () {
+                    def.reject("Failed to submit UpdateClassSchedule");
+                });
+            return def.promise;
+        },
         get: function () {
             var def = $q.defer();
             $http.get("api/Subject/GetSubjectByStudent")

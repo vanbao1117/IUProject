@@ -196,6 +196,14 @@
     <Content Include="AngularApp\1.2.6\angular-route.min.js" />
     <Content Include="AngularApp\1.2.6\angular.min.js" />
     <Content Include="AngularApp\1.2.6\ng-infinite-scroll.js" />
+    <Content Include="AngularApp\1.5.6\angular-animate.min.js" />
+    <Content Include="AngularApp\1.5.6\angular-resource.min.js" />
+    <Content Include="AngularApp\1.5.6\angular-route.min.js" />
+    <Content Include="AngularApp\1.5.6\angular.min.js" />
+    <Content Include="AngularApp\1.5.8\angular-animate.min.js" />
+    <Content Include="AngularApp\1.5.8\angular-resource.min.js" />
+    <Content Include="AngularApp\1.5.8\angular-route.min.js" />
+    <Content Include="AngularApp\1.5.8\angular.min.js" />
     <Content Include="AngularApp\myapp\controllers\AdminAttendanceController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminAccountController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminScheduleController.js" />

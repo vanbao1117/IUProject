@@ -6,8 +6,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs admin-tab-schedule">
                     <li class="active bis"><a href="" ng-click="activeTab('activity', 'bis')">Create BIS-Class</a></li>
-                    <li class="lecture"><a href="" ng-click="activeTab('timeline', 'lecture')">Lecturer Schedule</a></li>
-                    <li class="setting"><a href="" ng-click="activeTab('settings', 'setting')">Classes Schedule</a></li>
+                    @*<li class="lecture"><a href="" ng-click="activeTab('timeline', 'lecture')">Lecturer Schedule</a></li>*@
+                    <li class="setting"><a href="" ng-click="activeTab('settings', 'setting')">Schedule</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="activity">
@@ -67,7 +67,7 @@
                         <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
                     </div>
                     <!-- /.tab-pane -->
-                    <div class="tab-pane" id="timeline">
+                    @*<div class="tab-pane" id="timeline">
                         <div class="box">
                             <div class="box-header" style="float: left; width: 100px;">
                                 <h3 class="box-title">
@@ -177,7 +177,7 @@
 
                         </table>
                         <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
-                    </div>
+                    </div>*@
                     <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="settings">
@@ -224,7 +224,7 @@
                             </thead>
                             <tbody>
 
-                                <tr role="row" class="odd" ng-repeat="class in classSchedules" id="class_{{$index}}">
+                                <tr role="row" class="odd" ng-repeat="class in classSchedules" id="class_{{$index}}" >
                                     <td>{{className}}</td>
                                     <td>
                                         <select disabled ng-model="class.lecturerID" ng-options="item.lecturerID as item.lecturerName for item in lecturers"></select>
@@ -234,8 +234,7 @@
                                         <select disabled ng-model="class.subjectID" ng-options="item.subjectID as item.abbreSubjectName for item in subjects"></select>
                                     </td>
                                     <td>
-                                        <input type="date" ng-model="dateStudy" style="display:none">
-                                        {{class.dateStudy}}
+                                        <input disabled date-input type="date" ng-model="class.dateStudy">
                                     </td>
                                     <td>
                                         <select disabled ng-model="class.roomID" ng-options="item.romName as item.romName for item in rooms"></select>
@@ -244,7 +243,7 @@
                                     <td>
                                         <select disabled ng-model="class.slotID" ng-options="item.slotID as item.slotName for item in slots"></select>
                                     </td>
-                                    <td><i class="fa fa-pencil" id="allow_{{$index}}" ng-click="allowEdit('class_'+$index, 'allow', $index)"></i> <i class="fa fa-times" id="remove_{{$index}}" ng-click="allowEdit('class_'+$index, 'remove', $index)" style="display:none"></i></td>
+                                    <td><i class="fa fa-pencil" id="allow_{{$index}}" ng-click="allowEdit('class_'+$index, 'allow', $index, class)"></i> <i class="fa fa-times" id="remove_{{$index}}" ng-click="allowEdit('class_'+$index, 'remove', $index, class)" style="display:none"></i></td>
                                 </tr>
                             </tbody>
 
@@ -259,8 +258,8 @@
                             </ul>
                         </div>
                         
-                        <button style="float: right; width: 143px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Setup Schedule</button>
-                        <button style="float: right; width: 100px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                        <button ng-click="SetupClassSchedule()" style="float: right; width: 143px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Setup Schedule</button>
+                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
                     </div>
                 </div>
 

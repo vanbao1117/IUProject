@@ -21,10 +21,10 @@ namespace IU.Web
 
             //Angular
             Bundle angular = new ScriptBundle("~/bundles/angular").Include(
-                     "~/AngularApp/1.2.6/angular.min.js",
-                     "~/AngularApp/1.2.6/angular-route.min.js",
-                     "~/AngularApp/1.2.6/angular-resource.min.js",
-                     "~/AngularApp/1.2.6/angular-animate.min.js");
+                     "~/AngularApp/1.5.8/angular.min.js",
+                     "~/AngularApp/1.5.8/angular-route.min.js",
+                     "~/AngularApp/1.5.8/angular-resource.min.js",
+                     "~/AngularApp/1.5.8/angular-animate.min.js");
             angular.Transforms.Clear();
             bundles.Add(angular);
 
