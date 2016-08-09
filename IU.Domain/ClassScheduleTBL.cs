@@ -24,5 +24,6 @@ namespace IU.Domain
         public System.DateTime DateStudy { get; set; }
         public Nullable<int> ModeID { get; set; }
         public Nullable<bool> IsAttendance { get; set; }
+        public Nullable<int> Blog { get; set; }
     }
 }

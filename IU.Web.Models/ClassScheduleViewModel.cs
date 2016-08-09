@@ -22,9 +22,9 @@ namespace IU.Web.Models
         public string StudentID { get; set; }
         public string UserID { get; set; }
         public System.DateTime DateStudy { get; set; }
-        public string DateStudy2 { get; set; }
+        public string SemesterID { get; set; }
+        public bool isCreate { get; set; }
     }
-
 
     public class ClassSchedulePageViewModel
     {

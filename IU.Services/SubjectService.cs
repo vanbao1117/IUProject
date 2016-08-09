@@ -18,6 +18,7 @@ namespace IU.Services
         private IRepository<OpenClassTBL> OpenClassRepository;
         private IRepository<OpenSubjectTBL> OpenSubjectTBLRepository;
         private IRepository<ClassScheduleTBL> ClassScheduleTBLRepository;
+        private IRepository<StudentListTBL> StudentListTBLRepository;
 
         public SubjectService()
         {
@@ -26,6 +27,7 @@ namespace IU.Services
             OpenClassRepository = new Repository<OpenClassTBL>();
             OpenSubjectTBLRepository = new Repository<OpenSubjectTBL>();
             ClassScheduleTBLRepository = new Repository<ClassScheduleTBL>();
+            StudentListTBLRepository = new Repository<StudentListTBL>();
         }
 
         public async Task<bool> CreateBisSync(BisViewModel model, string userName)
@@ -93,13 +95,45 @@ namespace IU.Services
         {
             try
             {
-                var classSchedule = ClassScheduleTBLRepository.FindOneBy(c => c.ClassScheduleID == model.ClassScheduleID);
-                classSchedule.LecturerID = model.LecturerID;
-                classSchedule.ClassID = model.ClassID;
-                classSchedule.SubjectID = model.SubjectID;
-                classSchedule.SlotID = model.SlotID;
-                classSchedule.RoomID = model.RoomID;
-                ClassScheduleTBLRepository.UpdateAsync(classSchedule);
+                var studentLists = StudentListTBLRepository.FindAllBy(s => s.ClassID == model.ClassID && s.SemesterID == model.SemesterID).ToList();
+                foreach (StudentListTBL std in studentLists)
+                {
+                    var classSchedule = ClassScheduleTBLRepository.FindOneBy(c => c.ClassID == model.ClassID && c.StudentListID == std.StudentListID);
+                    classSchedule.LecturerID = model.LecturerID;
+                    classSchedule.ClassID = model.ClassID;
+                    classSchedule.SubjectID = model.SubjectID;
+                    classSchedule.SlotID = model.SlotID;
+                    classSchedule.RoomID = model.RoomID;
+                    ClassScheduleTBLRepository.Update(classSchedule);
+                }
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<bool> CreateClassScheduleSync(ClassScheduleViewModel model, string userName)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => CreateClassSchedule(model, userName));
+            }
+        }
+
+        private bool CreateClassSchedule(ClassScheduleViewModel model, string userName)
+        {
+            try
+            {
+                var studentLists = StudentListTBLRepository.FindAllBy(s => s.ClassID == model.ClassID && s.SemesterID == model.SemesterID).ToList();
+                foreach(StudentListTBL studentList in studentLists){
+                    var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID, RoomID = model.RoomID, SlotID = model.SlotID, SubjectID = model.SubjectID, LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = 5, Blog = 1, DateStudy = model.DateStudy };
+                    ClassScheduleTBLRepository.Save(classSchedule);
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -129,17 +163,43 @@ namespace IU.Services
                            where u.SemesterID == semesterID && u.ClassID == classID
                            select new {h,u}
                        )
-                       group t by new { t.h.ClassID, t.h.LecturerID, t.h.SubjectID, t.h.RoomID, t.h.SlotID , t.h.DateStudy, t.h.ClassScheduleID} into g
+                       group t by new { t.h.ClassID, t.h.LecturerID, t.h.SubjectID, t.h.RoomID, t.h.SlotID , t.h.DateStudy} into g
                        select new ClassScheduleViewModel(){
-                            ClassID = g.Key.ClassID,
+                            ClassID = classID,
                             LecturerID = g.Key.LecturerID,
                             SubjectID = g.Key.SubjectID,
                             RoomID = g.Key.RoomID,
                             SlotID = g.Key.SlotID ,
                             DateStudy = g.Key.DateStudy,
-                            ClassScheduleID = g.Key.ClassScheduleID
+                            SemesterID = semesterID,
+                            isCreate = false
                       };
-                    return sh.ToList();
+
+
+                    List<ClassScheduleViewModel> lsData = new List<ClassScheduleViewModel>();
+                    if(sh != null){
+                        lsData.AddRange(sh.ToArray());
+                    }
+
+                    string[] lsSubjects = lsData.Select(s => s.SubjectID).ToArray();
+
+                    var newSH = from h in context.SemesterClassSubjectTBLs
+                                where h.SemesterID == semesterID && h.ClassID == classID
+                                && !lsSubjects.Contains(h.SubjectID)
+                                select new ClassScheduleViewModel()
+                                {
+                                    ClassID = h.ClassID,
+                                    SubjectID = h.SubjectID,
+                                    SemesterID = h.SemesterID,
+                                    DateStudy = DateTime.Now,
+                                    isCreate = true
+                                };
+                    if (newSH != null)
+                    {
+                        lsData.AddRange(newSH.ToArray());
+                    }
+
+                    return lsData;
                 }
             }
             catch (Exception ex)

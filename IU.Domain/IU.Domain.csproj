@@ -124,6 +124,9 @@
     <Compile Include="RoomTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SemesterClassSubjectTBL.cs">
+      <DependentUpon>IUModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SemesterTBL.cs">
       <DependentUpon>IUModel.tt</DependentUpon>
     </Compile>

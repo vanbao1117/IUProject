@@ -16,8 +16,8 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.d
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.pdb
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.pdb
-C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.csprojResolveAssemblyReference.cache
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.dll
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.pdb
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.dll
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.pdb
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.csprojResolveAssemblyReference.cache

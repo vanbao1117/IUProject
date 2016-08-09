@@ -45,6 +45,7 @@ namespace IU.Domain
         public virtual DbSet<OpenSubjectTBL> OpenSubjectTBLs { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
         public virtual DbSet<RoomTBL> RoomTBLs { get; set; }
+        public virtual DbSet<SemesterClassSubjectTBL> SemesterClassSubjectTBLs { get; set; }
         public virtual DbSet<SemesterTBL> SemesterTBLs { get; set; }
         public virtual DbSet<SlotTBL> SlotTBLs { get; set; }
         public virtual DbSet<StudentInClassTBL> StudentInClassTBLs { get; set; }

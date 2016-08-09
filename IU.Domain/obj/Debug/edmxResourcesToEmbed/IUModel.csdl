@@ -21,6 +21,7 @@
     <EntitySet Name="OpenSubjectTBLs" EntityType="IUModel.OpenSubjectTBL" />
     <EntitySet Name="RefreshTokens" EntityType="IUModel.RefreshToken" />
     <EntitySet Name="RoomTBLs" EntityType="IUModel.RoomTBL" />
+    <EntitySet Name="SemesterClassSubjectTBLs" EntityType="IUModel.SemesterClassSubjectTBL" />
     <EntitySet Name="SemesterTBLs" EntityType="IUModel.SemesterTBL" />
     <EntitySet Name="SlotTBLs" EntityType="IUModel.SlotTBL" />
     <EntitySet Name="StudentInClassTBLs" EntityType="IUModel.StudentInClassTBL" />
@@ -243,6 +244,7 @@
     <Property Name="DateStudy" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModeID" Type="Int32" />
     <Property Name="IsAttendance" Type="Boolean" />
+    <Property Name="Blog" Type="Int32" />
   </EntityType>
   <EntityType Name="ClassTBL">
     <Key>
@@ -391,13 +393,26 @@
     <Property Name="RomName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="SemesterClassSubjectTBL">
+    <Key>
+      <PropertyRef Name="SeClSuID" />
+    </Key>
+    <Property Name="SeClSuID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SemesterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Blog" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="SemesterTBL">
     <Key>
       <PropertyRef Name="SemesterID" />
     </Key>
     <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="SemesterNo" Type="Int32" />
     <Property Name="SemesterName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Blog1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Blog2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="StartDate" Type="DateTime" Precision="3" />
     <Property Name="EndDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="AttendanceTBL" />
@@ -440,13 +455,14 @@
       <PropertyRef Name="StudentID" />
     </Key>
     <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StudentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="StudentGender" Type="Boolean" Nullable="false" />
-    <Property Name="StudentBirth" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="StudentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="ParentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StudentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentGender" Type="Boolean" />
+    <Property Name="StudentBirth" Type="DateTime" Precision="3" />
+    <Property Name="StudentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ParentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="StudentTBL" ToRole="AcceptRegister" />
     <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />

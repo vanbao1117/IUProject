@@ -100,6 +100,7 @@
     <EntitySetMapping Name="ClassScheduleTBLs">
       <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
         <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+          <ScalarProperty Name="Blog" ColumnName="Blog" />
           <ScalarProperty Name="IsAttendance" ColumnName="IsAttendance" />
           <ScalarProperty Name="ModeID" ColumnName="ModeID" />
           <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
@@ -250,13 +251,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SemesterClassSubjectTBLs">
+      <EntityTypeMapping TypeName="IUModel.SemesterClassSubjectTBL">
+        <MappingFragment StoreEntitySet="SemesterClassSubjectTBLs">
+          <ScalarProperty Name="Blog" ColumnName="Blog" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+          <ScalarProperty Name="SeClSuID" ColumnName="SeClSuID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SemesterTBLs">
       <EntityTypeMapping TypeName="IUModel.SemesterTBL">
         <MappingFragment StoreEntitySet="SemesterTBLs">
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Blog2" ColumnName="Blog2" />
+          <ScalarProperty Name="Blog1" ColumnName="Blog1" />
           <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
           <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
+          <ScalarProperty Name="SemesterNo" ColumnName="SemesterNo" />
           <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -300,6 +315,7 @@
           <ScalarProperty Name="StudentBirth" ColumnName="StudentBirth" />
           <ScalarProperty Name="StudentGender" ColumnName="StudentGender" />
           <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+          <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
         </MappingFragment>
       </EntityTypeMapping>

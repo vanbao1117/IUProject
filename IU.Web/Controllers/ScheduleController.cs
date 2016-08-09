@@ -56,7 +56,15 @@ namespace IU.Web.Controllers
                 using (SubjectService _SubjectService = new SubjectService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
-                    await _SubjectService.UpdateClassScheduleSync(model, userName);
+                    if (model.isCreate)
+                    {
+                        await _SubjectService.CreateClassScheduleSync(model, userName);
+                    }
+                    else
+                    {
+                        await _SubjectService.UpdateClassScheduleSync(model, userName);
+                    }
+                    
                     return Ok();
 
                 }

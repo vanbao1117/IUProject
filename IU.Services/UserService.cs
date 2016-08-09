@@ -95,9 +95,9 @@ namespace IU.Services
             {
                 var classTBL =
                 (from classTBLs in context.ClassTBLs
-                 join studentInClassTBLs in context.StudentInClassTBLs
-                     on classTBLs.ClassID equals studentInClassTBLs.ClassID
-                 where studentInClassTBLs.StudentID == studentID
+                 join studentListTBLs in context.StudentListTBLs
+                     on classTBLs.ClassID equals studentListTBLs.ClassID
+                 where studentListTBLs.StudentID == studentID
                  select classTBLs).SingleOrDefault();
 
                 return classTBL;

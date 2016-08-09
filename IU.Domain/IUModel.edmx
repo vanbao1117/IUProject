@@ -117,6 +117,7 @@
           <Property Name="DateStudy" Type="datetime" Nullable="false" />
           <Property Name="ModeID" Type="int" />
           <Property Name="IsAttendance" Type="bit" />
+          <Property Name="Blog" Type="int" />
         </EntityType>
         <EntityType Name="ClassTBLs">
           <Key>
@@ -252,13 +253,26 @@
           <Property Name="RomName" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="Decription" Type="varchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="SemesterClassSubjectTBLs">
+          <Key>
+            <PropertyRef Name="SeClSuID" />
+          </Key>
+          <Property Name="SeClSuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClassID" Type="nvarchar" MaxLength="128" />
+          <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Blog" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SemesterTBLs">
           <Key>
             <PropertyRef Name="SemesterID" />
           </Key>
           <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SemesterNo" Type="int" />
           <Property Name="SemesterName" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="SemesterCode" Type="varchar" MaxLength="50" />
+          <Property Name="Blog1" Type="varchar" MaxLength="50" />
+          <Property Name="Blog2" Type="varchar" MaxLength="50" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
         </EntityType>
@@ -294,13 +308,14 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="StudentName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="StudentGender" Type="bit" Nullable="false" />
-          <Property Name="StudentBirth" Type="datetime" Nullable="false" />
-          <Property Name="StudentPhone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="StudentEmail" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="ParentPhone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StudentCode" Type="varchar" MaxLength="50" />
+          <Property Name="StudentName" Type="varchar" MaxLength="50" />
+          <Property Name="StudentGender" Type="bit" />
+          <Property Name="StudentBirth" Type="datetime" />
+          <Property Name="StudentPhone" Type="varchar" MaxLength="50" />
+          <Property Name="StudentEmail" Type="varchar" MaxLength="150" />
+          <Property Name="ParentPhone" Type="varchar" MaxLength="50" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="SubjectTBLs">
           <Key>
@@ -670,6 +685,7 @@
           <EntitySet Name="OpenSubjectTBLs" EntityType="Self.OpenSubjectTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomTBLs" EntityType="Self.RoomTBLs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SemesterClassSubjectTBLs" EntityType="Self.SemesterClassSubjectTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentInClassTBLs" EntityType="Self.StudentInClassTBLs" Schema="dbo" store:Type="Tables" />
@@ -808,6 +824,7 @@
           <EntitySet Name="OpenSubjectTBLs" EntityType="IUModel.OpenSubjectTBL" />
           <EntitySet Name="RefreshTokens" EntityType="IUModel.RefreshToken" />
           <EntitySet Name="RoomTBLs" EntityType="IUModel.RoomTBL" />
+          <EntitySet Name="SemesterClassSubjectTBLs" EntityType="IUModel.SemesterClassSubjectTBL" />
           <EntitySet Name="SemesterTBLs" EntityType="IUModel.SemesterTBL" />
           <EntitySet Name="SlotTBLs" EntityType="IUModel.SlotTBL" />
           <EntitySet Name="StudentInClassTBLs" EntityType="IUModel.StudentInClassTBL" />
@@ -1030,6 +1047,7 @@
           <Property Name="DateStudy" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModeID" Type="Int32" />
           <Property Name="IsAttendance" Type="Boolean" />
+          <Property Name="Blog" Type="Int32" />
         </EntityType>
         <EntityType Name="ClassTBL">
           <Key>
@@ -1178,13 +1196,26 @@
           <Property Name="RomName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="SemesterClassSubjectTBL">
+          <Key>
+            <PropertyRef Name="SeClSuID" />
+          </Key>
+          <Property Name="SeClSuID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClassID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Blog" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="SemesterTBL">
           <Key>
             <PropertyRef Name="SemesterID" />
           </Key>
           <Property Name="SemesterID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterNo" Type="Int32" />
           <Property Name="SemesterName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="SemesterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Blog1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Blog2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_SemesterTBLs" FromRole="SemesterTBL" ToRole="AttendanceTBL" />
@@ -1227,13 +1258,14 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StudentGender" Type="Boolean" Nullable="false" />
-          <Property Name="StudentBirth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="StudentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StudentEmail" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ParentPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StudentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentGender" Type="Boolean" />
+          <Property Name="StudentBirth" Type="DateTime" Precision="3" />
+          <Property Name="StudentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StudentEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ParentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AcceptRegisters" Relationship="IUModel.FK_AcceptRegisters_StudentTBLs" FromRole="StudentTBL" ToRole="AcceptRegister" />
           <NavigationProperty Name="FeedBackTBLs" Relationship="IUModel.FK_FeedBackTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="FeedBackTBL" />
           <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_StudentTBLs1" FromRole="StudentTBL" ToRole="StudentListTBL" />
@@ -1648,6 +1680,7 @@
           <EntitySetMapping Name="ClassScheduleTBLs">
             <EntityTypeMapping TypeName="IUModel.ClassScheduleTBL">
               <MappingFragment StoreEntitySet="ClassScheduleTBLs">
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
                 <ScalarProperty Name="IsAttendance" ColumnName="IsAttendance" />
                 <ScalarProperty Name="ModeID" ColumnName="ModeID" />
                 <ScalarProperty Name="DateStudy" ColumnName="DateStudy" />
@@ -1798,13 +1831,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SemesterClassSubjectTBLs">
+            <EntityTypeMapping TypeName="IUModel.SemesterClassSubjectTBL">
+              <MappingFragment StoreEntitySet="SemesterClassSubjectTBLs">
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="SeClSuID" ColumnName="SeClSuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SemesterTBLs">
             <EntityTypeMapping TypeName="IUModel.SemesterTBL">
               <MappingFragment StoreEntitySet="SemesterTBLs">
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Blog2" ColumnName="Blog2" />
+                <ScalarProperty Name="Blog1" ColumnName="Blog1" />
                 <ScalarProperty Name="SemesterCode" ColumnName="SemesterCode" />
                 <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
+                <ScalarProperty Name="SemesterNo" ColumnName="SemesterNo" />
                 <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1848,6 +1895,7 @@
                 <ScalarProperty Name="StudentBirth" ColumnName="StudentBirth" />
                 <ScalarProperty Name="StudentGender" ColumnName="StudentGender" />
                 <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>

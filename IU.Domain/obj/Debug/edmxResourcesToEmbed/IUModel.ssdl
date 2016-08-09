@@ -112,6 +112,7 @@
     <Property Name="DateStudy" Type="datetime" Nullable="false" />
     <Property Name="ModeID" Type="int" />
     <Property Name="IsAttendance" Type="bit" />
+    <Property Name="Blog" Type="int" />
   </EntityType>
   <EntityType Name="ClassTBLs">
     <Key>
@@ -247,13 +248,26 @@
     <Property Name="RomName" Type="nvarchar" MaxLength="8" Nullable="false" />
     <Property Name="Decription" Type="varchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="SemesterClassSubjectTBLs">
+    <Key>
+      <PropertyRef Name="SeClSuID" />
+    </Key>
+    <Property Name="SeClSuID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="128" />
+    <Property Name="ClassID" Type="nvarchar" MaxLength="128" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" />
+    <Property Name="Blog" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="SemesterTBLs">
     <Key>
       <PropertyRef Name="SemesterID" />
     </Key>
     <Property Name="SemesterID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SemesterNo" Type="int" />
     <Property Name="SemesterName" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="SemesterCode" Type="varchar" MaxLength="50" />
+    <Property Name="Blog1" Type="varchar" MaxLength="50" />
+    <Property Name="Blog2" Type="varchar" MaxLength="50" />
     <Property Name="StartDate" Type="datetime" />
     <Property Name="EndDate" Type="datetime" />
   </EntityType>
@@ -289,13 +303,14 @@
       <PropertyRef Name="StudentID" />
     </Key>
     <Property Name="StudentID" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="StudentName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="StudentGender" Type="bit" Nullable="false" />
-    <Property Name="StudentBirth" Type="datetime" Nullable="false" />
-    <Property Name="StudentPhone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="StudentEmail" Type="varchar" MaxLength="150" Nullable="false" />
-    <Property Name="ParentPhone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentCode" Type="varchar" MaxLength="50" />
+    <Property Name="StudentName" Type="varchar" MaxLength="50" />
+    <Property Name="StudentGender" Type="bit" />
+    <Property Name="StudentBirth" Type="datetime" />
+    <Property Name="StudentPhone" Type="varchar" MaxLength="50" />
+    <Property Name="StudentEmail" Type="varchar" MaxLength="150" />
+    <Property Name="ParentPhone" Type="varchar" MaxLength="50" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="SubjectTBLs">
     <Key>
@@ -665,6 +680,7 @@
     <EntitySet Name="OpenSubjectTBLs" EntityType="Self.OpenSubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefreshTokens" EntityType="Self.RefreshTokens" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoomTBLs" EntityType="Self.RoomTBLs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SemesterClassSubjectTBLs" EntityType="Self.SemesterClassSubjectTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SemesterTBLs" EntityType="Self.SemesterTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SlotTBLs" EntityType="Self.SlotTBLs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentInClassTBLs" EntityType="Self.StudentInClassTBLs" Schema="dbo" store:Type="Tables" />

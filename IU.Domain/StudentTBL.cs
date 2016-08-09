@@ -22,9 +22,10 @@ namespace IU.Domain
         }
     
         public string StudentID { get; set; }
+        public string StudentCode { get; set; }
         public string StudentName { get; set; }
-        public bool StudentGender { get; set; }
-        public System.DateTime StudentBirth { get; set; }
+        public Nullable<bool> StudentGender { get; set; }
+        public Nullable<System.DateTime> StudentBirth { get; set; }
         public string StudentPhone { get; set; }
         public string StudentEmail { get; set; }
         public string ParentPhone { get; set; }
