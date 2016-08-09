@@ -32,7 +32,11 @@ namespace IU.Web.Models
         public System.DateTime StudentBirth { get; set; }
         public string StudentPhone { get; set; }
         public string StudentEmail { get; set; }
+        public string StudentCourse { get; set; }
         public string ParentPhone { get; set; }
-        public string UserID { get; set; }
+        public string Password { get; set; }
+        public string ClassID { get; set; }
     }
+
+
 }

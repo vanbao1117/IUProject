@@ -12,5 +12,8 @@ namespace IU.Web.Models
         public string LecturerPhone { get; set; }
         public string LecturerEmail { get; set; }
         public string UserID { get; set; }
+        public string Password { get; set; }
+        
+        public string SubjectID { get; set; }
     }
 }

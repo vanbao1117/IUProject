@@ -11,20 +11,19 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="activity">
                         <div class="register-box-body">
-                            <p class="login-box-msg">Create a new Student account</p>
-                            <div class="col-xs-9">
+                            <div class="col-xs-12">
 
                                 <form action="../../index.html" method="post">
                                     <div class="form-group has-feedback">
-                                        <input type="text" class="form-control" placeholder="Full name" ng-model="stdFullName">
+                                        <input type="text" class="form-control" placeholder="Full name" ng-model="student.studentName">
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="email" class="form-control" placeholder="Email" ng-model="stdEmail">
+                                        <input type="email" class="form-control" placeholder="Email" ng-model="student.studentEmail">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="password" class="form-control" placeholder="Password" ng-model="stdPassword">
+                                        <input type="password" class="form-control" placeholder="Password" ng-model="student.password">
                                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -32,17 +31,26 @@
                                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="studentid" class="form-control" placeholder="StudentID" ng-model="stdStudentID">
+                                        <input type="studentid" class="form-control" placeholder="StudentID" ng-model="student.studentID">
                                         <span class="glyphicon glyphicon-tags form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="studentphone" class="form-control" placeholder="Student Phone" ng-model="stdStudentPhone">
+                                        <input type="studentphone" class="form-control" placeholder="Student Phone" ng-model="student.studentPhone">
                                         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="course" class="form-control" placeholder="Course" ng-model="stdStudentCourse">
+                                        <input type="course" class="form-control" placeholder="Course" ng-model="student.studentCourse">
                                         <span class="glyphicon glyphicon-tower form-control-feedback"></span>
                                     </div>
+                                    <div class="form-group has-feedback">
+                                        <div class="col-xs-1">
+                                            <p class="text-muted text-left">Class</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <select ng-model="student.classID" ng-options="item.classID as item.className for item in classes"></select>
+                                        </div>
+                                            
+                                        </div>
                                 </form>
                             </div>
                             @*<div class="col-xs-3">
@@ -58,15 +66,11 @@
                                 </div>
                             </div>*@
                             <div class="row">
-                                <div class="col-xs-9">
-                                    <div class="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                                        </label>
-                                    </div>
+                                <div class="col-xs-12">
+                                    
                                     <!-- /.col -->
                                     <div class="col-xs-3" style="float:right">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button>
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="createStudent()">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,20 +82,19 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
                         <div class="register-box-body">
-                            <p class="login-box-msg">Create a new Lecturer Account</p>
-                            <div class="col-xs-9">
+                            <div class="col-xs-12">
 
                                 <form action="../../index.html" method="post">
                                     <div class="form-group has-feedback">
-                                        <input type="text" class="form-control" placeholder="Full name">
+                                        <input type="text" class="form-control" placeholder="Full name" ng-model="lecturer.LecturerName">
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input type="email" class="form-control" placeholder="Email" ng-model="lecturer.lecturerEmail">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="password" class="form-control" placeholder="Password">
+                                        <input type="password" class="form-control" placeholder="Password" ng-model="lecturer.password">
                                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
@@ -99,16 +102,22 @@
                                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="studentid" class="form-control" placeholder="LecturerID">
+                                        <input type="studentid" class="form-control" placeholder="LecturerID" ng-model="lecturer.LecturerID">
                                         <span class="glyphicon glyphicon-tags form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input type="lecturer" class="form-control" placeholder="Lecturer Phone">
+                                        <input type="lecturer" class="form-control" placeholder="Lecturer Phone" ng-model="lecturer.LecturerPhone">
                                         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
                                     </div>
+                                   
                                     <div class="form-group has-feedback">
-                                        <input type="subject" class="form-control" placeholder="Subject">
-                                        <span class="glyphicon glyphicon-tower form-control-feedback"></span>
+                                        <div class="col-xs-1">
+                                            <p class="text-muted text-left">Subject</p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <select id="subjects" ng-model="lecturer.subjectID" ng-options="item.subjectID as item.abbreSubjectName for item in subjects"></select>
+                                        </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -125,15 +134,10 @@
                                 </div>
                             </div>*@
                             <div class="row">
-                                <div class="col-xs-9">
-                                    <div class="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                                        </label>
-                                    </div>
+                                <div class="col-xs-12">
                                     <!-- /.col -->
                                     <div class="col-xs-3" style="float:right">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button>
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="createLecturer()">Save</button>
                                     </div>
                                 </div>
                             </div>

@@ -3,6 +3,28 @@
 IUApp.factory('SubjectService', ['$http', '$q', function ($http, $q) {
 
     return {
+        createStudent: function (student) {
+            var def = $q.defer();
+            $http.post('api/Schedule/CreateStudent', student)
+                .success(function (bis) {
+                    def.resolve(bis);
+                })
+                .error(function () {
+                    def.reject("Failed to submit CreateStudent");
+                });
+            return def.promise;
+        },
+        CreateLecturer: function (lecturer) {
+            var def = $q.defer();
+            $http.post('api/Schedule/CreateLecturer', lecturer)
+                .success(function (bis) {
+                    def.resolve(bis);
+                })
+                .error(function () {
+                    def.reject("Failed to submit CreateLecturer");
+                });
+            return def.promise;
+        },
         createBis: function (openClass) {
             var def = $q.defer();
             $http.post('api/Schedule/CreateBis', openClass)

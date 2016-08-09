@@ -15,6 +15,58 @@ namespace IU.Web.Controllers
     [Authorize]
     public class ScheduleController : ApiController
     {
+        // HttpPost api/Schedule/CreateStudent
+        /// <summary>
+        /// CreateStudent
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> CreateStudent(StudentViewModel model)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _SubjectService.CreateStudentSync(model, userName);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+
+        // HttpPost api/Schedule/CreateLecturer
+        /// <summary>
+        /// CreateStudent
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> CreateLecturer(LecturerViewModel model)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _SubjectService.CreateLecturerSync(model, userName);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
 
         // GET api/Schedule/CreateBis
         /// <summary>

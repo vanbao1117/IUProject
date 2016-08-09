@@ -19,6 +19,9 @@ namespace IU.Services
         private IRepository<OpenSubjectTBL> OpenSubjectTBLRepository;
         private IRepository<ClassScheduleTBL> ClassScheduleTBLRepository;
         private IRepository<StudentListTBL> StudentListTBLRepository;
+        private IRepository<StudentTBL> StudentTBLRepository;
+        private IRepository<AspNetUser> AccountRepository;
+        private IRepository<SemesterClassSubjectTBL> SemesterClassSubjectTBLRepository;
 
         public SubjectService()
         {
@@ -28,6 +31,9 @@ namespace IU.Services
             OpenSubjectTBLRepository = new Repository<OpenSubjectTBL>();
             ClassScheduleTBLRepository = new Repository<ClassScheduleTBL>();
             StudentListTBLRepository = new Repository<StudentListTBL>();
+            AccountRepository = new Repository<AspNetUser>();
+            StudentTBLRepository = new Repository<StudentTBL>();
+            SemesterClassSubjectTBLRepository = new Repository<SemesterClassSubjectTBL>();
         }
 
         public async Task<bool> CreateBisSync(BisViewModel model, string userName)
@@ -56,8 +62,57 @@ namespace IU.Services
             
         }
 
-        //TODO
-        public async Task<bool> CreateStudentSync(BisViewModel model, string userName)
+
+
+        public async Task<bool> CreateLecturerSync(LecturerViewModel model, string userName)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => CreateLecturer(model, userName));
+            }
+        }
+
+        private bool CreateLecturer(LecturerViewModel model, string userName)
+        {
+            try
+            {
+                var signupUserModel = new AspNetUser
+                {
+                    Id = Helper.GenerateRandomId(),
+                    Email = model.LecturerEmail,
+                    EmailConfirmed = true,
+                    PasswordHash = Helper.GetHash(model.Password),
+                    PhoneNumber = model.LecturerPhone,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    UserName = model.LecturerID
+                };
+                
+                AccountRepository.Save(signupUserModel);
+
+                var lecture = new LecturerTBL() { LecturerID = Helper.GenerateRandomId(), UserID = signupUserModel.Id, LecturerBirth = DateTime.Now, LecturerEmail = model.LecturerEmail, LecturerGender = true, LecturerName = model.LecturerName, LecturerPhone = model.LecturerPhone };
+
+                LecturerTBLRepository.Save(lecture);
+                using (var context = new IUContext())
+                {
+                    var subject = context.SubjectTBLs.Where(s => s.SubjectID == model.SubjectID).FirstOrDefault();
+                    var updateLecture =context.LecturerTBLs.Include("SubjectTBLs").Where(l => l.LecturerID == lecture.LecturerID).FirstOrDefault();
+                    updateLecture.SubjectTBLs.Add(subject);
+                    context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<bool> CreateStudentSync(StudentViewModel model, string userName)
         {
             using (var context = new IUContext())
             {
@@ -65,15 +120,31 @@ namespace IU.Services
             }
         }
 
-        private bool CreateStudent(BisViewModel model, string userName)
+        private bool CreateStudent(StudentViewModel model, string userName)
         {
             try
             {
-                string classID = Helper.GenerateRandomId();
-                ClassRepository.Save(new ClassTBL() { ClassID = classID, ClassName = model.ClassName, CreateDate = DateTime.Now, Creater = userName, StartDate = model.StartDate });
-                string openClassID = Helper.GenerateRandomId();
-                OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline, Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
-                OpenSubjectTBLRepository.Save(new OpenSubjectTBL() { OpenSubjectID = Helper.GenerateRandomId(), OpenClassID = openClassID, LecturerID = model.LecturerID, ModeID = model.ModeID, SubjectID = model.SubjectID, StartDate = model.StartDate, Cost = 0, CreatedDate = DateTime.Now, Creater = userName, Credit = 0 });
+                var signupUserModel = new AspNetUser
+                {
+                    Id = Helper.GenerateRandomId(),
+                    Email = model.StudentEmail,
+                    EmailConfirmed = true,
+                    PasswordHash = Helper.GetHash(model.Password),
+                    PhoneNumber = model.StudentPhone,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    UserName = model.StudentID
+                };
+                
+                AccountRepository.Save(signupUserModel);
+                var student = new StudentTBL() { StudentID = Helper.GenerateRandomId(), ParentPhone = model.ParentPhone, StudentBirth = DateTime.Now, StudentCode = model.StudentID, StudentEmail = model.StudentEmail, StudentGender = true, StudentName = model.StudentName, StudentPhone = model.StudentPhone, UserID = signupUserModel.Id };
+
+                StudentTBLRepository.Save(student);
+
+                StudentListTBLRepository.Save(new StudentListTBL() { StudentListID = Helper.GenerateRandomId(), ClassID = model.ClassID, SemesterID = GetCurrentSemester().SemesterID, StudentID = student.StudentID });
+
                 return true;
             }
             catch (Exception ex)
@@ -114,6 +185,16 @@ namespace IU.Services
                 return false;
             }
 
+        }
+
+        private SemesterTBL GetCurrentSemester()
+        {
+            using (var context = new IUContext())
+            {
+                var currentDate = DateTime.Now;
+                var sem = context.SemesterTBLs.Where(obj => obj.StartDate <= currentDate && currentDate <= obj.EndDate);
+                return sem.FirstOrDefault();
+            }
         }
 
         public async Task<bool> CreateClassScheduleSync(ClassScheduleViewModel model, string userName)
