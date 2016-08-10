@@ -101,7 +101,7 @@ namespace IU.Services
                 var openSubject = context.OpenSubjectTBLs.Where(o => o.OpenSubjectID == accept.OpenSubjectID).FirstOrDefault();
                 var classID = openClass.ClassID;
                 var RoomId = openClass.RoomID;
-                var slotID = openClass.SlotID;
+                var slotIDs = openClass.SlotID;
                 var lecturerID = openSubject.LecturerID;
                 var semesterID = openClass.SemesterID;
                 var studentID = accept.StudentID;
@@ -109,7 +109,18 @@ namespace IU.Services
 
                 StudentListRepository.Save(new StudentListTBL() { ClassID = classID, SemesterID = semesterID, StudentID = studentID, StudentListID = studentListId });
 
-                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = openSubject.StartDate.Value, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID });
+                if (slotIDs.IndexOf('-') > 0)
+                {
+                    foreach (string slotID in slotIDs.Split('-'))
+                    {
+                        ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = openSubject.StartDate.Value, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID });
+                    }
+                }
+                else
+                {
+                    ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = openSubject.StartDate.Value, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID });
+                }
+                
             }
         }
 

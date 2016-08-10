@@ -101,16 +101,16 @@ namespace IU.Web.Controllers
         /// <returns></returns>
         [Authorize]
         [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> UpdateClassSchedule(ClassScheduleViewModel model)
+        public async Task<IHttpActionResult> UpdateClassSchedule(UpdateClassSchedulePageViewModel model)
         {
             try
             {
                 using (SubjectService _SubjectService = new SubjectService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
-                    if (model.isCreate)
+                    if (model.NewModel.isCreate)
                     {
-                        await _SubjectService.CreateClassScheduleSync(model, userName);
+                        await _SubjectService.CreateClassScheduleSync(model.NewModel, userName);
                     }
                     else
                     {
@@ -196,23 +196,20 @@ namespace IU.Web.Controllers
         {
             try
             {
+                string userName = HttpContext.Current.User.Identity.Name;
                 using (ScheduleClassService _ScheduleClassService = new ScheduleClassService())
                 {
                     if (abbreSubjectName.Equals("ALL"))
                     {
-                        var _ScheduleClass = await _ScheduleClassService.GetAllClassScheduleSync(pageNumber, pageSize);
+                        var _ScheduleClass = await _ScheduleClassService.GetAllClassScheduleSync(pageNumber, pageSize, userName);
                         return Ok(_ScheduleClass);
                     }
                     else
                     {
-                        string userName = HttpContext.Current.User.Identity.Name;
                         var _ScheduleClass = await _ScheduleClassService.GetClassScheduleSync(pageNumber, pageSize, userName, abbreSubjectName);
                         return Ok(_ScheduleClass);
                     }
-                    
                 }
-
-                
             }
             catch (Exception ex)
             {

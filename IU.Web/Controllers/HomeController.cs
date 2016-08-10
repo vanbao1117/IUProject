@@ -12,6 +12,8 @@ namespace IU.Web.Controllers
     {
         public ActionResult Index()
         {
+            
+
             using (UserService service = new UserService())
             {
                 string userName = HttpContext.User.Identity.Name;

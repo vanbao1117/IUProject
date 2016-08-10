@@ -216,7 +216,9 @@
                                     <th class="sorting">Class</th>
                                     <th class="sorting">Lecturer</th>
                                     <th class="sorting_asc" tabindex="0">Subject</th>
-                                    <th class="sorting">Days</th>
+                                    <th class="sorting">Start Days</th>
+                                    <th class="sorting">Mode</th>
+                                    <th class="sorting">Blog</th>
                                     <th class="sorting">Room</th>
                                     <th class="sorting">Slot</th>
                                     <th class="sorting">Edit</th>
@@ -235,6 +237,12 @@
                                     </td>
                                     <td>
                                         <input disabled date-input type="date" ng-model="class.dateStudy">
+                                    </td>
+                                    <td>
+                                        <select ng-model="class.modeID" ng-options="item.modeID as item.mode for item in modes"></select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="class.blogID" ng-options="item.blogID as item.name for item in blogs"></select>
                                     </td>
                                     <td>
                                         <select disabled ng-model="class.roomID" ng-options="item.romName as item.romName for item in rooms"></select>

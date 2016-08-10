@@ -4,6 +4,7 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
     'AttendanceService', 'SweetAlert',
     function ($scope, $http, $location, $route, $filter, $templateCache, $timeout, SubjectService, ScheduleServices, AttendanceService, SweetAlert) {
         $scope.mode = 'edit';
+        $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
 
         //Bis
         $scope.subjectSelected = {};
@@ -29,6 +30,11 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         
         $scope.allowEdit = function (row, button, index, _class) {
             _class.edited = true;
+            
+
+            var oldVal = $scope.copyObjToObj(_class);
+            _class.oldVal = oldVal;
+
             console.log('edit row: ', '.allow_' + index);
             console.log('edit row: ', '.remove_' + index);
             if (button.indexOf('allow') >= 0) {
@@ -48,6 +54,8 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                         return;
                     }
                 });
+
+                delete _class.oldVal;
                 _class.edited = false;
                 console.log('disableEdit row: ', row);
                 $("#" + row).find("select").attr('disabled', true);
@@ -82,6 +90,31 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                 $('#timeline').hide();
                 $('#activity').hide();
             }
+        };
+
+        $scope.copyObjToObj = function (source, destination) {
+            if (!!destination) {
+                angular.copy(source, destination);
+            } else {
+                destination = angular.copy(source);
+            }
+            return destination;
+        };
+
+        $scope.GetClassSchedule = function () {
+            $scope.mode = 'edit';
+            var classID = $scope.classSelected.classID;
+            $scope.className = $scope.classSelected.className;
+            console.log('GetClassSchedule: ', $scope.className);
+            var semesterID = $scope.classSemesterSelected.semesterID;
+            SubjectService.GetClassSchedule(classID, semesterID).then(
+               function (classSchedules) {
+                   console.log('GetClassSchedule: ', classSchedules);
+                   $scope.classSchedules = classSchedules;
+               },
+               function (error) {
+                   console.log('GetClassSchedule error: ' + error);
+               });
         };
 
     $scope.saveChange = function () {
@@ -127,9 +160,23 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         } else if ($scope.currentTab == 'settings') {//Class 
             angular.forEach($scope.classSchedules, function (value, key) {
                 if (value.edited) {
-                    SubjectService.updateClassSchedule(value).then(
+              
+                    var oldval = $scope.copyObjToObj(value.oldVal, oldval);
+
+                    delete value.oldVal;
+
+                    var nval = $scope.copyObjToObj(value, nval);
+
+                    var submit = {oldModel: oldval, newModel:nval};
+
+
+                
+                    console.log('Update submit: ', submit);
+
+                    SubjectService.updateClassSchedule(submit).then(
                       function (status) {
                           $timeout(function () {
+                              $scope.GetClassSchedule();
                               SweetAlert.swal("Update Schedule!", "Update Schedule successfuly!", "success");
                           });
                           console.log('Update Schedule: ', status);
@@ -142,6 +189,8 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            
         }
     }
+
+ 
 
     $scope.setPageHeader = function (header) {
         $('.content-header').html('<h1>' + header + '</h1><ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">' + header + '</li></ol>');
@@ -228,21 +277,7 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            });
     };
 
-    $scope.GetClassSchedule = function () {
-        $scope.mode = 'edit';
-        var classID = $scope.classSelected.classID;
-        $scope.className = $scope.classSelected.className;
-        console.log('GetClassSchedule: ', $scope.className);
-        var semesterID = $scope.classSemesterSelected.semesterID;
-        SubjectService.GetClassSchedule(classID, semesterID).then(
-           function (classSchedules) {
-               console.log('GetClassSchedule: ', classSchedules);
-               $scope.classSchedules = classSchedules;
-           },
-           function (error) {
-               console.log('GetClassSchedule error: ' + error);
-           });
-    };
+
 
     $scope.SetupClassSchedule = function () {
         $scope.mode = 'setup';

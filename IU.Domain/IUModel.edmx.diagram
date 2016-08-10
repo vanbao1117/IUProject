@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="IUModel.AcceptRegister" Width="1.5" PointX="10.5" PointY="15.625" />
         <EntityTypeShape EntityType="IUModel.AdminTBL" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="IUModel.AspNetRole" Width="1.5" PointX="2.75" PointY="2.5" />
-        <EntityTypeShape EntityType="IUModel.AspNetUserClaim" Width="1.5" PointX="7.25" PointY="3.625" />
-        <EntityTypeShape EntityType="IUModel.AspNetUserLogin" Width="1.5" PointX="7.25" PointY="1" />
+        <EntityTypeShape EntityType="IUModel.AspNetUserClaim" Width="1.5" PointX="7.25" PointY="1" />
+        <EntityTypeShape EntityType="IUModel.AspNetUserLogin" Width="1.5" PointX="7.25" PointY="3.75" />
         <EntityTypeShape EntityType="IUModel.AspNetUser" Width="1.5" PointX="5" PointY="1.25" />
         <EntityTypeShape EntityType="IUModel.AspTransport" Width="1.5" PointX="9.75" PointY="3.75" />
         <EntityTypeShape EntityType="IUModel.AttendanceTBL" Width="1.5" PointX="5.25" PointY="16.125" />

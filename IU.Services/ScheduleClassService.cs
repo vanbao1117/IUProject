@@ -64,23 +64,23 @@ namespace IU.Services
             }
         }
 
-        public async Task<ClassSchedulePageViewModel> GetAllClassScheduleSync(int pageNumber, int pageSize)
+        public async Task<ClassSchedulePageViewModel> GetAllClassScheduleSync(int pageNumber, int pageSize, string userName)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetAllClassSchedule(pageNumber, pageSize));
+                return await Task.Run(() => GetAllClassSchedule(pageNumber, pageSize, userName));
             }
         }
 
 
 
-        private ClassSchedulePageViewModel GetAllClassSchedule(int pageNumber, int pageSize)
+        private ClassSchedulePageViewModel GetAllClassSchedule(int pageNumber, int pageSize, string userName)
         {
             using (var context = new IUContext())
             {
                 int NumberOfItems = 0;
                 var sem = GetCurrentSemester();
-                var studentList = GetStudentList(sem);
+                var studentList = GetStudentList(sem, userName);
 
                 var classSheduleTbl = context.ClassScheduleTBLs.Where(c => studentList.Contains(c.StudentListID));
 
@@ -145,11 +145,13 @@ namespace IU.Services
             }
         }
 
-        private string[] GetStudentList(SemesterTBL sem)
+        private string[] GetStudentList(SemesterTBL sem, string userName)
         {
             using (var context = new IUContext())
             {
-                var studentListTBL = context.StudentListTBLs.Where(obj => obj.SemesterID == sem.SemesterID);
+                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
+                var student = context.StudentTBLs.Where(s=>s.UserID == user.Id).FirstOrDefault();
+                var studentListTBL = context.StudentListTBLs.Where(obj => obj.SemesterID == sem.SemesterID && obj.StudentID == student.StudentID);
                 return studentListTBL.Select(l=> l.StudentListID).ToArray();
             }
         }

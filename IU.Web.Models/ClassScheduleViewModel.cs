@@ -23,6 +23,8 @@ namespace IU.Web.Models
         public string UserID { get; set; }
         public System.DateTime DateStudy { get; set; }
         public string SemesterID { get; set; }
+        public int ModeID { get; set; }
+        public int BlogID { get; set; }
         public bool isCreate { get; set; }
     }
 
@@ -30,5 +32,11 @@ namespace IU.Web.Models
     {
         public List<ClassScheduleViewModel> ClassSchedules { get; set; }
         public int TotalPages { get; set; }
+    }
+
+    public class UpdateClassSchedulePageViewModel
+    {
+        public ClassScheduleViewModel OldModel { get; set; }
+        public ClassScheduleViewModel NewModel { get; set; }
     }
 }
