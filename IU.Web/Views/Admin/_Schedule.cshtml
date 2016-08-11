@@ -37,7 +37,7 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">StartDay</th>
                                     <th class="sorting">Class</th>
                                     <th class="sorting">Lecturer</th>
-                                    <th class="sorting">Mode</th>
+                                    @*<th class="sorting">Mode</th>*@
                                     <th class="sorting">Room</th>
                                     <th class="sorting">Slot</th>
                                 </tr>
@@ -50,9 +50,9 @@
                                     <td>
                                         <select ng-model="editBisLecturerSelected" ng-options="item as item.lecturerName for item in lecturers"></select>
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <select ng-model="editModeSelected" ng-options="item as item.mode for item in modes"></select>
-                                    </td>
+                                    </td>*@
                                     <td>
                                         <select ng-model="editRoomSelected" ng-options="item as item.romName for item in rooms"></select>
                                     </td>

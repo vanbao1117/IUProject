@@ -27,6 +27,7 @@ namespace IU.Domain
         public System.DateTime CreateDate { get; set; }
         public string Creater { get; set; }
         public System.DateTime StartDate { get; set; }
+        public Nullable<bool> IsMainClass { get; set; }
     
         public virtual ICollection<AttendanceTBL> AttendanceTBLs { get; set; }
         public virtual ICollection<LecturerScheduleTBL> LecturerScheduleTBLs { get; set; }

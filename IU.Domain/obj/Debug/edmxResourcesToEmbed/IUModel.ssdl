@@ -123,6 +123,7 @@
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="Creater" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="IsMainClass" Type="bit" />
   </EntityType>
   <EntityType Name="Clients">
     <Key>

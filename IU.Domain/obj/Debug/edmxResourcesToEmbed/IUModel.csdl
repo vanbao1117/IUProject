@@ -255,6 +255,7 @@
     <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Creater" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsMainClass" Type="Boolean" />
     <NavigationProperty Name="AttendanceTBLs" Relationship="IUModel.FK_AttendanceTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="AttendanceTBL" />
     <NavigationProperty Name="LecturerScheduleTBLs" Relationship="IUModel.FK_LecturerScheduleTBLs_ClassTBLs" FromRole="ClassTBL" ToRole="LecturerScheduleTBL" />
     <NavigationProperty Name="StudentListTBLs" Relationship="IUModel.FK_ListStudentTBLs_ClassTBLs1" FromRole="ClassTBL" ToRole="StudentListTBL" />

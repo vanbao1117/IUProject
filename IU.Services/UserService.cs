@@ -61,7 +61,15 @@ namespace IU.Services
                     userModelView.AccountType = "STUDENT";
                     userModelView.FullName = student.StudentName;
                     userModelView.Semester = GetCurrentSemester().SemesterName;
-                    userModelView.Class = GetClass(student.StudentID).ClassName;
+                    List<ClassTBL> lsClass = GetClass(student.StudentID);
+                    foreach (ClassTBL classes in lsClass)
+                    {
+                        if (classes.IsMainClass.Value)
+                        {
+                            userModelView.Class = classes.ClassName;
+                        }
+                    }
+                   
                     return userModelView;
                 }
                 //Check if user is Lecturer
@@ -89,7 +97,7 @@ namespace IU.Services
 
         }
 
-        private ClassTBL GetClass(string studentID)
+        private List<ClassTBL> GetClass(string studentID)
         {
             using (var context = new IUContext())
             {
@@ -98,9 +106,9 @@ namespace IU.Services
                  join studentListTBLs in context.StudentListTBLs
                      on classTBLs.ClassID equals studentListTBLs.ClassID
                  where studentListTBLs.StudentID == studentID
-                 select classTBLs).SingleOrDefault();
+                 select classTBLs);
 
-                return classTBL;
+                return classTBL.ToList();
             }
         }
 

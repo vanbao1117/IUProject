@@ -117,6 +117,7 @@
     <EntitySetMapping Name="ClassTBLs">
       <EntityTypeMapping TypeName="IUModel.ClassTBL">
         <MappingFragment StoreEntitySet="ClassTBLs">
+          <ScalarProperty Name="IsMainClass" ColumnName="IsMainClass" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="Creater" ColumnName="Creater" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

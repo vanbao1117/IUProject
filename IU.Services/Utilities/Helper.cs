@@ -134,6 +134,117 @@ namespace IU.Services
             }
            
         }
+
+        public static DateTime[] GetRStudyDays(DateTime start, DateTime end, string modes, int blog)
+        {
+
+            List<DayOfWeek> daysToChoose = new List<DayOfWeek>();
+
+            List<string> lsMode = new List<string>();
+            if (modes.IndexOf('-') > 0)
+            {
+                string[] _mode = modes.Split('-');
+                lsMode.AddRange(_mode);
+            }
+            else
+            {
+                lsMode.Add(modes);
+            }
+
+            foreach (string mod in lsMode)
+            {
+                if (mod.Equals("2"))
+                {
+                    daysToChoose.Add(DayOfWeek.Monday);
+                }
+                else if (mod.Equals("3"))
+                {
+                    daysToChoose.Add(DayOfWeek.Tuesday);
+                }
+                else if (mod.Equals("4"))
+                {
+                    daysToChoose.Add(DayOfWeek.Wednesday);
+                }
+                else if (mod.Equals("5"))
+                {
+                    daysToChoose.Add(DayOfWeek.Thursday);
+                }
+                else if (mod.Equals("6"))
+                {
+                    daysToChoose.Add(DayOfWeek.Friday);
+                }
+                else if (mod.Equals("7"))
+                {
+                    daysToChoose.Add(DayOfWeek.Saturday);
+                }
+                else if (mod.Equals("8"))
+                {
+                    daysToChoose.Add(DayOfWeek.Sunday);
+                }
+                else
+                {
+                    daysToChoose.Add(DayOfWeek.Monday);
+                    daysToChoose.Add(DayOfWeek.Tuesday);
+                    daysToChoose.Add(DayOfWeek.Wednesday);
+                    daysToChoose.Add(DayOfWeek.Thursday);
+                    daysToChoose.Add(DayOfWeek.Friday);
+                    daysToChoose.Add(DayOfWeek.Saturday);
+                    daysToChoose.Add(DayOfWeek.Sunday);
+                }
+            }
+
+            DateTime[] totalDates = Enumerable.Range(0, (int)(end - start).TotalDays + 1)
+                                    .Select(d => start.AddDays(d))
+                                    .Where(d => d.DayOfWeek == DayOfWeek.Sunday).ToArray();
+
+            if (blog == 1 && totalDates.Length >= 5)
+            {
+                DateTime _blogStart = FirstDayOfWeek(totalDates[0]);
+                DateTime _blogEnd = totalDates[5];
+
+                TimeSpan diff = _blogEnd - _blogStart;
+                int days = diff.Days;
+                List<DateTime> dates = new List<DateTime>();
+                for (var i = 0; i <= days; i++)
+                {
+                    var testDate = _blogStart.AddDays(i);
+
+                    if (daysToChoose.Contains(testDate.DayOfWeek))
+                    {
+                        dates.Add(testDate);
+                    }
+                }
+
+
+                dates.Sort();
+                dates.Reverse();
+                return dates.ToArray();
+            }
+            else
+            {
+                DateTime _blogStart = FirstDayOfWeek(totalDates[0]);
+                DateTime _blogEnd = totalDates[totalDates.Length - 1];
+
+                TimeSpan diff = _blogEnd - _blogStart;
+                int days = diff.Days;
+                List<DateTime> dates = new List<DateTime>();
+                for (var i = 0; i <= days; i++)
+                {
+                    var testDate = _blogStart.AddDays(i);
+
+                    if (daysToChoose.Contains(testDate.DayOfWeek))
+                    {
+                        dates.Add(testDate);
+                    }
+                }
+
+
+                dates.Sort();
+                dates.Reverse();
+                return dates.ToArray();
+            }
+
+        }
         public static DateTime[] GetTwoDaysBefore()
         {
             var dt = DateTime.Now;
