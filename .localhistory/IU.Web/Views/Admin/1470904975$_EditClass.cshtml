@@ -1,0 +1,48 @@
+﻿<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Student</th>
+                                            <th class="sorting">Birth</th>
+                                            <th class="sorting">Gender</th>
+                                            <th class="sorting">Phone</th>
+                                            <th class="sorting">Parent Phone</th>
+                                            <th class="sorting">Email</th>
+                                            <th class="sorting">Change class</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr role="row" class="odd" ng-repeat="item in students">
+                                            <td>{{item.studentName}}</td>
+                                            <td>{{item.studentBirth}}</td>
+                                            <td>{{item.studentGender}}</td>
+                                            <td>{{item.studentPhone}}</td>
+                                            <td>{{item.parentPhone}}</td>
+                                            <td>{{item.studentEmail}}</td>
+                                            <td>
+                                                <select id="lectureClass" ng-model="item.classID" ng-options="item.classID as item.className for item in classes"></select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div><button style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save Change</button></div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+</section>

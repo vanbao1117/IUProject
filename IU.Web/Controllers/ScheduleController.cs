@@ -15,6 +15,143 @@ namespace IU.Web.Controllers
     [Authorize]
     public class ScheduleController : ApiController
     {
+
+        // GET api/Schedule/GetOpenClass
+        /// <summary>
+        /// Get GetOpenClass
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<OpenClassViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetOpenClass()
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    var openClass = await _ClassService.GetOpenClass();
+                    return Ok(openClass);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+
+        }
+
+        // GET api/Schedule/GetStudentInOpenClass
+        /// <summary>
+        /// Get GetStudentInOpenClass
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<StudentInOpenClassViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetStudentInOpenClass(string classID)
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    var students = await _ClassService.GetStudentInOpenClass(classID);
+                    return Ok(students);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+
+        }
+
+        // HttpPost api/Schedule/StudentChangeClass
+        /// <summary>
+        /// StudentChangeClass
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> StudentChangeClass(StudentChangeViewModel model)
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    await _ClassService.ChangeClass(model.OldClassID, model.StudentID, model.ClassID);
+                    return Ok();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
+        // GET api/Schedule/GetStudentInClass
+        /// <summary>
+        /// Get GetStudentInClass
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<StudentViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetStudentInClass(string classID)
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    var students = await _ClassService.GetStudentInClass(classID);
+                    return Ok(students);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+
+        }
+        // GET api/Schedule/GetClasses
+        /// <summary>
+        /// Get GetClassSchedule
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<ClassViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetClasses()
+        {
+            try
+            {
+                using (ClassService _ClassService = new ClassService())
+                {
+                    var classs = await _ClassService.GetAllClassList();
+                    return Ok(classs);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
         // HttpPost api/Schedule/CreateStudent
         /// <summary>
         /// CreateStudent

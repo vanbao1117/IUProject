@@ -51,7 +51,7 @@ namespace IU.Services
                         await AcceptRegisterRepository.DeleteAsync(acceptRegister);
                     }
 
-                    var nextAcceptRegister = AcceptRegisterRepository.FindAllBy(a => a.OrderNum == acceptRegister.OrderNum + 1).FirstOrDefault();
+                    var nextAcceptRegister = AcceptRegisterRepository.FindAllBy(a => a.Accepted == false).OrderBy(c => c.RegisterDate).FirstOrDefault();
                     //Accept next student
                     if (nextAcceptRegister != null)
                         createClassSchedule(nextAcceptRegister);
@@ -87,14 +87,22 @@ namespace IU.Services
 
                     //Check limited
                     var limited = checkLimit(model.OpenClassID);
-                    if (limited) return null;
+                    if (limited)
+                    {
+                        string _id = Helper.GenerateRandomId();
+                        await AcceptRegisterRepository.SaveAsync(new AcceptRegister() { AcceptRegisterID = _id, OpenClassID = model.OpenClassID, OpenSubjectID = model.OpenSubjectID, OrderNum = orderNum, RegisterDate = DateTime.Now, StudentID = student.StudentID, Accepted = false });
+                    }
+                    else
+                    {
+                        string _id = Helper.GenerateRandomId();
+                        await AcceptRegisterRepository.SaveAsync(new AcceptRegister() { AcceptRegisterID = _id, OpenClassID = model.OpenClassID, OpenSubjectID = model.OpenSubjectID, OrderNum = orderNum, RegisterDate = DateTime.Now, StudentID = student.StudentID, Accepted = true });
 
-                    string _id = Helper.GenerateRandomId();
-                    await AcceptRegisterRepository.SaveAsync(new AcceptRegister() { AcceptRegisterID = _id, OpenClassID = model.OpenClassID, OpenSubjectID = model.OpenSubjectID, OrderNum = orderNum, RegisterDate = DateTime.Now, StudentID = student.StudentID, Accepted = false });
+                        var accept = AcceptRegisterRepository.FindOneBy(a => a.AcceptRegisterID == _id);
 
-                    var accept = AcceptRegisterRepository.FindOneBy(a => a.AcceptRegisterID == _id);
+                        createClassSchedule(accept);
+                    }
 
-                    createClassSchedule(accept);
+                    
 
                     return model;
                 }

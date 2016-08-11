@@ -38,5 +38,22 @@ namespace IU.Web.Models
         public string ClassID { get; set; }
     }
 
+    public class StudentInOpenClassViewModel
+    {
+        public string StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string StudentCode{ get; set; }
+        public DateTime StudentBirth { get; set; }
+        public string ClassName { get; set; }
+        public string ClassID { get; set; }
+        public string Status { get; set; }
+    }
 
+    public class StudentChangeViewModel
+    {
+        public string StudentID { get; set; }
+        public string OldClassID { get; set; }
+
+        public string ClassID { get; set; }
+    }
 }

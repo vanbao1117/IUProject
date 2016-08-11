@@ -16,7 +16,17 @@ var IUApp = angular.module('IUApp', ["ngRoute"]).config(function ($routeProvider
             templateUrl: '/Home/AdminHome',
             controller: 'AdminHomeController'
         })
-        .when('/admin/account', {//AdminHome
+        .when('/admin/openclass', {//openclass
+            templateUrl: '/Home/StudentInOpenClass',
+            controller: 'AdminOpenClassController'
+        })
+        .when('/admin/edit/:classID', {//edit
+            templateUrl: function (params) {
+                return 'Home/StudentInClass?classID=' + params.classID
+            },
+            controller: 'StudentInClassController'
+        })
+        .when('/admin/account', {//account
             templateUrl: '/Home/AdminAccount',
             controller: 'AdminAccountController'
         })
