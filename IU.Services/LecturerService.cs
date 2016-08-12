@@ -106,12 +106,24 @@ namespace IU.Services
                 }
                 else
                 {
-                    attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID == subjectID && a.Attendancer == user.Id).ToList();
+                    attandances = AttendanceTBLRepository.FindAllBy(a => a.ClassID == classID && a.SubjectID.Trim() == subjectID && a.Attendancer == user.Id).ToList();
                 }
 
-                
+                var previewViewModels2 = context.ClassScheduleTBLs.Where(c => c.ClassID.Replace("\r\n", string.Empty) == classID.Replace("\r\n", string.Empty)
+                    && c.SubjectID.Replace("\r\n", string.Empty) == subjectID.Replace("\r\n", string.Empty)).OrderBy(p => p.DateStudy).GroupBy(n => new { n.DateStudy, n.SlotID })
+                            .Select(a => new PreviewViewModel()
+                            {
+                                Day = a.Key.DateStudy.Day + "/" + a.Key.DateStudy.Month,
+                                Slot = a.Key.SlotID
+                            }).ToList().Select(a => new PreviewViewModel()
+                            {
+                                Day = a.Day,
+                                Slot = GetSlot(a.Slot).SlotName
+                            }).ToList();
 
-                var previewViewModels = attandances.Select(a => new PreviewViewModel() { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID).SlotName, Status = (a.Attendance == true ? "P" : "A"), StudentName = GetStudent(a.StudentListID).StudentName }).OrderBy(p => p.Day).ToList();
+                var previewViewModels = attandances.Select(a => new PreviewViewModel() 
+                { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID).SlotName, Status = (a.Attendance == true ? "P" : "A"),
+                    StudentName = GetStudent(a.StudentListID).StudentName }).OrderBy(p => p.Day).ToList();
 
 
                 var rows = previewViewModels
@@ -128,13 +140,34 @@ namespace IU.Services
                             }
                 );
 
-                PreviewListViewModel model = new PreviewListViewModel() { ClassID = classID, SubjectID = subjectID, Preview = previewViewModels, Data = new List<LecturePreviewViewModel>(), CurrentSemmeter = GetCurrentSemester().SemesterName };
-
+                PreviewListViewModel model = new PreviewListViewModel() { ClassID = classID, SubjectID = subjectID, Preview = previewViewModels2, Data = new List<LecturePreviewViewModel>(), CurrentSemmeter = GetCurrentSemester().SemesterName };
+                int index = 0;
                 foreach (var studnt in rows)
                 {
+                    LecturePreviewViewModel row = null;
                     
                     var _cols = previewViewModels.Where(p => p.StudentName == studnt.StudentName).OrderBy(p=>p.Day).ToList();
-                    LecturePreviewViewModel row = new LecturePreviewViewModel() { Row = studnt.StudentName, Cols = _cols };
+                    if (index == 0)
+                    {
+                        List<PreviewViewModel> ls = new List<PreviewViewModel>();
+                        foreach (var modl in previewViewModels2)
+                        {
+                            if (modl.Day == _cols[0].Day)
+                            {
+                                break;
+                            }
+                            ls.Add(modl);
+                        }
+                        ls.AddRange(_cols);
+                        row = new LecturePreviewViewModel() { Row = studnt.StudentName, Cols = ls };
+                    }
+                    else
+                    {
+                        row = new LecturePreviewViewModel() { Row = studnt.StudentName, Cols = _cols };
+                    }
+                    
+                    
+                   
                     
                     model.Data.Add(row);
                 }
@@ -165,13 +198,13 @@ namespace IU.Services
                     attendance.Note = model.Note;
                     attendance.DateAttendance = model.DateStudy;
                     attendance.Attendance = model.Present;
-                    AttendanceTBLRepository.UpdateAsync(attendance);
+                    AttendanceTBLRepository.Update(attendance);
                 }
                 else
                 {
-                    AttendanceTBLRepository.SaveAsync(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id, ClassID = model.ClassID, DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
+                    AttendanceTBLRepository.Save(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id, ClassID = model.ClassID, DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
 
-                    var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID == model.SubjectID && c.StudentListID == model.StudentListID && c.DateStudy == model.DateStudy);
+                    var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID.Replace("\r\n", string.Empty) == model.SubjectID.Replace("\r\n", string.Empty) && c.StudentListID == model.StudentListID && c.DateStudy == model.DateStudy);
                     if (classTbl != null)
                     {
                         classTbl.IsAttendance = true;
@@ -295,17 +328,16 @@ namespace IU.Services
                 {
                     var results = context.AttendanceTBLs.Where(x => x.Attendancer == user.Id && x.SemesterID == semesterID && x.DateAttendance.Year == date.Year
                        && x.DateAttendance.Month == date.Month
-                       && x.DateAttendance.Day == date.Day).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.Note }, (key, group) => new
+                       && x.DateAttendance.Day == date.Day).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID }, (key, group) => new
                        {
                            ClassID = key.ClassID,
                            RoomID = key.RoomID,
                            SubjectID = key.SubjectID,
                            SlotID = key.SlotID,
-                           Note = key.Note,
                            Result = group.ToList()
                        }).ToList().Distinct();
 
-                    var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = a.RoomID, SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), Note = a.Note, SemesterID = GetCurrentSemester().SemesterID, isAttendanced = true, DateAttendance = date });
+                    var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = a.RoomID, SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = true, DateAttendance = date });
 
                     lsAttendance.AddRange(attendances.ToArray());
                 }
