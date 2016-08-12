@@ -22,6 +22,7 @@ namespace IU.Services
         private IRepository<StudentTBL> StudentTBLRepository;
         private IRepository<AspNetUser> AccountRepository;
         private IRepository<SemesterClassSubjectTBL> SemesterClassSubjectTBLRepository;
+        private IRepository<LecturerScheduleTBL> LecturerScheduleTBLRepository;
 
         public SubjectService()
         {
@@ -34,6 +35,7 @@ namespace IU.Services
             AccountRepository = new Repository<AspNetUser>();
             StudentTBLRepository = new Repository<StudentTBL>();
             SemesterClassSubjectTBLRepository = new Repository<SemesterClassSubjectTBL>();
+            LecturerScheduleTBLRepository = new Repository<LecturerScheduleTBL>();
         }
 
         public async Task<bool> CreateBisSync(BisViewModel model, string userName)
@@ -49,7 +51,7 @@ namespace IU.Services
             try
             {
                 string classID = Helper.GenerateRandomId();
-                ClassRepository.Save(new ClassTBL() { ClassID = classID, ClassName = model.ClassName, CreateDate = DateTime.Now, Creater = userName, StartDate = model.StartDate });
+                ClassRepository.Save(new ClassTBL() { ClassID = classID, ClassName = model.ClassName, CreateDate = DateTime.Now, Creater = userName, StartDate = model.StartDate, IsMainClass = false });
                 string openClassID = Helper.GenerateRandomId();
                 OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline, Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
                 OpenSubjectTBLRepository.Save(new OpenSubjectTBL() { OpenSubjectID = Helper.GenerateRandomId(), OpenClassID = openClassID, LecturerID = model.LecturerID, ModeID = model.ModeID, SubjectID = model.SubjectID, StartDate = model.StartDate, Cost = 0, CreatedDate = DateTime.Now, Creater = userName, Credit = 0 });
@@ -215,6 +217,7 @@ namespace IU.Services
         {
             try
             {
+                LecturerScheduleTBLRepository.Save(new LecturerScheduleTBL() { LecturerSchedule = Helper.GenerateRandomId(), ClassID = model.ClassID, LecturerID = model.LecturerID, SemesterID = model.SemesterID, SubjectID = model.SubjectID, StartDate = DateTime.Now });
                 using (var context = new IUContext())
                 {
                     var mode = context.ModeTBLs.Where(m => m.ModeID == model.ModeID).FirstOrDefault();
