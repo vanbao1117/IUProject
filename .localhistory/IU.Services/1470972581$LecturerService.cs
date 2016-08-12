@@ -438,7 +438,7 @@ namespace IU.Services
                  join studentListTBLs in context.StudentListTBLs
                      on studentTBLs.StudentID equals studentListTBLs.StudentID
                  where studentListTBLs.StudentListID == studentListID
-                 select studentTBLs).FirstOrDefault();
+                 select studentTBLs).SingleOrDefault();
 
                 return student;
             }

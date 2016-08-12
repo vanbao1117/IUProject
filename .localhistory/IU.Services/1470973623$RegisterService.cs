@@ -238,15 +238,15 @@ namespace IU.Services
             }
         }
 
-        public async Task<List<OpenSubjectViewModel>> GetRegisterDataSync(string userName)
+        public async Task<List<OpenSubjectViewModel>> GetRegisterDataSync()
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetRegisterData(userName));
+                return await Task.Run(() => GetRegisterData());
             }
         }
 
-        private List<OpenSubjectViewModel> GetRegisterData(string userName)
+        private List<OpenSubjectViewModel> GetRegisterData()
         {
             using (var context = new IUContext())
             {
@@ -271,11 +271,11 @@ namespace IU.Services
                 {
                     model.Select = checkExitOpenSubject(model.OpenSubjectID) && index == 0 ? true : false;
                     model.Active = checkExitOpenSubject(model.OpenSubjectID) && index == 0 ? true : false;
-                    model.Accepted = GetAcceptRegister(model.OpenClassID, userName) == null ? false : GetAcceptRegister(model.OpenClassID, userName).Accepted.Value;
-                    model.Status = GetAcceptRegister(model.OpenClassID, userName) == null ? "" : GetAcceptRegister(model.OpenClassID, userName).Accepted.Value ? "Accepted" : "Pending";
+                    model.Accepted = GetAcceptRegister(model.OpenClassID) == null ? false : GetAcceptRegister(model.OpenClassID).Accepted.Value;
+                    model.Status = GetAcceptRegister(model.OpenClassID) == null ? "" : GetAcceptRegister(model.OpenClassID).Accepted.Value ? "Accepted" : "Pending";
 
                     var openClass = context.OpenClassTBLs.Where(o => o.OpenClassID == model.OpenClassID).ToArray()
-                        .Select(o => new OpenClassViewModel() { Active = checkExitOpenClass(o.OpenClassID) && index == 0 ? true : false, ClassID = o.ClassID, ClassName = GetClass(o.ClassID).ClassName, CreatedDate = o.CreatedDate, Creater = o.Creater, OpenClassID = o.OpenClassID, RoomID = o.RoomID, RoomName = o.RoomID, Select = checkExitOpenClass(o.OpenClassID) && index == 0 ? true : false, SlotID = o.SlotID, SlotName = o.SlotID, StartDate = GetClass(o.ClassID).StartDate, Accepted = GetAcceptRegister(model.OpenClassID, userName) == null ? false : GetAcceptRegister(model.OpenClassID, userName).Accepted.Value, Status = GetAcceptRegister(model.OpenClassID, userName) == null ? "" : GetAcceptRegister(model.OpenClassID, userName).Accepted.Value ? "Accepted" : "Pending" }).ToList();
+                        .Select(o => new OpenClassViewModel() { Active = checkExitOpenClass(o.OpenClassID) && index == 0 ? true : false, ClassID = o.ClassID, ClassName = GetClass(o.ClassID).ClassName, CreatedDate = o.CreatedDate, Creater = o.Creater, OpenClassID = o.OpenClassID, RoomID = o.RoomID, RoomName = o.RoomID, Select = checkExitOpenClass(o.OpenClassID) && index == 0 ? true : false, SlotID = o.SlotID, SlotName = o.SlotID, StartDate = GetClass(o.ClassID).StartDate, Accepted = GetAcceptRegister(model.OpenClassID) == null ? false : GetAcceptRegister(model.OpenClassID).Accepted.Value, Status = GetAcceptRegister(model.OpenClassID) == null ? "" : GetAcceptRegister(model.OpenClassID).Accepted.Value ? "Accepted" : "Pending" }).ToList();
 
                     model.ChooseClass = openClass;
                     lsOpenSubject.Add(model);
@@ -351,9 +351,7 @@ namespace IU.Services
         {
             using (var context = new IUContext())
             {
-                var user = context.AspNetUsers.Where(u => u.UserName == userName).FirstOrDefault();
-                var student = context.StudentTBLs.Where(s => s.UserID == user.Id).FirstOrDefault();
-                var acceptRegister = context.AcceptRegisters.Where(o => o.OpenClassID == openClassID && o.StudentID == student.StudentID).FirstOrDefault();
+                var acceptRegister = context.AcceptRegisters.Where(o => o.OpenClassID == openClassID).FirstOrDefault();
                 return acceptRegister;
             }
         }

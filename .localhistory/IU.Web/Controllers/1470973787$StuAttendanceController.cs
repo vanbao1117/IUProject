@@ -29,7 +29,7 @@ namespace IU.Web.Controllers
                 using (RegisterService _RegisterService = new RegisterService())
                 {
                     string userName = HttpContext.Current.User.Identity.Name;
-                    List<OpenSubjectViewModel> lsModel = await _RegisterService.GetRegisterDataSync(userName);
+                    List<OpenSubjectViewModel> lsModel = await _RegisterService.GetRegisterDataSync();
                     return Ok(lsModel);
 
                 }
