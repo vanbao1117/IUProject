@@ -117,22 +117,22 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                });
         };
 
-    $scope.saveChange = function () {
+        $scope.saveChange = function (isNewSchedule) {
         //Bis
-        if ($scope.currentTab == 'activity') {
-            var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
-            var openClass = {
-                semesterID: $scope.semesterSelected.semesterID,
-                className: $scope.className,
-                startDate: $scope.startDay,
-                roomID: $scope.editRoomSelected.roomID,
-                slotIDs: [$scope.editSlot1Selected.slotID, $scope.editSlot2Selected.slotID],
-                modeID: $scope.editModeSelected.modeID,
-                limit: $scope.quantity,
-                deadline: $scope.deadLine,
-                subjectID: $scope.subjectSelected.subjectID,
-                lecturerID: $scope.editBisLecturerSelected.lecturerID
-            };
+            if ($scope.currentTab == 'activity') {
+                var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
+                var openClass = {
+                    semesterID: $scope.semesterSelected.semesterID,
+                    className: $scope.className,
+                    startDate: $scope.startDay,
+                    roomID: $scope.editRoomSelected.roomID,
+                    slotIDs: [$scope.editSlot1Selected.slotID, $scope.editSlot2Selected.slotID],
+                    modeID: $scope.editModeSelected.modeID,
+                    limit: $scope.quantity,
+                    deadline: $scope.deadLine,
+                    subjectID: $scope.subjectSelected.subjectID,
+                    lecturerID: $scope.editBisLecturerSelected.lecturerID
+                };
 
             SubjectService.createBis(openClass).then(
               function (status) {
@@ -167,10 +167,8 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
 
                     var nval = $scope.copyObjToObj(value, nval);
 
-                    var submit = {oldModel: oldval, newModel:nval};
+                    var submit = { oldModel: oldval, newModel: nval, isNewSchedule: isNewSchedule };
 
-
-                
                     console.log('Update submit: ', submit);
 
                     SubjectService.updateClassSchedule(submit).then(

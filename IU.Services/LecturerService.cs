@@ -66,7 +66,7 @@ namespace IU.Services
                     var subjects = lectures.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName, UserId = user.Id }).ToList();
 
                     var classs = lectures.LecturerScheduleTBLs.Where(c => c.SemesterID == GetCurrentSemester().SemesterID).ToList();
-                    var lecClass = classs.Select(c => new ClassViewModel() { ClassID = c.ClassID, ClassName = GetClass(c.ClassID).ClassName }).ToList();
+                    var lecClass = classs.GroupBy(n => new { n.ClassID}).Distinct().Select(c => new ClassViewModel() { ClassID = c.Key.ClassID, ClassName = GetClass(c.Key.ClassID).ClassName }).ToList();
 
 
                     LectureClassSubjectViewModel model = new LectureClassSubjectViewModel() { LectureClass = lecClass, LectureSubject = subjects };
@@ -382,6 +382,8 @@ namespace IU.Services
             return lsAttendance;
         }
 
+
+
         private string[] GetStudentList()
         {
             using (var context = new IUContext())
@@ -397,7 +399,20 @@ namespace IU.Services
         {
             using (var context = new IUContext())
             {
-                return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotTime;
+                List<string> slNa = new List<string>();
+                if(SlotID.IndexOf("-")>=0){
+                    foreach(string sl in SlotID.Split('-')){
+                        var slot = context.SlotTBLs.Where(s => s.SlotID == sl).FirstOrDefault();
+                        slNa.Add(slot.SlotName);
+                    }
+                    return string.Join("-", slNa);
+                }
+                else
+                {
+                    var slot = context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault();
+                    return slot.SlotName;
+                }
+                
             }
         }
         private SlotTBL GetSlot(string SlotID)

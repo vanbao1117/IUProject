@@ -15,6 +15,8 @@ namespace IU.Web.Models
         public string SubjectName { get; set; }
         public string RoomID { get; set; }
         public string SlotID { get; set; }
+        public string SlotID1 { get; set; }
+        public string SlotID2 { get; set; }
         public string LecturerID { get; set; }
         public string Lecturer { get; set; }
         public string StudentListID { get; set; }
@@ -38,5 +40,6 @@ namespace IU.Web.Models
     {
         public ClassScheduleViewModel OldModel { get; set; }
         public ClassScheduleViewModel NewModel { get; set; }
+        public bool IsNewSchedule { get; set; }
     }
 }
