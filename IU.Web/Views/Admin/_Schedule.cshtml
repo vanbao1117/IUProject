@@ -249,7 +249,8 @@
                                        
                                     </td>
                                     <td>
-                                        <select disabled ng-model="class.slotID" ng-options="item.slotID as item.slotName for item in slots"></select>
+                                        <select disabled ng-model="class.slotID1" ng-options="item.slotID as item.slotName for item in slots"></select>
+                                        <select disabled ng-model="class.slotID2" ng-options="item.slotID as item.slotName for item in slots"></select>
                                     </td>
                                     <td><i class="fa fa-pencil" id="allow_{{$index}}" ng-click="allowEdit('class_'+$index, 'allow', $index, class)"></i> <i class="fa fa-times" id="remove_{{$index}}" ng-click="allowEdit('class_'+$index, 'remove', $index, class)" style="display:none"></i></td>
                                 </tr>
@@ -266,7 +267,8 @@
                             </ul>
                         </div>*@
                         
-                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                        <button ng-click="saveChange(true)" style="float: right; width: 150px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Create New Schedule</button>
+                        <button ng-click="saveChange(false)" style="float: right; width: 150px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Change Schedule</button>
                     </div>
                 </div>
 

@@ -171,18 +171,36 @@ namespace IU.Services
                 
                 var studentLists = StudentListTBLRepository.FindAllBy(s => s.ClassID == model.OldModel.ClassID && s.SemesterID == model.OldModel.SemesterID).ToList();
 
-                foreach (StudentListTBL std in studentLists)
+                if (!model.IsNewSchedule)
                 {
-                    var classSchedule = ClassScheduleTBLRepository.FindOneBy(c => c.LecturerID == model.OldModel.LecturerID && c.StudentListID == std.StudentListID
-                        && c.ClassID == model.OldModel.ClassID
-                        && c.SubjectID == model.OldModel.SubjectID
-                        && c.SlotID == model.OldModel.SlotID
-                        && c.RoomID == model.OldModel.RoomID
-                        && c.Blog == model.OldModel.BlogID
-                        && c.ModeID == model.OldModel.ModeID);
+                    //foreach (StudentListTBL std in studentLists)
+                    //{
+                        //var classSchedule = ClassScheduleTBLRepository.FindOneBy(c => c.LecturerID == model.OldModel.LecturerID && c.StudentListID == std.StudentListID
+                        //    && c.ClassID == model.OldModel.ClassID
+                        //    && c.SubjectID == model.OldModel.SubjectID
+                        //    && c.SlotID == model.OldModel.SlotID1 + (model.OldModel.SlotID2.Equals("") ? "" : "-" + model.OldModel.SlotID2)
+                        //    && c.RoomID == model.OldModel.RoomID
+                        //    && c.Blog == model.OldModel.BlogID
+                        //    && c.ModeID == model.OldModel.ModeID);
 
-                    ClassScheduleTBLRepository.Delete(classSchedule);
+                       
+
+                        //ClassScheduleTBLRepository.Delete(classSchedule);
+                    //}
+
+                    var classSchedules = ClassScheduleTBLRepository.FindAllBy(c => c.LecturerID == model.OldModel.LecturerID 
+                            && c.ClassID.Replace("\r\n", string.Empty) == model.OldModel.ClassID.Replace("\r\n", string.Empty)
+                            && c.SubjectID.Replace("\r\n", string.Empty) == model.OldModel.SubjectID.Replace("\r\n", string.Empty)
+                            && c.RoomID.Replace("\r\n", string.Empty) == model.OldModel.RoomID.Replace("\r\n", string.Empty)
+                            && c.Blog == model.OldModel.BlogID
+                            && c.SlotID == model.OldModel.SlotID1 + (model.OldModel.SlotID2.Equals("") ? "" : "-" + model.OldModel.SlotID2)
+                            && c.ModeID == model.OldModel.ModeID).ToList();
+                    foreach (var classclassSchedule in classSchedules)
+                    {
+                        ClassScheduleTBLRepository.Delete(classclassSchedule);
+                    }
                 }
+               
 
                 CreateClassSchedule(model.NewModel, userName);
                 
@@ -229,7 +247,7 @@ namespace IU.Services
                         var studentLists = StudentListTBLRepository.FindAllBy(s => s.ClassID == model.ClassID && s.SemesterID == model.SemesterID).ToList();
                         foreach (StudentListTBL studentList in studentLists)
                         {
-                            var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID, RoomID = model.RoomID, SlotID = model.SlotID, SubjectID = model.SubjectID, LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = model.ModeID, Blog = model.BlogID, DateStudy = dateStudy };
+                            var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID, RoomID = model.RoomID, SlotID = model.SlotID1 + (model.SlotID2.Equals("") ? "" : "-" + model.SlotID2), SubjectID = model.SubjectID, LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = model.ModeID, Blog = model.BlogID, DateStudy = dateStudy };
                             ClassScheduleTBLRepository.Save(classSchedule);
                         }
                     }
@@ -277,6 +295,8 @@ namespace IU.Services
                             LecturerID = s.Key.LecturerID,
                             SubjectID = s.Key.SubjectID,
                             RoomID = s.Key.RoomID,
+                            SlotID1 = GetSlot(0, s.Key.SlotID),
+                            SlotID2 = GetSlot(1, s.Key.SlotID),
                             SlotID = s.Key.SlotID,
                             ModeID = s.Key.ModeID.Value,
                             BlogID = s.Key.Blog.Value,
@@ -319,6 +339,19 @@ namespace IU.Services
 
         }
 
+        private string GetSlot(int index, string slotIDs)
+        {
+            if (slotIDs.IndexOf("-") >= 0)
+            {
+                return slotIDs.Split('-')[index];
+            }
+            else
+            {
+                if (index == 0) return slotIDs;
+                else return "";
+            }
+        }
+
         public async Task<List<ModeViewModel>> GetAllModesSync()
         {
             using (var context = new IUContext())
@@ -348,6 +381,7 @@ namespace IU.Services
         {
             using (var context = new IUContext())
             {
+                if (id.Length == 3) return id;
                 return context.RoomTBLs.Where(r => r.RoomID == id).FirstOrDefault().RomName;
             }
         }
