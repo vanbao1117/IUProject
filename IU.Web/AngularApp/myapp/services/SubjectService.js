@@ -69,9 +69,9 @@ IUApp.factory('SubjectService', ['$http', '$q', function ($http, $q) {
                 });
             return def.promise;
         },
-        getAllSubjects: function () {
+        getAllSubjects: function (lectureID) {
             var def = $q.defer();
-            $http.get("api/Subject/GetSubjects")
+            $http.get("api/Subject/GetSubjects?lectureID=" + lectureID)
                 .success(function (subjects) {
                     def.resolve(subjects);
                 })
@@ -157,6 +157,17 @@ IUApp.factory('SubjectService', ['$http', '$q', function ($http, $q) {
                     def.reject("Failed to get GetClassSchedule");
                 });
             return def.promise;
-        }
+        },
+        getClassScheduleAdmin: function (page, classID) {
+            var def = $q.defer();
+            $http.get("api/Schedule/GetClassScheduleAdmin?pageNumber=" + page + "&pageSize=20&classID=" + classID)
+            .success(function (schedules) {
+                def.resolve(schedules);
+            })
+            .error(function () {
+                def.reject("Failed to get subject");
+            });
+        return def.promise;
+    },
     };
 }]);

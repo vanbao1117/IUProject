@@ -196,7 +196,6 @@ C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web\bin\Newtonsoft.Json.x
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.csprojResolveAssemblyReference.cache
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.dll
 C:\Users\Win 8.1 VS8 X64\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.pdb
-C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.csprojResolveAssemblyReference.cache
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\IU.Web.dll.config
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\IU.Web.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\IU.Web.pdb
@@ -260,5 +259,6 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\System.Web.WebPages.Deployme
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\System.Web.WebPages.Razor.xml
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\Antlr3.Runtime.pdb
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\bin\Newtonsoft.Json.xml
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.csprojResolveAssemblyReference.cache
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web\obj\Debug\IU.Web.pdb

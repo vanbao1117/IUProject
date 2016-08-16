@@ -5,6 +5,10 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
     function ($scope, $http, $location, $route, $filter, $templateCache, $timeout, SubjectService, ScheduleServices, AttendanceService, SweetAlert) {
         $scope.mode = 'edit';
         $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
+        $scope.subjects = [];
+        $scope.$watch('subjects', function (newVal, oldVal) {
+            console.log('subjects', newVal);
+        });
 
         //Bis
         $scope.subjectSelected = {};
@@ -198,8 +202,9 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         return new Array(n);
     };
 
-    $scope.getAllSubjects = function () {
-        SubjectService.getAllSubjects().then(
+    $scope.getAllSubjects = function (lecturerID) {
+        if (lecturerID === undefined) lecturerID = "";
+        SubjectService.getAllSubjects(lecturerID).then(
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
@@ -282,11 +287,14 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
        
     };
 
+    
+
+
      (function init() {
          $timeout(function () {
              $scope.setPageHeader('Schedule');
 
-             $scope.getAllSubjects();
+             $scope.getAllSubjects("");
              $scope.getAllSemester();
              $scope.getAllClass();
              $scope.getAllLecturer();

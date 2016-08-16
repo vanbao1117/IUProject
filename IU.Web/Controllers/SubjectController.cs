@@ -158,14 +158,14 @@ namespace IU.Web.Controllers
         [ResponseType(typeof(IEnumerable<UserSubjectViewModel>))]
         [Authorize]
         [System.Web.Http.HttpGet]
-        public async Task<IHttpActionResult> GetSubjects()
+        public async Task<IHttpActionResult> GetSubjects(string lectureID)
         {
             try
             {
                 List<UserSubjectViewModel> modelArray = null;
                 using (SubjectService _subjectService = new SubjectService())
                 {
-                    modelArray = await _subjectService.GetAllSubjectsSync();
+                    modelArray = await _subjectService.GetAllSubjectsSync(lectureID);
                 }
 
                 return Ok(modelArray);

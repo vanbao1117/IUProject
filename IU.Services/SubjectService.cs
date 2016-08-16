@@ -38,6 +38,92 @@ namespace IU.Services
             LecturerScheduleTBLRepository = new Repository<LecturerScheduleTBL>();
         }
 
+        public async Task<ClassSchedulePageViewModel> GetClassScheduleAdminSync(int pageNumber, int pageSize, string classID)
+        {
+            using (var context = new IUContext())
+            {
+                return await Task.Run(() => GetClassScheduleAdmin(pageNumber, pageSize,classID));
+            }
+        }
+
+        private ClassSchedulePageViewModel GetClassScheduleAdmin(int pageNumber, int pageSize, string classID)
+        {
+            using (var context = new IUContext())
+            {
+                int NumberOfItems = 0;
+                var sem = GetCurrentSemester();
+
+                //var classSheduleTbl = context.ClassScheduleTBLs.Where(c => c.ClassID == classID.Replace("\r\n", string.Empty)).GroupBy(f => new { f.ClassID, f.ClassScheduleID, f.LecturerID, RoomID = f.RoomID, SlotID = f.SlotID, f.SubjectID, f.DateStudy }).Distinct().ToList();
+
+
+                var classSheduleTbl = context.ClassScheduleTBLs.GroupBy(f => new { f.ClassID, f.LecturerID, f.RoomID, f.SlotID, f.SubjectID, f.DateStudy }).Select(g => g.FirstOrDefault()).ToList()
+                    .Select(f => new {
+                    ClassID = f.ClassID,
+                    LecturerID = f.LecturerID,
+                    RoomID = f.RoomID,
+                    SlotID = f.SlotID,
+                    SubjectID = f.SubjectID,
+                    DateStudy = f.DateStudy
+                      }).ToList().AsQueryable();
+
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classSheduleTbls => classSheduleTbls.DateStudy, false, out NumberOfItems);
+
+                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = f.SlotID, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
+
+                int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
+
+                ClassSchedulePageViewModel classSchedule = new ClassSchedulePageViewModel() { TotalPages = totalPage, ClassSchedules = firstPage.ToList() };
+
+                return classSchedule;
+            }
+        }
+
+        private string GetSubjectName(string SubjectID)
+        {
+            using (var context = new IUContext())
+            {
+                var _Lecturer = context.SubjectTBLs.Where(c => c.SubjectID == SubjectID).FirstOrDefault();
+                if (_Lecturer != null) return _Lecturer.SubjectName;
+            }
+            return null;
+        }
+
+        private StudentTBL GetStudent(string studentListID)
+        {
+            using (var context = new IUContext())
+            {
+                var student =
+                (from studentTBLs in context.StudentTBLs
+                 join studentListTBLs in context.StudentListTBLs
+                     on studentTBLs.StudentID equals studentListTBLs.StudentID
+                 where studentListTBLs.StudentListID == studentListID
+                 select studentTBLs).SingleOrDefault();
+
+                return student;
+            }
+        }
+
+        private string GetClassName(string classId)
+        {
+            using (var context = new IUContext())
+            {
+                var _class = context.ClassTBLs.Where(c => c.ClassID == classId).FirstOrDefault();
+                if (_class != null) return _class.ClassName;
+            }
+            return null;
+        }
+
+        private string GetLecturerName(string LecturerID)
+        {
+            using (var context = new IUContext())
+            {
+                var _Lecturer = context.LecturerTBLs.Where(c => c.LecturerID == LecturerID).FirstOrDefault();
+                if (_Lecturer != null) return _Lecturer.LecturerName;
+            }
+            return null;
+        }
+
+
         public async Task<bool> CreateBisSync(BisViewModel model, string userName)
         {
             using (var context = new IUContext())
@@ -247,15 +333,20 @@ namespace IU.Services
                         var studentLists = StudentListTBLRepository.FindAllBy(s => s.ClassID == model.ClassID && s.SemesterID == model.SemesterID).ToList();
                         foreach (StudentListTBL studentList in studentLists)
                         {
-                            var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID, RoomID = model.RoomID, SlotID = model.SlotID1 + (model.SlotID2.Equals("") ? "" : "-" + model.SlotID2), SubjectID = model.SubjectID, LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = model.ModeID, Blog = model.BlogID, DateStudy = dateStudy };
-                            ClassScheduleTBLRepository.Save(classSchedule);
+                            if (model.SlotID2 == null && model.SlotID1 == null) break;
+
+                            if(model.SlotID2 == null){
+                                var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID.Replace("/r/n", string.Empty), RoomID = model.RoomID, SlotID = model.SlotID1, SubjectID = model.SubjectID.Replace("/r/n", string.Empty), LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = model.ModeID, Blog = model.BlogID, DateStudy = dateStudy };
+                                ClassScheduleTBLRepository.Save(classSchedule);
+                            }else{
+                                var classSchedule = new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = model.ClassID.Replace("/r/n", string.Empty), RoomID = model.RoomID, SlotID = model.SlotID1 + (model.SlotID2.Equals("") ? "" : "-" + model.SlotID2), SubjectID = model.SubjectID.Replace("/r/n", string.Empty), LecturerID = model.LecturerID, StudentListID = studentList.StudentListID, IsAttendance = false, ModeID = model.ModeID, Blog = model.BlogID, DateStudy = dateStudy };
+                                ClassScheduleTBLRepository.Save(classSchedule);
+                            }
+                           
                         }
                     }
                 }
 
-                
-
-                
 
                 return true;
             }
@@ -301,9 +392,9 @@ namespace IU.Services
                             ModeID = s.Key.ModeID.Value,
                             BlogID = s.Key.Blog.Value,
                             SemesterID = semesterID,
-                            DateStudy = s.Key.DateStudy,
+                            DateStudy = s.Key.DateStudy.ToString("dddd, dd MMMM yyyy"),
                             isCreate = false
-                    }).GroupBy(x => x.LecturerID).Select(x => x.FirstOrDefault());
+                    }).GroupBy(x => x.SubjectID).Select(x => x.FirstOrDefault());
 
 
                     List<ClassScheduleViewModel> lsData = new List<ClassScheduleViewModel>();
@@ -311,8 +402,8 @@ namespace IU.Services
                         lsData.AddRange(sh.ToArray());
                     }
 
-                    string[] lsSubjects = lsData.Select(s => s.SubjectID).ToArray();
-
+                    string[] lsSubjects = lsData.Select(s => s.SubjectID.Replace("\r\n", string.Empty)).ToArray();
+                    var _DateStudy = DateTime.Now.ToString("dddd, dd MMMM yyyy");
                     var newSH = from h in context.SemesterClassSubjectTBLs
                                 where h.SemesterID == semesterID && h.ClassID == classID
                                 && !lsSubjects.Contains(h.SubjectID)
@@ -321,7 +412,7 @@ namespace IU.Services
                                     ClassID = h.ClassID,
                                     SubjectID = h.SubjectID,
                                     SemesterID = h.SemesterID,
-                                    DateStudy = DateTime.Now,
+                                    DateStudy = _DateStudy,
                                     isCreate = true
                                 };
                     if (newSH != null)
@@ -403,6 +494,14 @@ namespace IU.Services
             }
         }
 
+        private string GetSlot(string slotID)
+        {
+            using (var context = new IUContext())
+            {
+                return context.SlotTBLs.Where(s => s.SlotID == slotID).FirstOrDefault().SlotName;
+            }
+        }
+
         private List<SlotViewModel> GetAllSlots()
         {
             using (var context = new IUContext())
@@ -412,20 +511,33 @@ namespace IU.Services
             }
         }
 
-        public async Task<List<UserSubjectViewModel>> GetAllSubjectsSync()
+        public async Task<List<UserSubjectViewModel>> GetAllSubjectsSync(string lectureID)
         {
             using (var context = new IUContext())
             {
-                return await Task.Run(() => GetAllSubjects());
+                return await Task.Run(() => GetAllSubjects(lectureID));
             }
         }
 
-        private List<UserSubjectViewModel> GetAllSubjects()
+        private List<UserSubjectViewModel> GetAllSubjects(string lectureID)
         {
             using (var context = new IUContext())
             {
-                var subjects = context.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName});
-                return subjects.ToList();
+                if (lectureID == "" || lectureID == null)
+                {
+                    var subjects = context.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName });
+                    return subjects.ToList();
+                }
+
+                var lecturerSubjects = context.LecturerTBLs.Include("SubjectTBLs").Where(l=>l.LecturerID == lectureID).FirstOrDefault();
+                if(lecturerSubjects != null){
+                    var lSubjects = lecturerSubjects.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName });
+                    return lSubjects.ToList();
+                }
+                else
+                {
+                    return new List<UserSubjectViewModel>();
+                }
             }
         }
 

@@ -45,7 +45,7 @@ namespace IU.Services
 
                 var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
 
-                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy, RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
+                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 
                 int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize); ;
 
@@ -58,10 +58,11 @@ namespace IU.Services
 
         private string GetSlotbyID(string SlotID)
         {
-            using (var context = new IUContext())
-            {
-                return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotTime;
-            }
+            return SlotID;
+            //using (var context = new IUContext())
+            //{
+            //    return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotTime;
+            //}
         }
 
         public async Task<ClassSchedulePageViewModel> GetAllClassScheduleSync(int pageNumber, int pageSize, string userName)
@@ -86,7 +87,7 @@ namespace IU.Services
 
                 var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
 
-                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy, RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
+                var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 
                 int totalPage = (int)Math.Ceiling((double)NumberOfItems / (double)pageSize);
 

@@ -118,11 +118,11 @@ namespace IU.Services
                             }).ToList().Select(a => new PreviewViewModel()
                             {
                                 Day = a.Day,
-                                Slot = GetSlot(a.Slot).SlotName
+                                Slot = GetSlot(a.Slot)
                             }).ToList();
 
                 var previewViewModels = attandances.Select(a => new PreviewViewModel() 
-                { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID).SlotName, Status = (a.Attendance == true ? "P" : "A"),
+                { Day = a.DateAttendance.Day + "/" + a.DateAttendance.Month, Slot = GetSlot(a.SlotID), Status = (a.Attendance == true ? "P" : "A"),
                     StudentName = GetStudent(a.StudentListID).StudentName }).OrderBy(p => p.Day).ToList();
 
 
@@ -140,7 +140,22 @@ namespace IU.Services
                             }
                 );
 
-                PreviewListViewModel model = new PreviewListViewModel() { ClassID = classID, SubjectID = subjectID, Preview = previewViewModels2, Data = new List<LecturePreviewViewModel>(), CurrentSemmeter = GetCurrentSemester().SemesterName };
+                var query = previewViewModels2.GroupBy(n => n.Day,
+                (key, values) => new { Day = key, Count = values.Count() }).ToList();
+
+                List<PreviewViewModel> lisWithCount = new List<PreviewViewModel>();
+                foreach (PreviewViewModel m in previewViewModels2)
+                {
+                    var countDay = query.Where(q => q.Day == m.Day).FirstOrDefault();
+                    var existDayInList = lisWithCount.Where(e => e.Day == m.Day).FirstOrDefault();
+                    if (existDayInList == null && countDay != null)
+                    {
+                        m.ColSpan = countDay.Count;
+                        lisWithCount.Add(m);
+                    }
+                }
+
+                PreviewListViewModel model = new PreviewListViewModel() { ClassID = classID, SubjectID = subjectID, Preview = lisWithCount, Data = new List<LecturePreviewViewModel>(), CurrentSemmeter = GetCurrentSemester().SemesterName };
                 int index = 0;
                 foreach (var studnt in rows)
                 {
@@ -202,9 +217,9 @@ namespace IU.Services
                 }
                 else
                 {
-                    AttendanceTBLRepository.Save(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id, ClassID = model.ClassID, DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
+                    AttendanceTBLRepository.Save(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id.Replace("\r\n", string.Empty), ClassID = model.ClassID.Replace("\r\n", string.Empty), DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
 
-                    var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID.Replace("\r\n", string.Empty) == model.SubjectID.Replace("\r\n", string.Empty) && c.StudentListID == model.StudentListID && c.DateStudy == model.DateStudy);
+                    var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID.Replace("\r\n", string.Empty) == model.SubjectID.Replace("\r\n", string.Empty) && c.StudentListID.Replace("\r\n", string.Empty) == model.StudentListID.Replace("\r\n", string.Empty) && c.DateStudy == model.DateStudy);
                     if (classTbl != null)
                     {
                         classTbl.IsAttendance = true;
@@ -281,7 +296,7 @@ namespace IU.Services
                               && attendanceTBLs.DateAttendance.Month == dateStudy.Month
                               && attendanceTBLs.DateAttendance.Day == dateStudy.Day
                               && attendanceTBLs.SlotID == slotID
-                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = attendanceTBLs.SlotID, RoomID = attendanceTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = attendanceTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName, isAttendanced = true, Attendance = attendanceTBLs.Attendance, Present = attendanceTBLs.Attendance, DateStudy = dateStudy, Note = attendanceTBLs.Note, AttendanceID = attendanceTBLs.AttendanceID, Attendancer = attendanceTBLs.Attendancer, DateAttendance = attendanceTBLs.DateAttendance });
+                       select new UserAttendanceViewModel() { Avata = aspNetUsers.Image, ClassID = classID, StudentID = studentTBLs.StudentID, StudentName = studentTBLs.StudentName, UserID = studentTBLs.UserID, SlotID = attendanceTBLs.SlotID, RoomID =attendanceTBLs.RoomID, StudentListID = studentListTBLs.StudentListID, SemesterID = semesterID, SubjectID = attendanceTBLs.SubjectID, ClassName = classTBLs.ClassName, SubjectName = subjectTBLs.SubjectName, SubjectCode = subjectTBLs.AbbreSubjectName, isAttendanced = true, Attendance = attendanceTBLs.Attendance, Present = attendanceTBLs.Attendance, DateStudy = dateStudy, Note = attendanceTBLs.Note, AttendanceID = attendanceTBLs.AttendanceID, Attendancer = attendanceTBLs.Attendancer, DateAttendance = attendanceTBLs.DateAttendance });
                     return attendances.ToList();
                 }
                
@@ -337,7 +352,7 @@ namespace IU.Services
                            Result = group.ToList()
                        }).ToList().Distinct();
 
-                    var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = a.RoomID, SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = true, DateAttendance = date });
+                    var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = GetRoom(a.RoomID), SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = true, DateAttendance = date });
 
                     lsAttendance.AddRange(attendances.ToArray());
                 }
@@ -362,6 +377,15 @@ namespace IU.Services
             return lsAttendance;
         }
 
+        private string GetRoom(string id)
+        {
+            using (var context = new IUContext())
+            {
+                if (id.Length == 3) return id;
+                return context.RoomTBLs.Where(r => r.RoomID == id).FirstOrDefault().RomName;
+            }
+        }
+
         private List<UserAttendanceViewModel> GetClassSchedule(string lecturerID, string[] studentListIDs, DateTime[] dates, IUContext context)
         {
             List<UserAttendanceViewModel> lsAttendance = new List<UserAttendanceViewModel>();
@@ -378,7 +402,6 @@ namespace IU.Services
                        RoomID = key.RoomID,
                        SubjectID = key.SubjectID,
                        SlotID = key.SlotID,
-                       Note = string.Empty,
                        DateStudy = key.DateStudy,
                        Result = group.ToList()
                    }).ToList().Distinct();
@@ -397,12 +420,11 @@ namespace IU.Services
                                RoomID = key.RoomID,
                                SubjectID = key.SubjectID,
                                SlotID = key.SlotID,
-                               Note = string.Empty,
                                DateStudy = key.DateStudy,
                                Result = group.ToList()
                            }).ToList().Distinct();
 
-                        var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = a.RoomID, SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), Note = a.Note, SemesterID = GetCurrentSemester().SemesterID, isAttendanced = false, DateStudy = a.DateStudy });
+                        var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = GetRoom(a.RoomID), SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = false, DateStudy = a.DateStudy });
                         if (attendances != null)
                             lsAttendance.AddRange(attendances.ToArray());
                     }
@@ -447,12 +469,14 @@ namespace IU.Services
                 
             }
         }
-        private SlotTBL GetSlot(string SlotID)
+        private string GetSlot(string SlotID)
         {
-            using (var context = new IUContext())
-            {
-                return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault();
-            }
+
+            return SlotID;
+            //using (var context = new IUContext())
+            //{
+            //    return context.SlotTBLs.Where(s => s.SlotID == SlotID).FirstOrDefault().SlotName;
+            //}
         }
 
         private ClassTBL GetClass(string ClassID)

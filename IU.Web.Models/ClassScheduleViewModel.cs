@@ -23,7 +23,8 @@ namespace IU.Web.Models
         public string StudentName { get; set; }
         public string StudentID { get; set; }
         public string UserID { get; set; }
-        public System.DateTime DateStudy { get; set; }
+        public string DateStudy { get; set; }
+
         public string SemesterID { get; set; }
         public int ModeID { get; set; }
         public int BlogID { get; set; }

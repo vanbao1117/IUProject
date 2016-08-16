@@ -280,7 +280,7 @@ namespace IU.Services
             if (pageSize <= 0) pageSize = 20;
 
             //Total result count
-            rowsCount = query.Count();
+            rowsCount = query.ToArray().Count();
 
             //If page number should be > 0 else set to first page
             if (rowsCount <= pageSize || pageNum <= 0) pageNum = 1;

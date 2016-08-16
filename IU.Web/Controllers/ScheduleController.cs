@@ -16,6 +16,34 @@ namespace IU.Web.Controllers
     public class ScheduleController : ApiController
     {
 
+        // GET api/Schedule/GetClassScheduleAdmin
+        /// <summary>
+        /// Get GetClassScheduleAdmin
+        /// </summary>
+        /// <returns></returns>
+        [ResponseType(typeof(ClassSchedulePageViewModel))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> GetClassScheduleAdmin(int pageNumber, int pageSize, string classID)
+        {
+            try
+            {
+                using (SubjectService _SubjectService = new SubjectService())
+                {
+                    var classScheduls = await _SubjectService.GetClassScheduleAdminSync(pageNumber, pageSize,classID);
+                    return Ok(classScheduls);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+
+        }
+
         // GET api/Schedule/GetOpenClass
         /// <summary>
         /// Get GetOpenClass
@@ -261,6 +289,7 @@ namespace IU.Web.Controllers
             catch (Exception ex)
             {
                 return Ok(ex.Message + ex.StackTrace);
+
             }
 
         }

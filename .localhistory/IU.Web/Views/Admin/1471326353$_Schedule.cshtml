@@ -1,0 +1,226 @@
+﻿<section class="content">
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs admin-tab-schedule">
+                    <li class="active bis"><a href="" ng-click="activeTab('activity', 'bis')">Create BIS-Class</a></li>
+                    <li class="setting"><a href="" ng-click="activeTab('settings', 'setting')">Create Schedule</a></li>
+                    <li class="lecture"><a href="" ng-click="activeTab('timeline', 'lecture')">View Schedule</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="activity">
+                        <div class="box">
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject 
+                                    <select id="subjects" ng-model="subjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Semester 
+                                    <select id="semesters" ng-model="semesterSelected" ng-options="item as item.semesterName for item in semesters"></select>
+                                </h3>
+                            </div>
+                            <div class="box-header" style="float: right; margin-top: 12px ">
+                                <h3 class="box-title">DeadLine<input type="date" ng-model="deadLine"></h3>
+                            </div>
+                            <div class="box-header" style="float: right;margin-top: 13px ">
+                                <h3 class="box-title">Quantity<input type="note" ng-model="quantity"></h3>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">StartDay</th>
+                                    <th class="sorting">Class</th>
+                                    <th class="sorting">Lecturer</th>
+                                    @*<th class="sorting">Mode</th>*@
+                                    <th class="sorting">Room</th>
+                                    <th class="sorting">Slot</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd">
+                                    <td><input type="date" ng-model="startDay"></td>
+                                    <td><input type="note" ng-model="className"></td>
+                                    <td>
+                                        <select ng-model="editBisLecturerSelected" ng-options="item as item.lecturerName for item in lecturers"></select>
+                                    </td>
+                                    @*<td>
+                                        <select ng-model="editModeSelected" ng-options="item as item.mode for item in modes"></select>
+                                    </td>*@
+                                    <td>
+                                        <select ng-model="editRoomSelected" ng-options="item as item.romName for item in rooms"></select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="editSlot1Selected" ng-options="item as item.slotName for item in slots"></select>
+                                        <select ng-model="editSlot2Selected" ng-options="item as item.slotName for item in slots"></select>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <button ng-click="saveChange()" style="float: right; width: 100px; margin-top: 30px" type="button" class="btn btn-block btn-success">Save</button>
+                    </div>
+                    <!-- /.tab-pane -->
+                    
+                    <div class="tab-pane" id="settings">
+                        <div class="box">
+                            <div class="box-header" style="float: left; width: 100px">
+                                <h3 class="box-title">
+                                    Semester
+
+                                </h3>
+                                <select ng-model="classSemesterSelected" ng-options="item as item.semesterName for item in semesters"></select>
+                            </div>
+
+                            
+                            <div class="box-header" style="float: left; width: 100px; margin-left: 17px;">
+                                <h3 class="box-title">
+                                    Class 
+                                    
+                                </h3>
+                                <select ng-model="classSelected" ng-options="item as item.className for item in classes"></select>
+                            </div>
+                            <div class="box-header" style="float: left; width: 100px; margin-left: 53px;">
+                                <button ng-click="GetClassSchedule()" style="width: 100px; margin-top: 9px; margin-left: 17px; " type="button" class="btn btn-block btn-success">Search</button>
+                            </div>
+                            
+                            @*<div class="box-header" style="float: left; width: 100px;">
+                                <h3 class="box-title">
+                                    Subject
+
+                                </h3>
+                                <select ng-model="classSubjectSelected" ng-options="item as item.abbreSubjectName for item in subjects"></select>
+                            </div>*@
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting">Class</th>
+                                    <th class="sorting">Lecturer</th>
+                                    <th class="sorting_asc" tabindex="0">Subject</th>
+                                    <th class="sorting">Start Days</th>
+                                    <th class="sorting">Mode</th>
+                                    <th class="sorting">Blog</th>
+                                    <th class="sorting">Room</th>
+                                    <th class="sorting">Slot</th>
+                                    <th class="sorting">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd" ng-repeat="class in classSchedules" id="class_{{$index}}" >
+                                    <td>{{className}}</td>
+                                    <td>
+                                        <select disabled ng-model="class.lecturerID" ng-options="item.lecturerID as item.lecturerName for item in lecturers"></select>
+                                        
+                                    </td>
+                                    <td>
+                                        <select disabled ng-model="class.subjectID" ng-options="item.subjectID as item.abbreSubjectName for item in subjects"></select>
+                                    </td>
+                                    <td>
+                                        <input disabled date-input type="date" ng-model="class.dateStudy">
+                                    </td>
+                                    <td>
+                                        <select ng-model="class.modeID" ng-options="item.modeID as item.mode for item in modes"></select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="class.blogID" ng-options="item.blogID as item.name for item in blogs"></select>
+                                    </td>
+                                    <td>
+                                        <select disabled ng-model="class.roomID" ng-options="item.romName as item.romName for item in rooms"></select>
+                                       
+                                    </td>
+                                    <td>
+                                        <select disabled ng-model="class.slotID1" ng-options="item.slotID as item.slotName for item in slots"></select>
+                                        <select disabled ng-model="class.slotID2" ng-options="item.slotID as item.slotName for item in slots"></select>
+                                    </td>
+                                    <td><i class="fa fa-pencil" id="allow_{{$index}}" ng-click="allowEdit('class_'+$index, 'allow', $index, class)"></i> <i class="fa fa-times" id="remove_{{$index}}" ng-click="allowEdit('class_'+$index, 'remove', $index, class)" style="display:none"></i></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        @*<div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>*@
+                        
+                        <button ng-click="saveChange(true)" style="float: right; width: 150px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Create New Schedule</button>
+                        <button ng-click="saveChange(false)" style="float: right; width: 150px; margin-right: 5px; margin-top: 30px" type="button" class="btn btn-block btn-success">Change Schedule</button>
+                    </div>
+
+                    <div class="tab-pane" id="timeline">
+                    <div class="box">
+                        <div class="box-header" style="float: left; width: 100px;">
+                            <h3 class="box-title">
+                                Class
+                            </h3>
+                            <select id="classes" ng-change="getClassScheduleAdmin()" ng-model="classxx.viewScheduleSelected" ng-options="item as item.className for item in classes2"></select>
+                        </div>
+
+                            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Days</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Subject</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Class</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Room</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Slot</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="aaaa">Lecturer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                    <tr role="row" class="odd" ng-repeat="item in schedules.classSchedules">
+                                        <td class="sorting_1">{{item.dateStudy}}</td>
+                                        <td>{{item.subjectName}}</td>
+                                        <td>{{item.className}}</td>
+                                        <td>{{item.roomID}}</td>
+                                        <td>{{item.slotID}}</td>
+                                        <td>{{item.lecturer}}</td>
+                                    </tr>
+                         
+                                </tbody>
+                              
+                            </table>
+                        <div class="row">
+                            <div class="col-sm-5">
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate" style="text-align: center;">
+                                    <ul class="pagination">
+                                        <li class="paginate_button active" ng-repeat="a in range(schedules.totalPages) track by $index">
+                                            <a style="cursor: pointer;" href="#" ng-click="$event.preventDefault();getClassScheduleAdmin($index + 1)" aria-controls="example2" data-dt-idx="{{$index + 1}}" tabindex="{{$index}}">{{$index + 1}}</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+
+                <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+</section>

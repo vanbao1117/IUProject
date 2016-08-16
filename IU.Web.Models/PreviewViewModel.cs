@@ -9,6 +9,7 @@ namespace IU.Web.Models
         public string Slot { get; set; }
         public string StudentName { get; set; }
         public string Status { get; set; }
+        public int ColSpan { get; set; }
     }
 
     public class PreviewListViewModel
