@@ -529,7 +529,7 @@ namespace IU.Services
                     return subjects.ToList();
                 }
 
-                var lecturerSubjects = context.LecturerTBLs.Include("SubjectTBLs").Where(l=>l.LecturerID == lectureID).FirstOrDefault();
+                var lecturerSubjects = context.LecturerTBLs.Include("SubjectTBLs").Where(l => l.LecturerID.Replace("\r\n", string.Empty) == lectureID.Replace("\r\n", string.Empty)).FirstOrDefault();
                 if(lecturerSubjects != null){
                     var lSubjects = lecturerSubjects.SubjectTBLs.Select(s => new UserSubjectViewModel() { SubjectID = s.SubjectID, SubjectName = s.SubjectName, AbbreSubjectName = s.AbbreSubjectName });
                     return lSubjects.ToList();
@@ -587,7 +587,7 @@ namespace IU.Services
         {
             using (var context = new IUContext())
             {
-                var lecturers = context.LecturerTBLs.Select(s => new LecturerViewModel() { LecturerID = s.LecturerID, LecturerName = s.LecturerName, LecturerPhone = s.LecturerPhone, LecturerBirth = s.LecturerBirth, LecturerEmail = s.LecturerEmail, LecturerGender = s.LecturerGender, UserID = s.UserID });
+                var lecturers = context.LecturerTBLs.Select(s => new LecturerViewModel() { LecturerID = s.LecturerID.Replace("\r\n", string.Empty), LecturerName = s.LecturerName, LecturerPhone = s.LecturerPhone, LecturerBirth = s.LecturerBirth, LecturerEmail = s.LecturerEmail, LecturerGender = s.LecturerGender, UserID = s.UserID });
                 return lecturers.ToList();
             }
         }

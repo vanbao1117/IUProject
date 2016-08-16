@@ -203,6 +203,7 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
     };
 
     $scope.getAllSubjects = function (lecturerID) {
+        console.log('lecturerID: ', lecturerID);
         if (lecturerID === undefined) lecturerID = "";
         SubjectService.getAllSubjects(lecturerID).then(
            function (subjects) {
