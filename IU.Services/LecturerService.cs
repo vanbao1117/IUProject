@@ -219,11 +219,16 @@ namespace IU.Services
                 {
                     AttendanceTBLRepository.Save(new AttendanceTBL() { AttendanceID = Helper.GenerateRandomId(), Attendance = model.Present, Attendancer = user.Id.Replace("\r\n", string.Empty), ClassID = model.ClassID.Replace("\r\n", string.Empty), DateAttendance = model.DateStudy, Note = model.Note, RoomID = model.RoomID, SemesterID = model.SemesterID, SlotID = model.SlotID, SubjectID = model.SubjectID, StudentListID = model.StudentListID });
 
-                    var classTbl = ClassScheduleTBLRepository.FindOneBy(c => c.SubjectID.Replace("\r\n", string.Empty) == model.SubjectID.Replace("\r\n", string.Empty) && c.StudentListID.Replace("\r\n", string.Empty) == model.StudentListID.Replace("\r\n", string.Empty) && c.DateStudy == model.DateStudy);
-                    if (classTbl != null)
+                    var classTbls = ClassScheduleTBLRepository.FindAllBy(c => c.SubjectID == model.SubjectID && c.DateStudy.Year == model.DateStudy.Year && c.DateStudy.Month == model.DateStudy.Month && c.DateStudy.Day == model.DateStudy.Day && c.SlotID == model.SlotID).ToList();
+                    if (classTbls != null)
                     {
-                        classTbl.IsAttendance = true;
-                        ClassScheduleTBLRepository.Update(classTbl);
+                        foreach (ClassScheduleTBL classTbl in classTbls)
+                        {
+                            var sh = ClassScheduleTBLRepository.FindOneBy(c => c.ClassScheduleID == classTbl.ClassScheduleID);
+                            sh.IsAttendance = true;
+                            ClassScheduleTBLRepository.Update(sh);
+                        }
+                        
                     }
                     
                 }
@@ -394,40 +399,65 @@ namespace IU.Services
             {
                 var results = context.ClassScheduleTBLs.Where(x => x.LecturerID == lecturerID && studentListIDs.Contains(x.StudentListID) && x.DateStudy.Year == date.Year
                    && x.DateStudy.Month == date.Month
-                   && x.DateStudy.Day == date.Day
-                   && x.IsAttendance == true
-                   ).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.DateStudy }, (key, group) => new
-                   {
-                       ClassID = key.ClassID,
-                       RoomID = key.RoomID,
-                       SubjectID = key.SubjectID,
-                       SlotID = key.SlotID,
-                       DateStudy = key.DateStudy,
-                       Result = group.ToList()
-                   }).ToList().Distinct();
+                   && x.DateStudy.Day == date.Day).ToList();
+                   //&& x.IsAttendance == true
+                   //).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.DateStudy }, (key, group) => new
+                   //{
+                   //    ClassID = key.ClassID,
+                   //    RoomID = key.RoomID,
+                   //    SubjectID = key.SubjectID,
+                   //    SlotID = key.SlotID,
+                   //    DateStudy = key.DateStudy,
+                   //    Result = group.ToList()
+                   //}).ToList().Distinct();
 
                 if (results != null)
                 {
-                    if (results.ToArray().Count() == 0)
+                    foreach (var sk in results)
                     {
-                        results = context.ClassScheduleTBLs.Where(x => x.LecturerID == lecturerID && studentListIDs.Contains(x.StudentListID) && x.DateStudy.Year == date.Year
-                           && x.DateStudy.Month == date.Month
-                           && x.DateStudy.Day == date.Day
-                           && x.IsAttendance == false
-                           ).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.DateStudy }, (key, group) => new
-                           {
-                               ClassID = key.ClassID,
-                               RoomID = key.RoomID,
-                               SubjectID = key.SubjectID,
-                               SlotID = key.SlotID,
-                               DateStudy = key.DateStudy,
-                               Result = group.ToList()
-                           }).ToList().Distinct();
+                        if (sk.IsAttendance == false)
+                        {
+                            var results1 = context.ClassScheduleTBLs.Where(x => x.LecturerID == lecturerID && studentListIDs.Contains(x.StudentListID) && x.DateStudy.Year == date.Year
+                              && x.DateStudy.Month == date.Month
+                              && x.DateStudy.Day == date.Day
+                              && x.IsAttendance == false
+                              ).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.DateStudy }, (key, group) => new
+                              {
+                                  ClassID = key.ClassID,
+                                  RoomID = key.RoomID,
+                                  SubjectID = key.SubjectID,
+                                  SlotID = key.SlotID,
+                                  DateStudy = key.DateStudy
+                              }).ToList().Distinct();
 
-                        var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = GetRoom(a.RoomID), SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = false, DateStudy = a.DateStudy });
-                        if (attendances != null)
-                            lsAttendance.AddRange(attendances.ToArray());
+                            var attendances = results1.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = GetRoom(a.RoomID), SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = false, DateStudy = a.DateStudy });
+                            if (attendances != null)
+                            {
+                                lsAttendance.AddRange(attendances.ToArray());
+                                break;
+                            }
+                        }
                     }
+                    //if (results.ToArray().Count() == 0)
+                    //{
+                    //    results = context.ClassScheduleTBLs.Where(x => x.LecturerID == lecturerID && studentListIDs.Contains(x.StudentListID) && x.DateStudy.Year == date.Year
+                    //       && x.DateStudy.Month == date.Month
+                    //       && x.DateStudy.Day == date.Day
+                    //       && x.IsAttendance == false
+                    //       ).GroupBy(x => new { x.SubjectID, x.ClassID, x.RoomID, x.SlotID, x.DateStudy }, (key, group) => new
+                    //       {
+                    //           ClassID = key.ClassID,
+                    //           RoomID = key.RoomID,
+                    //           SubjectID = key.SubjectID,
+                    //           SlotID = key.SlotID,
+                    //           DateStudy = key.DateStudy,
+                    //           Result = group.ToList()
+                    //       }).ToList().Distinct();
+
+                    //    var attendances = results.ToList().Select(a => new UserAttendanceViewModel() { SubjectName = GetSubjectName(a.SubjectID), SubjectID = a.SubjectID, ClassName = GetClass(a.ClassID).ClassName, ClassID = a.ClassID, RoomID = GetRoom(a.RoomID), SlotID = a.SlotID, SlotTime = GetSlotbyID(a.SlotID), SemesterID = GetCurrentSemester().SemesterID, isAttendanced = false, DateStudy = a.DateStudy });
+                    //    if (attendances != null)
+                    //        lsAttendance.AddRange(attendances.ToArray());
+                    //}
                     
                 }
                 
