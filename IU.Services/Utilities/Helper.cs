@@ -94,10 +94,17 @@ namespace IU.Services
                 TimeSpan diff = _blogEnd - _blogStart;
                 int days = diff.Days;
                 List<DateTime> dates = new List<DateTime>();
+                int count = 0;
                 for (var i = 0; i <= days; i++)
                 {
+                    if (count == 3) break;
                     var testDate = _blogStart.AddDays(i);
+                    if (testDate.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        count++;
+                    }
 
+                    
                     if (daysToChoose.Contains(testDate.DayOfWeek))
                     {
                         dates.Add(testDate);
@@ -117,9 +124,17 @@ namespace IU.Services
                 TimeSpan diff = _blogEnd - _blogStart;
                 int days = diff.Days;
                 List<DateTime> dates = new List<DateTime>();
+                int count = 0;
                 for (var i = 0; i <= days; i++)
                 {
+                    if (count == 3) break;
+
                     var testDate = _blogStart.AddDays(i);
+                    if (testDate.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        count++;
+                    }
+
 
                     if (daysToChoose.Contains(testDate.DayOfWeek))
                     {

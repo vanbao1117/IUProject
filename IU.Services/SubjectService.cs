@@ -309,6 +309,16 @@ namespace IU.Services
             }
         }
 
+        private SemesterTBL GetCurrentSemester(string semesterID)
+        {
+            using (var context = new IUContext())
+            {
+                var currentDate = DateTime.Now;
+                var sem = context.SemesterTBLs.Where(obj => obj.SemesterID == semesterID);
+                return sem.FirstOrDefault();
+            }
+        }
+
         public async Task<bool> CreateClassScheduleSync(ClassScheduleViewModel model, string userName)
         {
             using (var context = new IUContext())
@@ -325,8 +335,8 @@ namespace IU.Services
                 using (var context = new IUContext())
                 {
                     var mode = context.ModeTBLs.Where(m => m.ModeID == model.ModeID).FirstOrDefault();
-                    var sm = GetCurrentSemester();
-                    DateTime[] studyDates = Helper.GetStudyDays(sm.StartDate.Value, sm.EndDate.Value, mode.Mode, model.BlogID);
+                    var sm = GetCurrentSemester(model.SemesterID);
+                    DateTime[] studyDates = Helper.GetStudyDays(DateTime.Parse(model.DateStudy), sm.EndDate.Value, mode.Mode, model.BlogID);
 
                     foreach (DateTime dateStudy in studyDates)
                     {
