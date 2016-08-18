@@ -66,7 +66,7 @@ namespace IU.Services
                     DateStudy = f.DateStudy
                       }).ToList().AsQueryable();
 
-                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classSheduleTbls => classSheduleTbls.DateStudy, false, out NumberOfItems);
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classSheduleTbls => classSheduleTbls.DateStudy, true, out NumberOfItems);
 
                 var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = f.SlotID, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 

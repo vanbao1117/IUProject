@@ -43,7 +43,7 @@ namespace IU.Services
 
                 var classSheduleTbl = context.ClassScheduleTBLs.Where(c => c.StudentListID == currentStudentList.StudentListID && c.SubjectID == subject.SubjectID);
 
-                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, true, out NumberOfItems);
 
                 var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 
@@ -85,7 +85,7 @@ namespace IU.Services
 
                 var classSheduleTbl = context.ClassScheduleTBLs.Where(c => studentList.Contains(c.StudentListID));
 
-                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, false, out NumberOfItems);
+                var firstPageData = Helper.PagedResult(classSheduleTbl, pageNumber, pageSize, classScheduleTBLs => classScheduleTBLs.DateStudy, true, out NumberOfItems);
 
                 var firstPage = firstPageData.ToList().Select(f => new ClassScheduleViewModel() { ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), ClassScheduleID = f.ClassScheduleID, LecturerID = f.LecturerID, Lecturer = GetLecturerName(f.LecturerID), DateStudy = f.DateStudy.ToString("dddd, dd MMMM yyyy"), RoomID = f.RoomID, SlotID = GetSlotbyID(f.SlotID), StudentID = GetStudent(f.StudentListID).StudentID, StudentListID = f.StudentListID, StudentName = GetStudent(f.StudentListID).StudentName, SubjectID = f.SubjectID, SubjectName = GetSubjectName(f.SubjectID) });
 

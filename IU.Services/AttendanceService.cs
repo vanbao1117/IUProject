@@ -57,7 +57,7 @@ namespace IU.Services
 
                     if (!attendances.Any()) continue;
 
-                    var firstPageData = Helper.PagedResult(attendances, pageNumber, pageSize, attendance => attendance.DateAttendance, false, out NumberOfItems);
+                    var firstPageData = Helper.PagedResult(attendances, pageNumber, pageSize, attendance => attendance.DateAttendance, true, out NumberOfItems);
 
                     var firstPage = firstPageData.ToArray().Select(f => new UserAttendanceViewModel() { Attendance = f.Attendance, AttendanceID = f.AttendanceID, Attendancer = f.Attendancer, AttendancerName = GetLecturer(f.Attendancer).LecturerName, ClassID = f.ClassID, ClassName = GetClassName(f.ClassID), DateAttendance = f.DateAttendance, RoomID = f.RoomID, SemesterID = f.SemesterID, SlotID = GetSlotbyID(f.SlotID), StudentListID = f.StudentListID, SubjectID = f.SubjectID, SubjectName = GetSubjectByName(f.SubjectID).SubjectName });
 
@@ -168,7 +168,7 @@ namespace IU.Services
                   join studentTBLs in context.StudentTBLs
                      on studentListTBLs.StudentID equals studentTBLs.StudentID
                   where studentTBLs.UserID == userId
-                  select semesterTBLs).Distinct().OrderByDescending(a => a.StartDate);
+                  select semesterTBLs).Distinct().OrderBy(a => a.StartDate);
                 
                 var datas = semesters.ToArray().Select(semesterTBLs=> new UserSemesterViewModel() { SemesterID = semesterTBLs.SemesterID, SemesterName = semesterTBLs.SemesterName, StartDate = semesterTBLs.StartDate, EndDate = semesterTBLs.EndDate, SemesterCode = semesterTBLs.SemesterCode });
 
