@@ -138,9 +138,11 @@ namespace IU.Services
 
                 StudentListRepository.Save(new StudentListTBL() { ClassID = classID, SemesterID = semesterID, StudentID = studentID, StudentListID = studentListId });
                 var sm = GetCurrentSemester();
-
+                List<DateTime> lsStudyDate = new List<DateTime>();
                 DateTime[] studyDatesBlog1 = Helper.GetStudyDays(sm.StartDate.Value, sm.EndDate.Value, "0", 1);
                 DateTime[] studyDatesBlog2 = Helper.GetStudyDays(sm.StartDate.Value, sm.EndDate.Value, "0", 2);
+                lsStudyDate.AddRange(studyDatesBlog1);
+                lsStudyDate.AddRange(studyDatesBlog2);
 
                 int blog = 1;
                 foreach (DateTime dat in studyDatesBlog2)
@@ -151,89 +153,97 @@ namespace IU.Services
                         break;
                     }
                 }
-               
-                DateTime[] totalW = null;
-                List<DateTime> lstotalW = new List<DateTime>();
-                if (blog == 1)
-                {
-                    studyDatesBlog1 = studyDatesBlog1.Reverse().ToArray();
-                   
-                    TimeSpan diff = studyDatesBlog1[studyDatesBlog1.Length - 1] - openSubject.StartDate.Value;
-                    int days = diff.Days;
-                    List<DateTime> dates = new List<DateTime>();
-                    for (var i = 0; i <= days; i++)
-                    {
-                        var testDate = openSubject.StartDate.Value.AddDays(i);
-
-                        if (testDate.DayOfWeek == DayOfWeek.Sunday)
-                        {
-                            lstotalW.Add(testDate);
-                        }
-                    }
-                    totalW = lstotalW.ToArray();
-
-                }
-                else
-                {
-                    studyDatesBlog2 = studyDatesBlog2.Reverse().ToArray();
-                    
-                    TimeSpan diff = studyDatesBlog2[studyDatesBlog2.Length - 1] - openSubject.StartDate.Value;
-                    int days = diff.Days;
-                    List<DateTime> dates = new List<DateTime>();
-                    for (var i = 0; i <= days; i++)
-                    {
-                        var testDate = openSubject.StartDate.Value.AddDays(i);
-
-                        if (testDate.DayOfWeek == DayOfWeek.Sunday)
-                        {
-                            lstotalW.Add(testDate);
-                        }
-                    }
-                    totalW = lstotalW.ToArray();
-                }
-                
-
-                //Mod: 2-4, 3-5
-                DateTime w1 = totalW[0];
-                DateTime w2 = totalW[1];
-                DateTime w3 = totalW[2];
-
-                List<DateTime> lsStudyDate = new List<DateTime>();
-                DateTime[] m24 = Helper.GetRStudyDays(Helper.FirstDayOfWeek(w1), w3, "2-4", blog);
-                lsStudyDate.AddRange(m24);
-
-                DateTime[] m35 = Helper.GetRStudyDays(Helper.FirstDayOfWeek(w1), w3, "3-5", blog);
-                lsStudyDate.AddRange(m35);
-
-                //2-4-6, 3-5-6
-                DateTime startW4 = DateTime.Now;
-                if (totalW.Length >= 3)
-                {
-                    startW4 = totalW[2];
-                    DateTime[] m246 = Helper.GetRStudyDays(Helper.FirstDayOfWeek(startW4), totalW[totalW.Length - 1], "2-4-6", blog);
-                    lsStudyDate.AddRange(m246);
-
-                    DateTime[] m356 = Helper.GetRStudyDays(Helper.FirstDayOfWeek(startW4), totalW[totalW.Length - 1], "3-5-6", blog);
-                    lsStudyDate.AddRange(m356);
-                }
 
 
+                int slotCount = 0;
+                int weekCount = 0;
+                List<DateTime> firstDayOfWeeks = new List<DateTime>();
                 foreach (DateTime dateStudy in lsStudyDate)
                 {
-                    
-                    if (slotIDs.IndexOf('-') > 0)
+                    if (dateStudy.Year == openSubject.StartDate.Value.Year && dateStudy.Month == openSubject.StartDate.Value.Month && dateStudy.Day >= openSubject.StartDate.Value.Day && slotCount <= 30)
                     {
-                        foreach (string slotID in slotIDs.Split('-'))
+                        //Count week
+                        DateTime firstDay = Helper.FirstDayOfWeek(dateStudy);
+                        if (!firstDayOfWeeks.Contains(firstDay))
                         {
-                            ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                            firstDayOfWeeks.Add(firstDay);
+                            weekCount++;
                         }
+
+                        #region Mod: 2-4, 3-5
+                        if ((weekCount == 1 || weekCount == 3) && (dateStudy.DayOfWeek == DayOfWeek.Monday || dateStudy.DayOfWeek == DayOfWeek.Wednesday))
+                        {
+                            if (slotIDs.IndexOf('-') > 0)
+                            {
+                                foreach (string slotID in slotIDs.Split('-'))
+                                {
+                                    slotCount++;
+                                    ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                                }
+                            }
+                            else
+                            {
+                                slotCount++;
+                                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                            }
+                        }
+
+                        if (weekCount == 2 && (dateStudy.DayOfWeek == DayOfWeek.Tuesday || dateStudy.DayOfWeek == DayOfWeek.Thursday))
+                        {
+                            if (slotIDs.IndexOf('-') > 0)
+                            {
+                                foreach (string slotID in slotIDs.Split('-'))
+                                {
+                                    slotCount++;
+                                    ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                                }
+                            }
+                            else
+                            {
+                                slotCount++;
+                                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                            }
+                        }
+                        #endregion
+
+                        #region Mod: 2-4-6, 3-5-6
+                        if ((weekCount == 4 || weekCount == 6) && (dateStudy.DayOfWeek == DayOfWeek.Monday || dateStudy.DayOfWeek == DayOfWeek.Wednesday || dateStudy.DayOfWeek == DayOfWeek.Friday))
+                        {
+                            if (slotIDs.IndexOf('-') > 0)
+                            {
+                                foreach (string slotID in slotIDs.Split('-'))
+                                {
+                                    slotCount++;
+                                    ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                                }
+                            }
+                            else
+                            {
+                                slotCount++;
+                                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                            }
+                        }
+
+                        if (weekCount == 5 && (dateStudy.DayOfWeek == DayOfWeek.Tuesday || dateStudy.DayOfWeek == DayOfWeek.Thursday || dateStudy.DayOfWeek == DayOfWeek.Friday))
+                        {
+                            if (slotIDs.IndexOf('-') > 0)
+                            {
+                                foreach (string slotID in slotIDs.Split('-'))
+                                {
+                                    slotCount++;
+                                    ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotID, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                                }
+                            }
+                            else
+                            {
+                                slotCount++;
+                                ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
+                            }
+                        }
+#endregion
                     }
-                    else
-                    {
-                        ClassScheduleRepository.Save(new ClassScheduleTBL() { ClassScheduleID = Helper.GenerateRandomId(), ClassID = classID, DateStudy = dateStudy, LecturerID = lecturerID, ModeID = openSubject.ModeID, RoomID = RoomId, SlotID = slotIDs, StudentListID = studentListId, SubjectID = openSubject.SubjectID, Blog = blog, IsAttendance = false });
-                    }
+                    
                 }
-                
                 
             }
         }

@@ -20,3 +20,4 @@ C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.d
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\bin\Debug\IU.Web.Models.pdb
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.dll
 C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.pdb
+C:\Users\nvan\Documents\GitHub\IUProject\IU.Web.Models\obj\Debug\IU.Web.Models.csprojResolveAssemblyReference.cache

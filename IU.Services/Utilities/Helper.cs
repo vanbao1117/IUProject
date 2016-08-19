@@ -78,7 +78,6 @@ namespace IU.Services
                     daysToChoose.Add(DayOfWeek.Thursday);
                     daysToChoose.Add(DayOfWeek.Friday);
                     daysToChoose.Add(DayOfWeek.Saturday);
-                    daysToChoose.Add(DayOfWeek.Sunday);
                 }
             }
 
