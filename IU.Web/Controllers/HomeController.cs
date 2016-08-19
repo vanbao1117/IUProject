@@ -26,7 +26,10 @@ namespace IU.Web.Controllers
             
         }
 
-
+        public PartialViewResult AdminViewFeedback()
+        {
+            return PartialView("~/Views/Admin/_FeedBack.cshtml");
+        }
         public PartialViewResult StudentInOpenClass()
         {
             return PartialView("~/Views/Admin/_OpenClass.cshtml");

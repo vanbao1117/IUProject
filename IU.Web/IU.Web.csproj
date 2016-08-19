@@ -206,6 +206,7 @@
     <Content Include="AngularApp\1.5.8\angular.min.js" />
     <Content Include="AngularApp\myapp\controllers\AdminAttendanceController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminAccountController.js" />
+    <Content Include="AngularApp\myapp\controllers\AdminFeedbackController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminOpenClassController.js" />
     <Content Include="AngularApp\myapp\controllers\StudentInClassController.js" />
     <Content Include="AngularApp\myapp\controllers\AdminScheduleController.js" />
@@ -1204,6 +1205,7 @@
     <Content Include="Views\Admin\_Account.cshtml" />
     <Content Include="Views\Admin\_EditClass.cshtml" />
     <Content Include="Views\Admin\_OpenClass.cshtml" />
+    <Content Include="Views\Admin\_FeedBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

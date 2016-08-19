@@ -34,6 +34,38 @@ namespace IU.Services
             }
         }
 
+        public async Task<List<FeedbackViewModel>> AdminViewFeedback()
+        {
+            using (var context = new IUContext())
+            {
+                try
+                {
+                    var feedbacks = await FeedbackRepository.FindAllAsync();
+                    if (feedbacks != null)
+                    {
+                        return feedbacks.ToList().Select(f => new FeedbackViewModel() { Attitude = f.Attitude, Comments = f.Comments, Lecturer = GetLectureName(f.Lecturer), OnTime = f.OnTime == null ? "" : f.OnTime, Quality = f.Quality == null ? "" : f.Quality, Satisfaction = f.Satisfaction == null ? "" : f.Satisfaction, Student = GetStudentName(f.Student), FeedbackDate = f.FeedbackDate.Value == null ? "" : f.FeedbackDate.Value.ToString("dddd, dd MMMM yyyy") }).ToList();
+                    } 
+                }
+                catch (Exception ex) { }
+                return null;
+            }
+        }
+
+        public string GetStudentName(string studentID)
+        {
+            using (var context = new IUContext())
+            {
+                return context.StudentTBLs.Where(s => s.StudentID == studentID).FirstOrDefault().StudentName;
+            }
+        }
+
+        public string GetLectureName(string lecturerID)
+        {
+            using (var context = new IUContext())
+            {
+                return context.LecturerTBLs.Where(s => s.LecturerID == lecturerID).FirstOrDefault().LecturerName;
+            }
+        }
 
         #region Dispose
         ~FeedbackService()

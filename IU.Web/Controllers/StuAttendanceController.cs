@@ -15,6 +15,34 @@ namespace IU.Web.Controllers
     [Authorize]
     public class StuAttendanceController : ApiController
     {
+        // GET api/StuAttendance/adminViewFeedback
+        /// <summary>
+        /// Get class Register
+        /// </summary>
+        /// <returns></returns>
+
+        [ResponseType(typeof(IEnumerable<UserSemesterViewModel>))]
+        [Authorize]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> AdminViewFeedback()
+        {
+            try
+            {
+                using (FeedbackService _FeedbackService = new FeedbackService())
+                {
+                    string userName = HttpContext.Current.User.Identity.Name;
+                    var feedbacks = await _FeedbackService.AdminViewFeedback();
+                    return Ok(feedbacks);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message + ex.StackTrace);
+            }
+
+        }
+
         // GET api/StuAttendance/GetRegisterData
         /// <summary>
         /// Get class Register

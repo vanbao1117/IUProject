@@ -13,6 +13,17 @@ IUApp.factory('FeedbackServices', ['$http', '$q', function ($http, $q) {
                     def.reject("Failed to submit feedback");
                 });
             return def.promise;
+        },
+        adminViewFeedback: function () {
+            var def = $q.defer();
+            $http.get("api/StuAttendance/adminViewFeedback")
+                .success(function (feedbacks) {
+                    def.resolve(feedbacks);
+                })
+                .error(function () {
+                    def.reject("Failed to adminViewFeedback");
+                });
+            return def.promise;
         }
     };
 }]);
