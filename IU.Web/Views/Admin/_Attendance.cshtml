@@ -43,14 +43,12 @@
                     <tr role="row">
                         <th rowspan="2" style="vertical-align: middle; text-align: center;">No</th>
                         <th rowspan="2" style="vertical-align: middle; text-align: center;">Student Name</th>
-                        <th ng-repeat="item in lecturerPreviews.preview" class="sorting">{{item.day}}</th>
+                        <th ng-repeat="item in lecturerPreviews.preview" colspan="{{item.colSpan}}" class="sorting">{{item.day}}</th>
 
                     </tr>
                     <tr role="row">
-                        <th class="sorting" ng-repeat="item in lecturerPreviews.preview">{{item.slot}}</th>
-
-
-                    </tr>
+                                        <th class="sorting" ng-repeat="item in slotIndex">{{item}}</th>
+                                    </tr>
                 </thead>
                 <tbody>
 
