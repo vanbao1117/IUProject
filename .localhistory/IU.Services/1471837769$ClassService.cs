@@ -74,7 +74,7 @@ namespace IU.Services
             try
             {
                 SemesterTBL sem = GetCurrentSemester();
-                var student = StudentListTBLRepository.FindOneBy(s => s.ClassID == oldClassID && s.StudentID == studentID && s.SemesterID == sem.SemesterID);
+                var student = StudentListTBLRepository.FindAllBy(s => s.ClassID == oldClassID && s.StudentID == studentID && s.SemesterID == sem.SemesterID);
                 if (student != null)
                 {
                     StudentListTBLRepository.Delete(student);

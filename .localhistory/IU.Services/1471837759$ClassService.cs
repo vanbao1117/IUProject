@@ -74,10 +74,14 @@ namespace IU.Services
             try
             {
                 SemesterTBL sem = GetCurrentSemester();
-                var student = StudentListTBLRepository.FindOneBy(s => s.ClassID == oldClassID && s.StudentID == studentID && s.SemesterID == sem.SemesterID);
-                if (student != null)
+                var students = StudentListTBLRepository.FindAllBy(s => s.ClassID == oldClassID && s.StudentID == studentID && s.SemesterID == sem.SemesterID);
+                if (students != null)
                 {
-                    StudentListTBLRepository.Delete(student);
+                    foreach (var student in students)
+                    {
+                        StudentListTBLRepository.Delete(student);
+                    }
+                    
                 }
 
                 StudentListTBLRepository.Save(new StudentListTBL() { StudentListID = Helper.GenerateRandomId(), ClassID = newClassID, SemesterID = sem.SemesterID, StudentID = studentID });

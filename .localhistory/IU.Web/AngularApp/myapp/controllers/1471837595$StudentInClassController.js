@@ -41,7 +41,7 @@ IUApp.controller('StudentInClassController', ['$scope', '$http', '$location', '$
                 var studentID = value.studentID;
                 var newClassID = value.classID;
                 var student = { studentID: studentID, oldClassID: classID, classID: newClassID };
-                console.log('student: ', student);
+
                 ClassService.studentChangeClass(student).then(
                   function (students) {
                       console.log('getStudentInClass: ', students);

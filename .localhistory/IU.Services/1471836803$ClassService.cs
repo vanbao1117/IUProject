@@ -58,7 +58,7 @@ namespace IU.Services
                         on acceptRegisters.OpenClassID equals openClassTBLs.OpenClassID
                       join classTBLs in context.ClassTBLs
                         on openClassTBLs.ClassID equals classTBLs.ClassID
-                      where openClassTBLs.ClassID == classID 
+                      where openClassTBLs.ClassID == classID
                       select new StudentInOpenClassViewModel() { StudentID = studentTBLs.StudentID, ClassID = openClassTBLs.ClassID, ClassName = classTBLs.ClassName, StudentName = studentTBLs.StudentName, Status = acceptRegisters.Accepted == true? "Accepted" : "Pending", StudentBirth = studentTBLs.StudentBirth.Value, StudentCode = studentTBLs.StudentCode });
                     return students.ToList();
                 }
@@ -80,7 +80,7 @@ namespace IU.Services
                     StudentListTBLRepository.Delete(student);
                 }
 
-                StudentListTBLRepository.Save(new StudentListTBL() { StudentListID = Helper.GenerateRandomId(), ClassID = newClassID, SemesterID = sem.SemesterID, StudentID = studentID });
+                StudentListTBLRepository.Save(new StudentListTBL() { StudentListID = Helper.GenerateRandomId(), ClassID = newClassID, SemesterID = student.SemesterID, StudentID = student.StudentID });
                 return true;
             }
             catch (Exception ex)
@@ -105,12 +105,11 @@ namespace IU.Services
             {
                 using (var context = new IUContext())
                 {
-                    SemesterTBL sem = GetCurrentSemester();
                     var students =
                      (from studentTBLs in context.StudentTBLs
                       join studentListTBLs in context.StudentListTBLs
                           on studentTBLs.StudentID equals studentListTBLs.StudentID
-                      where studentListTBLs.ClassID == classID && studentListTBLs.SemesterID == sem.SemesterID
+                      where studentListTBLs.ClassID == classID
                       select new StudentViewModel() { StudentID = studentTBLs.StudentID, ClassID = studentListTBLs.ClassID, StudentPhone = studentTBLs.StudentPhone, StudentName = studentTBLs.StudentName, StudentGender = studentTBLs.StudentGender.Value, StudentEmail = studentTBLs.StudentEmail, StudentBirth = studentTBLs.StudentBirth.Value, ParentPhone = studentTBLs.ParentPhone});
                     return students.ToList();
                 }

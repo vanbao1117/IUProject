@@ -105,12 +105,11 @@ namespace IU.Services
             {
                 using (var context = new IUContext())
                 {
-                    SemesterTBL sem = GetCurrentSemester();
                     var students =
                      (from studentTBLs in context.StudentTBLs
                       join studentListTBLs in context.StudentListTBLs
                           on studentTBLs.StudentID equals studentListTBLs.StudentID
-                      where studentListTBLs.ClassID == classID && studentListTBLs.SemesterID == sem.SemesterID
+                      where studentListTBLs.ClassID == classID
                       select new StudentViewModel() { StudentID = studentTBLs.StudentID, ClassID = studentListTBLs.ClassID, StudentPhone = studentTBLs.StudentPhone, StudentName = studentTBLs.StudentName, StudentGender = studentTBLs.StudentGender.Value, StudentEmail = studentTBLs.StudentEmail, StudentBirth = studentTBLs.StudentBirth.Value, ParentPhone = studentTBLs.ParentPhone});
                     return students.ToList();
                 }
