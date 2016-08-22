@@ -6,7 +6,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         $scope.mode = 'edit';
         $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
         $scope.subjects = [];
-        $scope.allsubjects = [];
         $scope.$watch('subjects', function (newVal, oldVal) {
             console.log('subjects', newVal);
         });
@@ -167,11 +166,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     return;
                 }
 
-                if ($scope.editBisLecturerSelected === undefined || $scope.editBisLecturerSelected.lecturerID == '') {
-                    swal({ title: "warning!", text: "Please select lecturer!", type: "warning" });
-                    return;
-                }
-
 
                 var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
                 var openClass = {
@@ -186,8 +180,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     subjectID: $scope.subjectSelected.subjectID,
                     lecturerID: $scope.editBisLecturerSelected.lecturerID
                 };
-
-                console.log("openClass: ", openClass);
 
             SubjectService.createBis(openClass).then(
               function (status) {
@@ -267,10 +259,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
-               if (lecturerID == "") {
-                   $scope.allsubjects = $scope.copyObjToObj(subjects, $scope.allsubjects);
-               }
-               
            },
            function (error) {
                console.log('getAllSubjects error: ' + error);

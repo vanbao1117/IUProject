@@ -42,25 +42,9 @@ namespace IU.Services
         {
             using (var context = new IUContext())
             {
-                List<DateTime> lsStudy = new List<DateTime>();
                 var sm = GetCurrentSemester(semesterID);
-                if (blog < 0)
-                {
-                    DateTime[] studyDates = Helper.GetStudyDays(DateTime.Parse(dateStudy), sm.EndDate.Value, mode.ToString(), blog);
-                    DateTime[] studyDates2 = Helper.GetStudyDays(DateTime.Parse(dateStudy), sm.EndDate.Value, mode.ToString(), blog);
-
-                    lsStudy.AddRange(studyDates);
-                    lsStudy.AddRange(studyDates2);
-                }
-                else
-                {
-                    DateTime[] studyDates = Helper.GetStudyDays(DateTime.Parse(dateStudy), sm.EndDate.Value, mode.ToString(), blog);
-                    lsStudy.AddRange(studyDates);
-                }
-
-
-
-                foreach (DateTime date in lsStudy)
+                DateTime[] studyDates = Helper.GetStudyDays(DateTime.Parse(dateStudy), sm.EndDate.Value, mode.ToString(), blog);
+                foreach (DateTime date in studyDates)
                 {
                     var scheudlue = context.ClassScheduleTBLs.Where(c => c.DateStudy.Year == date.Year && c.DateStudy.Month == date.Month && c.DateStudy.Day == date.Day && c.ModeID.Value == mode && c.RoomID == room && c.SlotID == slot).Any();
                     if (scheudlue)
@@ -188,11 +172,35 @@ namespace IU.Services
         {
             try
             {
-               
+                using (var context = new IUContext())
+                {
+                    var mode = context.ModeTBLs.Where(m => m.ModeID == model.ModeID).FirstOrDefault();
+                    var sm = GetCurrentSemester(model.SemesterID);
+                    DateTime[] studyDates = Helper.GetStudyDays(model.StartDate, sm.EndDate.Value, mode.Mode, 1);
+                    DateTime[] studyDates2 = Helper.GetStudyDays(model.StartDate, sm.EndDate.Value, mode.Mode, 2);
+                    List<DateTime> lsStudy = new List<DateTime>();
+                    lsStudy.AddRange(studyDates);
+                    lsStudy.AddRange(studyDates2);
+
+                    foreach (string slot in model.SlotIDs)
+                    {
+                        //check exist slot for room same day
+                        var isValid = ValidateSchedule(model.SemesterID, model.StartDate.ToString(), int.Parse(mode.Mode), -1, model.RoomID, slot);
+                        if (!isValid) return false;
+
+                        //check exist slot for lecture same day
+                        var isValidLecture = ValidateLectureSchedule(model.SemesterID, model.StartDate.ToString(), int.Parse(mode.Mode), -1, model.RoomID, slot, model.LecturerID);
+                        if (!isValidLecture) return false;
+                    }
+                   
+                }
+
+              
+
                 string classID = Helper.GenerateRandomId();
                 ClassRepository.Save(new ClassTBL() { ClassID = classID, ClassName = model.ClassName, CreateDate = DateTime.Now, Creater = userName, StartDate = model.StartDate, IsMainClass = false });
                 string openClassID = Helper.GenerateRandomId();
-                OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline.Value.ToLocalTime(), Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
+                OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline, Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
                 OpenSubjectTBLRepository.Save(new OpenSubjectTBL() { OpenSubjectID = Helper.GenerateRandomId(), OpenClassID = openClassID, LecturerID = model.LecturerID, ModeID = model.ModeID, SubjectID = model.SubjectID, StartDate = model.StartDate, Cost = 0, CreatedDate = DateTime.Now, Creater = userName, Credit = 0 });
                 return true;
             }

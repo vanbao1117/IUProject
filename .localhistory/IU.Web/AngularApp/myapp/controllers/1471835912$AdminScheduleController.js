@@ -6,7 +6,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         $scope.mode = 'edit';
         $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
         $scope.subjects = [];
-        $scope.allsubjects = [];
         $scope.$watch('subjects', function (newVal, oldVal) {
             console.log('subjects', newVal);
         });
@@ -143,36 +142,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     return;
                 }
 
-                if ($scope.editRoomSelected === undefined || $scope.editRoomSelected.roomID == '') {
-                    swal({ title: "warning!", text: "Please enter room!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.editModeSelected === undefined || $scope.editModeSelected.modeID == '') {
-                    swal({ title: "warning!", text: "Please enter mode!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.quantity === undefined || $scope.quantity == '') {
-                    swal({ title: "warning!", text: "Please enter quantity!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.deadLine === undefined || $scope.deadLine == '') {
-                    swal({ title: "warning!", text: "Please enter deadLine!", type: "warning" });
-                    return;
-                }
-                if ($scope.subjectSelected === undefined || $scope.subjectSelected.subjectID == '') {
-                    swal({ title: "warning!", text: "Please select subject!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.editBisLecturerSelected === undefined || $scope.editBisLecturerSelected.lecturerID == '') {
-                    swal({ title: "warning!", text: "Please select lecturer!", type: "warning" });
-                    return;
-                }
-
-
                 var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
                 var openClass = {
                     semesterID: $scope.semesterSelected.semesterID,
@@ -186,8 +155,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     subjectID: $scope.subjectSelected.subjectID,
                     lecturerID: $scope.editBisLecturerSelected.lecturerID
                 };
-
-                console.log("openClass: ", openClass);
 
             SubjectService.createBis(openClass).then(
               function (status) {
@@ -267,10 +234,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
-               if (lecturerID == "") {
-                   $scope.allsubjects = $scope.copyObjToObj(subjects, $scope.allsubjects);
-               }
-               
            },
            function (error) {
                console.log('getAllSubjects error: ' + error);

@@ -29,34 +29,6 @@ IUApp.controller('FeedbackController', ['$scope', '$http', '$templateCache', '$t
         };
 
         $scope.sendFeedback = function () {
-            if ($scope.lecturer === undefined || $scope.lecturer.lecturerID == '') {
-                swal({ title: "warning!", text: "Please select lecturer!", type: "warning" });
-                return;
-            }
-
-            if ($scope.quality === undefined || $scope.quality.quality == '') {
-                swal({ title: "warning!", text: "Please enter quality!", type: "warning" });
-                return;
-            }
-
-            if ($scope.attitude === undefined || $scope.attitude.attitude == '') {
-                swal({ title: "warning!", text: "Please enter attitude!", type: "warning" });
-                return;
-            }
-            if ($scope.satisfaction === undefined || $scope.satisfaction.satisfaction == '') {
-                swal({ title: "warning!", text: "Please enter satisfaction!", type: "warning" });
-                return;
-            }
-            if ($scope.onTime === undefined || $scope.onTime.onTime == '') {
-                swal({ title: "warning!", text: "Please enter onTime!", type: "warning" });
-                return;
-            }
-            if ($scope.comments === undefined || $scope.comments == '') {
-                swal({ title: "warning!", text: "Please enter your comments!", type: "warning" });
-                return;
-            }
-
-
             var feedback = {
                 lecturerID: $scope.lecturer.lecturerID, quality: $scope.quality.quality,
                 attitude: $scope.attitude.attitude, satisfaction: $scope.satisfaction.satisfaction, onTime: $scope.onTime.onTime, comments: $scope.comments

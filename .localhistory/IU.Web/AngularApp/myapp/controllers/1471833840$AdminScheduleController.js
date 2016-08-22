@@ -6,7 +6,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         $scope.mode = 'edit';
         $scope.blogs = [{ blogID: 1, name: '1' }, { blogID: 2, name: '2' }];
         $scope.subjects = [];
-        $scope.allsubjects = [];
         $scope.$watch('subjects', function (newVal, oldVal) {
             console.log('subjects', newVal);
         });
@@ -125,54 +124,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
         $scope.saveChange = function (isNewSchedule) {
         //Bis
             if ($scope.currentTab == 'activity') {
-                if ($scope.editSlot1Selected === undefined || $scope.editSlot2Selected === undefined) {
-                    swal({ title: "warning!", text: "Please choose slot!", type: "warning" });
-                    return;
-                }
-                if ($scope.editSlot1Selected.slotID == $scope.editSlot2Selected.slotID) {
-                    swal({ title: "warning!", text: "You choosed same slot!", type: "warning" });
-                    return;
-                }
-                if ($scope.className === undefined || $scope.className == '') {
-                    swal({ title: "warning!", text: "Please enter class name!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.startDay === undefined || $scope.startDay == '') {
-                    swal({ title: "warning!", text: "Please enter start Day!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.editRoomSelected === undefined || $scope.editRoomSelected.roomID == '') {
-                    swal({ title: "warning!", text: "Please enter room!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.editModeSelected === undefined || $scope.editModeSelected.modeID == '') {
-                    swal({ title: "warning!", text: "Please enter mode!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.quantity === undefined || $scope.quantity == '') {
-                    swal({ title: "warning!", text: "Please enter quantity!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.deadLine === undefined || $scope.deadLine == '') {
-                    swal({ title: "warning!", text: "Please enter deadLine!", type: "warning" });
-                    return;
-                }
-                if ($scope.subjectSelected === undefined || $scope.subjectSelected.subjectID == '') {
-                    swal({ title: "warning!", text: "Please select subject!", type: "warning" });
-                    return;
-                }
-
-                if ($scope.editBisLecturerSelected === undefined || $scope.editBisLecturerSelected.lecturerID == '') {
-                    swal({ title: "warning!", text: "Please select lecturer!", type: "warning" });
-                    return;
-                }
-
-
                 var myDate = new Date(new Date().getTime()+(5*24*60*60*1000));
                 var openClass = {
                     semesterID: $scope.semesterSelected.semesterID,
@@ -187,12 +138,12 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
                     lecturerID: $scope.editBisLecturerSelected.lecturerID
                 };
 
-                console.log("openClass: ", openClass);
-
             SubjectService.createBis(openClass).then(
               function (status) {
-                  console.log('createBis status: ', status);
-                  
+                  if (status == false || status == 'false') {
+                      swal({ title: "warning!", text: "Already exist slot applied for Lecture on same day!", type: "warning" });
+                      return;
+                  }
                   $timeout(function () {
                       $scope.subjectSelected = {};
                       $scope.semesterSelected = {};
@@ -230,7 +181,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
 
                     SubjectService.updateClassSchedule(submit).then(
                       function (status) {
-                          console.log('updateClassSchedule status: ', status);
                           $timeout(function () {
                               if (status == false || status == 'false') {
                                   swal({ title: "warning!", text: "Already exist slot applied for Lecture on same day!", type: "warning" });
@@ -267,10 +217,6 @@ IUApp.controller('AdminScheduleController', ['$scope', '$http', '$location', '$r
            function (subjects) {
                console.log('getAllSubjects: ', subjects);
                $scope.subjects = subjects;
-               if (lecturerID == "") {
-                   $scope.allsubjects = $scope.copyObjToObj(subjects, $scope.allsubjects);
-               }
-               
            },
            function (error) {
                console.log('getAllSubjects error: ' + error);

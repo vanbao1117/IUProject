@@ -52,7 +52,7 @@ IUApp.controller('FeedbackController', ['$scope', '$http', '$templateCache', '$t
                 return;
             }
             if ($scope.comments === undefined || $scope.comments == '') {
-                swal({ title: "warning!", text: "Please enter your comments!", type: "warning" });
+                swal({ title: "warning!", text: "Please enter comments!", type: "warning" });
                 return;
             }
 

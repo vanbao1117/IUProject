@@ -188,11 +188,31 @@ namespace IU.Services
         {
             try
             {
-               
+                using (var context = new IUContext())
+                {
+                    var mode = context.ModeTBLs.Where(m => m.ModeID == model.ModeID).FirstOrDefault();
+                    var sm = GetCurrentSemester(model.SemesterID);
+                   
+
+                    foreach (string slot in model.SlotIDs)
+                    {
+                        //check exist slot for room same day
+                        var isValid = ValidateSchedule(model.SemesterID, model.StartDate.ToString(), int.Parse(mode.Mode), -1, model.RoomID, slot);
+                        if (!isValid) return false;
+
+                        //check exist slot for lecture same day
+                        var isValidLecture = ValidateLectureSchedule(model.SemesterID, model.StartDate.ToString(), int.Parse(mode.Mode), -1, model.RoomID, slot, model.LecturerID);
+                        if (!isValidLecture) return false;
+                    }
+                   
+                }
+
+              
+
                 string classID = Helper.GenerateRandomId();
                 ClassRepository.Save(new ClassTBL() { ClassID = classID, ClassName = model.ClassName, CreateDate = DateTime.Now, Creater = userName, StartDate = model.StartDate, IsMainClass = false });
                 string openClassID = Helper.GenerateRandomId();
-                OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline.Value.ToLocalTime(), Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
+                OpenClassRepository.Save(new OpenClassTBL() { OpenClassID = openClassID, ClassID = classID, CreatedDate = DateTime.Now, Creater = userName, Deadline = model.Deadline, Limit = model.Limit, RoomID = GetRoom(model.RoomID), SemesterID = model.SemesterID, SlotID = string.Join("-", model.SlotIDs) });
                 OpenSubjectTBLRepository.Save(new OpenSubjectTBL() { OpenSubjectID = Helper.GenerateRandomId(), OpenClassID = openClassID, LecturerID = model.LecturerID, ModeID = model.ModeID, SubjectID = model.SubjectID, StartDate = model.StartDate, Cost = 0, CreatedDate = DateTime.Now, Creater = userName, Credit = 0 });
                 return true;
             }
